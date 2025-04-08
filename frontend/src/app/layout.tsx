@@ -1,5 +1,7 @@
 import { Karla } from "next/font/google";
 import "./globals.css";
+import Header from "@/components/common/Header";
+import Footer from "@/components/common/Footer";
 
 const karla = Karla({
   subsets: ["latin"],
@@ -19,9 +21,15 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" className={`${karla.variable}`}>
-      <body className="min-h-screen bg-gray-50 font-sans antialiased">
-        {children}
+    <html lang="en" suppressHydrationWarning>
+      <body
+        className={`${karla.variable} min-h-screen w-full bg-background font-sans antialiased`}
+      >
+        <div className="min-h-screen w-full flex flex-col items-center justify-between">
+          <Header />
+          <main className="flex-1 w-full bg-[#ff04f]">{children}</main>
+          <Footer />
+        </div>
       </body>
     </html>
   );
