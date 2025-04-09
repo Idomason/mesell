@@ -25,9 +25,9 @@ export default function RootLayout({
       <body
         className={`${karla.variable} min-h-screen w-full bg-background font-sans antialiased`}
       >
-        <div className="min-h-screen w-full flex flex-col items-center justify-between">
+        <div className="flex min-h-screen w-full flex-col">
           <Header />
-          <main className="flex-1 w-full bg-[#ff04f]">{children}</main>
+          <main className="flex-1 w-full">{children}</main>
           <Footer />
         </div>
       </body>

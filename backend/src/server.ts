@@ -8,6 +8,7 @@ import authRoutes from "./routes/auth";
 import productRoutes from "./routes/products";
 import orderRoutes from "./routes/orders";
 import paymentRoutes from "./routes/payments";
+import { connectDB } from "./config/db";
 
 // Load environment variables
 dotenv.config();
@@ -28,22 +29,10 @@ app.use("/api/payments", paymentRoutes);
 app.use(notFoundHandler);
 app.use(errorHandler);
 
-// MongoDB connection
-const MONGODB_URI =
-  process.env.MONGODB_URI || "mongodb://localhost:27017/mesell";
-
-mongoose
-  .connect(MONGODB_URI)
-  .then(() => {
-    console.log("Connected to MongoDB");
-  })
-  .catch((error) => {
-    console.error("MongoDB connection error:", error);
-    process.exit(1);
-  });
-
 // Start server
-const PORT = process.env.PORT || 5000;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => {
+  // MongoDB connection
+  connectDB();
   console.log(`Server is running on port ${PORT}`);
 });
