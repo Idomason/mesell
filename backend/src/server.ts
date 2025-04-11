@@ -2,13 +2,13 @@ import express from "express";
 import mongoose from "mongoose";
 import cors from "cors";
 import dotenv from "dotenv";
-import { errorHandler } from "./middleware/errorHandler";
-import { notFoundHandler } from "./middleware/notFoundHandler";
-import authRoutes from "./routes/auth";
-import productRoutes from "./routes/products";
-import orderRoutes from "./routes/orders";
-import paymentRoutes from "./routes/payments";
-import { connectDB } from "./config/db";
+import { errorHandler } from "./middleware/errorHandler.js";
+import { notFoundHandler } from "./middleware/notFoundHandler.js";
+import authRoutes from "./routes/auth.js";
+import productRoutes from "./routes/products.js";
+import orderRoutes from "./routes/orders.js";
+import paymentRoutes from "./routes/payments.js";
+import { connectDB } from "./config/db.js";
 
 // Load environment variables
 dotenv.config();

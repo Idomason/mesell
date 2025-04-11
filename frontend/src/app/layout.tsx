@@ -1,12 +1,14 @@
-import { Karla } from "next/font/google";
+import { Plus_Jakarta_Sans } from "next/font/google";
 import "./globals.css";
 import Header from "@/components/common/Header";
 import Footer from "@/components/common/Footer";
 
-const karla = Karla({
+const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
   display: "swap",
-  variable: "--font-karla",
+  variable: "--font-plus-jakarta",
+  weight: ["400", "500", "600", "700"],
+  preload: true,
 });
 
 export const metadata = {
@@ -23,7 +25,10 @@ export default function RootLayout({
   return (
     <html lang="en" suppressHydrationWarning>
       <body
-        className={`${karla.variable} min-h-screen w-full bg-background font-sans antialiased`}
+        className={`${plusJakarta.variable} min-h-screen w-full bg-background font-sans antialiased`}
+        style={{
+          fontFamily: `var(--font-plus-jakarta), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
+        }}
       >
         <div className="flex min-h-screen w-full flex-col">
           <Header />
