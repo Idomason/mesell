@@ -286,23 +286,23 @@ export default function BrandProfile() {
             </div>
             <div className="border border-gray-100 rounded">
               <div className="container mx-auto px-4">
-                <h2 className="text-xl tracking-wide font-bold text-primary px-4 py-4">
+                <h2 className="text-xl tracking-wide font-bold text-primary py-4">
                   Latest Products
                 </h2>
-                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 px-4 py-4">
-                  <div className="flex gap-4 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
+                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
                     <Image
-                      className="h-40 object-cover"
+                      className="h-40 w-full lg:w-40 object-cover"
                       src={"/images/mesell-0.png"}
                       width={192}
                       height={192}
                       alt="Latest Product Image"
                     />
-                    <div className="flex flex-col gap-2 py-2 mr-4">
+                    <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
@@ -310,25 +310,25 @@ export default function BrandProfile() {
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
-                        <Button className="bg-primary text-primary-foreground px-4 py-1.5">
+                        <Button className="bg-primary text-primary-foreground px-4 py-1.5 text-xs md:text-sm">
                           View Product
                         </Button>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-4 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
                     <Image
-                      className="h-40 object-cover"
+                      className="h-40 w-full lg:w-40 object-cover"
                       src={"/images/mesell-0.png"}
                       width={192}
                       height={192}
                       alt="Latest Product Image"
                     />
-                    <div className="flex flex-col gap-2 py-2 mr-4">
+                    <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
@@ -336,25 +336,25 @@ export default function BrandProfile() {
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
-                        <Button className="bg-primary text-primary-foreground px-4 py-1.5">
+                        <Button className="bg-primary text-primary-foreground px-4 py-1.5 text-xs md:text-sm">
                           View Product
                         </Button>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-4 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
                     <Image
-                      className="h-40 object-cover"
+                      className="h-40 w-full lg:w-40 object-cover"
                       src={"/images/mesell-0.png"}
                       width={192}
                       height={192}
                       alt="Latest Product Image"
                     />
-                    <div className="flex flex-col gap-2 py-2 mr-4">
+                    <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
@@ -362,25 +362,25 @@ export default function BrandProfile() {
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
-                        <Button className="bg-primary text-primary-foreground px-4 py-1.5">
+                        <Button className="bg-primary text-primary-foreground px-4 py-1.5 text-xs md:text-sm">
                           View Product
                         </Button>
                       </div>
                     </div>
                   </div>
-                  <div className="flex gap-4 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
                     <Image
-                      className="h-40 object-cover"
+                      className="h-40 w-full lg:w-40 object-cover"
                       src={"/images/mesell-0.png"}
                       width={192}
                       height={192}
                       alt="Latest Product Image"
                     />
-                    <div className="flex flex-col gap-2 py-2 mr-4">
+                    <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
@@ -388,7 +388,7 @@ export default function BrandProfile() {
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
-                        <Button className="bg-primary text-primary-foreground px-4 py-1.5">
+                        <Button className="bg-primary text-primary-foreground px-4 py-1.5 text-xs md:text-sm">
                           View Product
                         </Button>
                       </div>
