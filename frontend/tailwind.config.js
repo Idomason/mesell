@@ -131,12 +131,8 @@ module.exports = {
           to: { height: 0 },
         },
         marquee: {
-          "0%": { transform: "translateX(0%)" },
+          "0%": { transform: "translateX(0)" },
           "100%": { transform: "translateX(-100%)" },
-        },
-        marquee2: {
-          "0%": { transform: "translateX(100%)" },
-          "100%": { transform: "translateX(0%)" },
         },
         "gradient-shift": {
           "0%": { backgroundPosition: "0% 50%" },
@@ -156,7 +152,6 @@ module.exports = {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
         marquee: "marquee 30s linear infinite",
-        marquee2: "marquee2 30s linear infinite",
         "gradient-shift": "gradient-shift 15s ease infinite",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",
         "float-slow": "float-slow 6s ease-in-out infinite",

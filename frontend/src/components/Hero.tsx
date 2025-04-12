@@ -43,9 +43,9 @@ export default function Hero() {
                 </span>
               </h1>
               <p className="text-lg md:text-xl text-muted-foreground max-w-2xl">
-                Nigeria's trusted pre-order platform. Secure payments, verified
-                sellers, and guaranteed delivery. Join thousands of satisfied
-                customers.
+                Nigeria&apos;s trusted pre-order platform. Secure payments,
+                verified sellers, and guaranteed delivery. Join thousands of
+                satisfied customers.
               </p>
             </div>
 
