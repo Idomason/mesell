@@ -16,7 +16,6 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { customers } from "@/data/customer";
 import Link from "next/link";
-import { Input } from "./ui/input";
 
 export default function BrandProfile() {
   return (
@@ -301,27 +300,29 @@ export default function BrandProfile() {
             </div>
             <div className="border border-gray-100 rounded">
               <div className="container mx-auto px-4">
-                <h2 className="text-xl tracking-wide font-bold text-primary py-4">
+                <h2 className="text-xl text-center sm:text-left tracking-wide font-bold text-primary py-4">
                   Latest Products
                 </h2>
                 <div className="grid grid-cols-1 sm:grid-cols-2 gap-4 py-4">
-                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
-                    <Image
-                      className="h-40 w-full lg:w-40 object-cover"
-                      src={"/images/mesell-0.png"}
-                      width={192}
-                      height={192}
-                      alt="Latest Product Image"
-                    />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                    <div className="">
+                      <Image
+                        className="h-full w-full object-cover"
+                        src={"/images/mesell-0.png"}
+                        width={192}
+                        height={192}
+                        alt="Latest Product Image"
+                      />
+                    </div>
                     <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-xs md:text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm line-clamp-2 text-ellipsis">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col gap-4 justify-between">
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
@@ -331,23 +332,25 @@ export default function BrandProfile() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
-                    <Image
-                      className="h-40 w-full lg:w-40 object-cover"
-                      src={"/images/mesell-0.png"}
-                      width={192}
-                      height={192}
-                      alt="Latest Product Image"
-                    />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                    <div className="">
+                      <Image
+                        className="h-full w-full object-cover"
+                        src={"/images/mesell-0.png"}
+                        width={192}
+                        height={192}
+                        alt="Latest Product Image"
+                      />
+                    </div>
                     <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-xs md:text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm line-clamp-2 text-ellipsis">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col gap-4 justify-between">
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
@@ -357,23 +360,25 @@ export default function BrandProfile() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
-                    <Image
-                      className="h-40 w-full lg:w-40 object-cover"
-                      src={"/images/mesell-0.png"}
-                      width={192}
-                      height={192}
-                      alt="Latest Product Image"
-                    />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                    <div className="">
+                      <Image
+                        className="h-full w-full object-cover"
+                        src={"/images/mesell-0.png"}
+                        width={192}
+                        height={192}
+                        alt="Latest Product Image"
+                      />
+                    </div>
                     <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-xs md:text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm line-clamp-2 text-ellipsis">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col gap-4 justify-between">
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
@@ -383,23 +388,25 @@ export default function BrandProfile() {
                       </div>
                     </div>
                   </div>
-                  <div className="flex flex-col lg:flex-row overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
-                    <Image
-                      className="h-40 w-full lg:w-40 object-cover"
-                      src={"/images/mesell-0.png"}
-                      width={192}
-                      height={192}
-                      alt="Latest Product Image"
-                    />
+                  <div className="grid grid-cols-1 lg:grid-cols-2 overflow-hidden rounded-md ring-1 ring-primary-100 bg-primary-100">
+                    <div className="">
+                      <Image
+                        className="h-full w-full object-cover"
+                        src={"/images/mesell-0.png"}
+                        width={192}
+                        height={192}
+                        alt="Latest Product Image"
+                      />
+                    </div>
                     <div className="flex flex-col gap-2 py-2 px-4">
                       <h2 className="text-lg font-bold text-primary">
                         Laddies Shoes
                       </h2>
-                      <p className="text-neutral-500 text-xs md:text-sm">
+                      <p className="text-neutral-500 text-xs md:text-sm line-clamp-2 text-ellipsis">
                         Lorem ipsum dolor sit amet consectetur adipisicing elit.
                         Quisquam, quos.
                       </p>
-                      <div className="flex items-center justify-between">
+                      <div className="flex flex-col gap-4 justify-between">
                         <p className="text-primary">
                           <strong>N10,000</strong>
                         </p>
@@ -425,7 +432,7 @@ export default function BrandProfile() {
           </div>
 
           {/* Second Row */}
-          <div className="flex flex-col gap-4 w-auto flex-1 mt-3 sm:mt-0">
+          <div className="flex flex-col gap-4 w-auto mt-3 sm:mt-0 flex-grow-0">
             <div className="border border-gray-100 p-4 w-full rounded flex-1">
               <h2 className="text-xl tracking-wide font-bold text-primary py-4">
                 Overall Rating
@@ -443,11 +450,11 @@ export default function BrandProfile() {
 
               <div className="flex items-center justify-between gap-10">
                 <div>
-                  <div>
-                    <span>
-                      <p>Compensation</p>
-                      <Input type="range" placeholder="4.8" />
-                    </span>
+                  <div className="py-2">
+                    <div className="flex items-center space-x-4">
+                      <span className="text-xs md:text-sm">Compensation</span>
+                      <input type="range" placeholder="4.8" />
+                    </div>
                   </div>
                 </div>
               </div>
