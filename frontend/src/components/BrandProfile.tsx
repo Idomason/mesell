@@ -1,3 +1,5 @@
+"use client";
+
 import {
   Calendar,
   ChevronLeftCircle,
@@ -26,9 +28,9 @@ export default function BrandProfile() {
           <div className="border border-gray-100 rounded w-full flex flex-col items-center justify-center overflow-hidden">
             <div className="w-full h-48 relative overflow-hidden">
               <Image
-                className="w-full h-full object-cover"
+                className="w-full h-48 object-cover"
                 src={"/images/mesell-brand-banner.avif"}
-                width={1200}
+                width={192}
                 height={192}
                 alt="Mesell Banner"
                 priority
@@ -61,7 +63,11 @@ export default function BrandProfile() {
 
                 <div className="flex flex-row-reverse sm:flex-row flex-wrap items-center justify-around gap-4 -mt-8">
                   <div className="place-self-center">
-                    <Ellipsis size={25} className="text-neutral-300" />
+                    <Ellipsis
+                      size={25}
+                      className="text-neutral-300"
+                      onClick={() => alert("Hey! Welcome to Mesell")}
+                    />
                   </div>
                   <div>
                     <Button className="bg-primary-100 px-4 py-1.5 text-primary hover:text-primary-foreground">
@@ -164,6 +170,7 @@ export default function BrandProfile() {
         <div className="py-1 rounded sm:flex gap-4">
           {/* First Row */}
           <div className="flex flex-col gap-3 w-full">
+            {/* About Us */}
             <div className="border border-gray-100 p-8 rounded sm:mb-4">
               <div>
                 <h2 className="text-xl font-bold mb-3 text-primary">
@@ -217,6 +224,7 @@ export default function BrandProfile() {
                 </div>
               </div>
             </div>
+            {/* Life At Brand's Workstation */}
             <div className="border border-gray-100 md:p-4 rounded">
               <div className="">
                 <div className="flex  justify-between mb-2 p-4 md:p-0">
@@ -298,6 +306,7 @@ export default function BrandProfile() {
                 </div>
               </div>
             </div>
+            {/* Latest Products */}
             <div className="border border-gray-100 rounded">
               <div className="container mx-auto px-4">
                 <h2 className="text-xl text-center sm:text-left tracking-wide font-bold text-primary py-4">
