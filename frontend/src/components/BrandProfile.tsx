@@ -65,7 +65,7 @@ export default function BrandProfile() {
                   <div className="place-self-center">
                     <Ellipsis
                       size={25}
-                      className="text-neutral-300"
+                      className="text-neutral-300 hover:text-neutral-500 cursor-pointer transition-colors duration-300 ease-in"
                       onClick={() => alert("Hey! Welcome to Mesell")}
                     />
                   </div>
