@@ -21,10 +21,10 @@ import Link from "next/link";
 
 export default function BrandProfile() {
   return (
-    <div className="bg-white">
-      <div className="pb-16 max-w-6xl flex flex-col gap-8 relative w-full mx-auto">
+    <div className="bg-gray-50">
+      <div className="pb-16 max-w-6xl flex flex-col gap-8 relative w-full mx-auto bg-gray-50">
         {/* First section */}
-        <div className="rounded flex gap-4 w-full">
+        <div className="rounded flex gap-4 w-full bg-white">
           <div className="border border-gray-100 rounded w-full flex flex-col items-center justify-center overflow-hidden">
             <div className="w-full h-48 relative overflow-hidden">
               <Image
@@ -167,11 +167,11 @@ export default function BrandProfile() {
         </div>
 
         {/* Second Section */}
-        <div className="py-1 rounded sm:flex gap-4">
+        <div className="rounded sm:flex gap-4 bg-gray-50">
           {/* First Row */}
-          <div className="flex flex-col gap-3 w-full">
+          <div className="flex flex-col gap-3 w-full bg-gray-50">
             {/* About Us */}
-            <div className="border border-gray-100 p-8 rounded sm:mb-4">
+            <div className="border border-gray-100 p-8 rounded sm:mb-4 bg-white ">
               <div>
                 <h2 className="text-xl font-bold mb-3 text-primary">
                   About Us
@@ -225,7 +225,7 @@ export default function BrandProfile() {
               </div>
             </div>
             {/* Life At Brand's Workstation */}
-            <div className="border border-gray-100 md:p-4 rounded">
+            <div className="border border-gray-100 md:p-4 rounded bg-white ">
               <div className="">
                 <div className="flex  justify-between mb-2 p-4 md:p-0">
                   <h2 className="text-lg tracking-wide font-bold text-primary">
@@ -307,7 +307,7 @@ export default function BrandProfile() {
               </div>
             </div>
             {/* Latest Products */}
-            <div className="border border-gray-100 rounded">
+            <div className="border border-gray-100 rounded bg-white ">
               <div className="container mx-auto px-4">
                 <h2 className="text-xl text-center sm:text-left tracking-wide font-bold text-primary py-4">
                   Latest Products
@@ -441,8 +441,8 @@ export default function BrandProfile() {
           </div>
 
           {/* Second Row */}
-          <div className="flex flex-col gap-4 w-auto mt-3 sm:mt-0 flex-grow-0">
-            <div className="border border-gray-100 p-4 w-full rounded flex-1">
+          <div className="flex flex-col gap-4 w-auto mt-3 sm:mt-0 flex-grow-0 bg-gray-50 ">
+            <div className="border border-gray-100 p-4 bg-white  w-full  rounded flex-1">
               <h2 className="text-xl tracking-wide font-bold text-primary py-4">
                 Overall Rating
               </h2>
@@ -468,7 +468,7 @@ export default function BrandProfile() {
                 </div>
               </div>
             </div>
-            <div className="border border-gray-100 p-8 rounded">
+            <div className="border border-gray-100 p-8 bg-white  rounded">
               <h2 className="text-2xl font-bold mb-4">Brand Name</h2>
             </div>
           </div>
