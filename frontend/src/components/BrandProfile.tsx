@@ -23,7 +23,7 @@ export default function BrandProfile() {
     <div className="bg-white">
       <div className="pb-16 max-w-6xl flex flex-col gap-8 relative w-full mx-auto">
         {/* First section */}
-        <div className="max-w-6xl rounded flex gap-4 w-full">
+        <div className="rounded flex gap-4 w-full">
           <div className="border border-gray-100 rounded w-full flex flex-col items-center justify-center overflow-hidden">
             <div className="w-full h-48 relative overflow-hidden">
               <Image
@@ -151,7 +151,7 @@ export default function BrandProfile() {
         </div>
 
         {/* Profile Image */}
-        <div className="h-24 w-24 lg:h-32 lg:w-32 border-4 border-primary-foreground shadow-sm overflow-hidden rounded-full absolute top-36 left-8">
+        <div className="h-24 w-24 lg:h-32 lg:w-32 border-4 border-primary-foreground shadow-sm overflow-hidden rounded-full absolute top-36 lg:top-32 left-8">
           <Image
             className="w-full h-full object-cover"
             src={"/images/customers/mesell-customer-4.png"}
@@ -162,7 +162,7 @@ export default function BrandProfile() {
         </div>
 
         {/* Second Section */}
-        <div className="py-1 max-w-6xl rounded sm:flex gap-4">
+        <div className="py-1 rounded sm:flex gap-4">
           {/* First Row */}
           <div className="flex flex-col gap-3 w-full">
             <div className="border border-gray-100 p-8 rounded sm:mb-4">
@@ -182,23 +182,34 @@ export default function BrandProfile() {
                   </h2>
                   <div>
                     <p>
-                      <span>-</span> <span>Lorem ipsum dolor sit amet</span>
+                      <span>-</span>{" "}
+                      <span className="text-neutral-500 ml-2">
+                        Lorem ipsum dolor sit amet
+                      </span>
                     </p>
                     <p>
                       <span>-</span>{" "}
-                      <span>Lorem ipsum dolor sit amet consectetur amet</span>
+                      <span className="text-neutral-500 ml-2">
+                        Lorem ipsum dolor sit amet consectetur amet
+                      </span>
                     </p>
                     <p>
                       <span>-</span>{" "}
-                      <span>Lorem ipsum dolor sit amet consectetur</span>
+                      <span className="text-neutral-500 ml-2">
+                        Lorem ipsum dolor sit amet consectetur
+                      </span>
                     </p>
                     <p>
                       <span>-</span>{" "}
-                      <span>Lorem ipsum dolor sit amet consectetur</span>
+                      <span className="text-neutral-500 ml-2">
+                        Lorem ipsum dolor sit amet consectetur
+                      </span>
                     </p>
                     <p>
                       <span>-</span>{" "}
-                      <span>Lorem ipsum dolor sit amet consectetur</span>
+                      <span className="text-neutral-500 ml-2">
+                        Lorem ipsum dolor sit amet consectetur
+                      </span>
                     </p>
                   </div>
                 </div>
