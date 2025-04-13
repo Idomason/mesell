@@ -7,6 +7,7 @@ import {
   MapPin,
   Plus,
   Share2,
+  Star,
   Users,
   Verified,
 } from "lucide-react";
@@ -15,13 +16,14 @@ import React from "react";
 import { Button } from "@/components/ui/button";
 import { customers } from "@/data/customer";
 import Link from "next/link";
+import { Input } from "./ui/input";
 
 export default function BrandProfile() {
   return (
-    <section className="bg-white">
-      <div className="container mx-auto px-4 py-8 max-w-6xl flex flex-col gap-8 relative">
+    <div className="bg-white">
+      <div className="pb-16 max-w-6xl flex flex-col gap-8 relative w-full mx-auto">
         {/* First section */}
-        <div className="container mx-auto px-4 max-w-7xl rounded flex gap-4 w-full">
+        <div className="max-w-6xl rounded flex gap-4 w-full">
           <div className="border border-gray-100 rounded w-full flex flex-col items-center justify-center overflow-hidden">
             <div className="w-full h-48 relative overflow-hidden">
               <Image
@@ -58,7 +60,7 @@ export default function BrandProfile() {
                   </div>
                 </div>
 
-                <div className="flex flex-wrap items-center justify-around gap-4 -mt-8">
+                <div className="flex flex-row-reverse sm:flex-row flex-wrap items-center justify-around gap-4 -mt-8">
                   <div className="place-self-center">
                     <Ellipsis size={25} className="text-neutral-300" />
                   </div>
@@ -149,7 +151,7 @@ export default function BrandProfile() {
         </div>
 
         {/* Profile Image */}
-        <div className="h-24 w-24 lg:h-32 lg:w-32 border-4 border-primary-foreground shadow-sm overflow-hidden rounded-full absolute top-48 left-16">
+        <div className="h-24 w-24 lg:h-32 lg:w-32 border-4 border-primary-foreground shadow-sm overflow-hidden rounded-full absolute top-36 left-8">
           <Image
             className="w-full h-full object-cover"
             src={"/images/customers/mesell-customer-4.png"}
@@ -160,7 +162,7 @@ export default function BrandProfile() {
         </div>
 
         {/* Second Section */}
-        <div className="container mx-auto px-4 py-1 max-w-7xl rounded sm:flex gap-4">
+        <div className="py-1 max-w-6xl rounded sm:flex gap-4">
           {/* First Row */}
           <div className="flex flex-col gap-3 w-full">
             <div className="border border-gray-100 p-8 rounded sm:mb-4">
@@ -205,9 +207,9 @@ export default function BrandProfile() {
                 </div>
               </div>
             </div>
-            <div className="border border-gray-100 p-4 rounded">
+            <div className="border border-gray-100 md:p-4 rounded">
               <div className="">
-                <div className="flex  justify-between mb-2">
+                <div className="flex  justify-between mb-2 p-4 md:p-0">
                   <h2 className="text-lg tracking-wide font-bold text-primary">
                     Life at Isha Steps
                   </h2>
@@ -223,6 +225,8 @@ export default function BrandProfile() {
                   </div>
                 </div>
                 <div className="relative flex overflow-x-hidden">
+                  <div className="absolute top-0 -left-1 bottom-0 right-0 bg-gradient-to-r from-stone-900 to-20% to-transparent z-10"></div>
+                  <div className="absolute top-0 -left-1 bottom-0 right-0 bg-gradient-to-l from-stone-900 to-20% to-transparent z-10"></div>
                   <div className="animate-marquee whitespace-nowrap flex gap-4">
                     <Image
                       className="w-48 h-48 object-cover rounded-md shadow inline-block"
@@ -410,9 +414,32 @@ export default function BrandProfile() {
           </div>
 
           {/* Second Row */}
-          <div className="flex flex-col gap-4 w-full flex-1 mt-3 sm:mt-0">
-            <div className="border border-gray-100 p-8 rounded flex-1">
-              <h2 className="text-2xl font-bold mb-4">Brand Name</h2>
+          <div className="flex flex-col gap-4 w-auto flex-1 mt-3 sm:mt-0">
+            <div className="border border-gray-100 p-4 w-full rounded flex-1">
+              <h2 className="text-xl tracking-wide font-bold text-primary py-4">
+                Overall Rating
+              </h2>
+              <div className="flex items-center justify-between gap-10">
+                <strong className="font-semibold">4.8/5</strong>
+                <div className="flex items-center justify-center">
+                  <Star size={24} className="text-amber-400 fill-amber-400" />
+                  <Star size={24} className="text-amber-400 fill-amber-400" />
+                  <Star size={24} className="text-amber-400 fill-amber-400" />
+                  <Star size={24} className="text-amber-400 fill-amber-400" />
+                  <Star size={24} className="text-amber-400" />
+                </div>
+              </div>
+
+              <div className="flex items-center justify-between gap-10">
+                <div>
+                  <div>
+                    <span>
+                      <p>Compensation</p>
+                      <Input type="range" placeholder="4.8" />
+                    </span>
+                  </div>
+                </div>
+              </div>
             </div>
             <div className="border border-gray-100 p-8 rounded">
               <h2 className="text-2xl font-bold mb-4">Brand Name</h2>
@@ -420,6 +447,6 @@ export default function BrandProfile() {
           </div>
         </div>
       </div>
-    </section>
+    </div>
   );
 }
