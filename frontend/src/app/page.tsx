@@ -1,6 +1,7 @@
 import Hero from "@/components/Hero";
 import Brands from "@/components/Brands";
 import PopularProducts from "@/components/PopularProducts";
+import Quote from "@/components/Quote";
 
 export default function Home() {
   return (
@@ -8,6 +9,7 @@ export default function Home() {
       <Hero />
       <Brands />
       <PopularProducts />
+      <Quote />
     </div>
   );
 }

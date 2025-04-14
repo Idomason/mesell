@@ -51,9 +51,10 @@ export default function Header() {
           <Link href="/" className="flex items-center">
             <Image
               src="/images/logo-opacity.png"
-              alt="Mesell Logo"
-              width={120}
-              height={40}
+              alt="Logo"
+              width={150}
+              height={50}
+              className="h-8 w-auto"
             />
           </Link>
 
