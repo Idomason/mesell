@@ -73,18 +73,9 @@ export const products = [
   },
   {
     id: 9,
-    name: "Product 9",
-    description: "Description 9",
-    price: 9500,
-    image:
-      "https://images.unsplash.com/photo-1560343090-f0409e92791a?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
-    category: "Category 9",
-  },
-  {
-    id: 10,
     name: "Product 10",
     description: "Description 10",
-    price: 10000,
+    price: 9500,
     image:
       "https://images.unsplash.com/photo-1549298916-b41d501d3772?ixlib=rb-4.0.3&ixid=M3wxMjA3fDB8MHxwaG90by1wYWdlfHx8fGVufDB8fHx8fA%3D%3D&auto=format&fit=crop&w=1000&q=80",
     category: "Category 10",

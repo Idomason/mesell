@@ -22,6 +22,18 @@ export default function Header() {
     setMounted(true);
   }, []);
 
+  // Prevent body scroll when menu is open
+  useEffect(() => {
+    if (isMenuOpen) {
+      document.body.style.overflow = "hidden";
+    } else {
+      document.body.style.overflow = "unset";
+    }
+    return () => {
+      document.body.style.overflow = "unset";
+    };
+  }, [isMenuOpen]);
+
   const handleSearch = (e: React.FormEvent) => {
     e.preventDefault();
     // Implement search functionality
@@ -130,7 +142,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 hover:text-primary"
+            className="md:hidden text-gray-700 hover:text-primary transition-colors"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
@@ -138,67 +150,127 @@ export default function Header() {
           </button>
         </div>
 
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
+            isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+
         {/* Mobile Menu */}
-        {isMenuOpen && (
-          <div className="md:hidden mt-4 pb-4">
-            <form onSubmit={handleSearch} className="relative mb-4">
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
+        <div
+          className={`fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out md:hidden ${
+            isMenuOpen ? "translate-x-0" : "translate-x-full"
+          }`}
+        >
+          <div className="flex flex-col h-full">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <Link
+                href="/"
+                className="flex items-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Image
+                  src="/images/logo-opacity.png"
+                  alt="Logo"
+                  width={120}
+                  height={40}
+                  className="h-8 w-auto"
+                />
+              </Link>
               <button
-                type="submit"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
+                className="text-gray-700 hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
               >
-                <Search size={16} />
+                <X size={24} />
               </button>
-            </form>
-            <nav className="flex flex-col space-y-4">
-              <Link
-                href="/products"
-                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Products
-              </Link>
-              <Link
-                href="/categories"
-                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Categories
-              </Link>
-              <Link
-                href="/orders"
-                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                onClick={() => setIsMenuOpen(false)}
-              >
-                Orders
-              </Link>
-              <div className="pt-2 border-t border-gray-200">
+            </div>
+
+            {/* Mobile Search */}
+            <div className="p-4 border-b">
+              <form onSubmit={handleSearch} className="relative">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
+                <button
+                  type="submit"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
+                >
+                  <Search size={16} />
+                </button>
+              </form>
+            </div>
+
+            {/* Mobile Navigation */}
+            <nav className="flex-1 overflow-y-auto">
+              <div className="px-4 py-2 space-y-1">
                 <Link
-                  href="/login"
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-primary transition-colors mb-2"
+                  href="/products"
+                  className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <LogIn size={18} className="mr-2" />
-                  Login
+                  Products
                 </Link>
                 <Link
-                  href="/signup"
-                  className="flex items-center text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+                  href="/categories"
+                  className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  <User size={18} className="mr-2" />
-                  Sign Up
+                  Categories
                 </Link>
+                <Link
+                  href="/orders"
+                  className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
+                  onClick={() => setIsMenuOpen(false)}
+                >
+                  Orders
+                </Link>
+              </div>
+
+              {/* Mobile Auth & Cart */}
+              <div className="px-4 py-4 border-t">
+                <div className="space-y-2">
+                  <Link
+                    href="/login"
+                    className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <LogIn size={20} className="mr-3" />
+                    Login
+                  </Link>
+                  <Link
+                    href="/signup"
+                    className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <User size={20} className="mr-3" />
+                    Sign Up
+                  </Link>
+                  <Link
+                    href="/cart"
+                    className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
+                    onClick={() => setIsMenuOpen(false)}
+                  >
+                    <div className="relative">
+                      <ShoppingCart size={20} className="mr-3" />
+                      <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                        0
+                      </span>
+                    </div>
+                    Cart
+                  </Link>
+                </div>
               </div>
             </nav>
           </div>
-        )}
+        </div>
       </div>
     </header>
   );
