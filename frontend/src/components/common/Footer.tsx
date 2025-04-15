@@ -64,7 +64,7 @@ export default function Footer() {
                 width={120}
                 height={40}
                 priority
-                className="h-8 w-auto"
+                className="h-7 w-auto"
               />
             </div>
             <p className="text-sm">

@@ -64,9 +64,9 @@ export default function Header() {
             <Image
               src="/images/logo-opacity.png"
               alt="Logo"
-              width={150}
-              height={50}
-              className="h-8 w-auto"
+              width={100}
+              height={40}
+              className="h-7 w-auto"
             />
           </Link>
 
@@ -92,10 +92,11 @@ export default function Header() {
             {/* Navigation Links */}
             <nav className="flex items-center space-x-6">
               <Link
-                href="/products"
+                href="/brand"
                 className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
               >
-                Products
+                {/* Products */}
+                Brand
               </Link>
               <Link
                 href="/categories"
