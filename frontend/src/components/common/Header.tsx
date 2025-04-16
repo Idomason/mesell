@@ -213,11 +213,11 @@ export default function Header() {
             <nav className="flex-1 overflow-y-auto">
               <div className="px-4 py-2 space-y-1">
                 <Link
-                  href="/products"
+                  href="/brand"
                   className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
                   onClick={() => setIsMenuOpen(false)}
                 >
-                  Products
+                  Brand
                 </Link>
                 <Link
                   href="/categories"
