@@ -21,7 +21,7 @@ import { Input } from "./ui/input";
 
 export default function BrandProfile() {
   return (
-    <div className="bg-gray-50 min-h-screen">
+    <div className="bg-gray-50 min-h-screen font-sans">
       <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-8">
         {/* Hero Section */}
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">

@@ -5,7 +5,7 @@ import { customers } from "@/data/customer";
 export default function Hero() {
   return (
     <section
-      className="relative min-h-[85vh] overflow-hidden"
+      className="relative min-h-[85vh] overflow-hidden font-sans"
       aria-label="Hero section"
     >
       {/* Animated Background */}

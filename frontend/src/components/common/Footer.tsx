@@ -40,7 +40,7 @@ export default function Footer() {
   };
 
   return (
-    <footer className="bg-gradient-to-b from-gray-900 to-gray-950 text-gray-300 relative">
+    <footer className="bg-gradient-to-b from-gray-900 font-sans to-gray-950 text-gray-300 relative">
       {/* Scroll to top button */}
       {showScrollTop && (
         <button

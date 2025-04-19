@@ -42,7 +42,7 @@ export default function Header() {
 
   if (!mounted) {
     return (
-      <header className="w-full border-b bg-background">
+      <header className="w-full border-b bg-background font-sans">
         <div className="container mx-auto px-4 py-4">
           <div className="flex items-center justify-between">
             <div className="h-8 w-32 animate-pulse rounded bg-muted" />

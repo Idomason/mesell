@@ -6,7 +6,7 @@ import { Verified } from "lucide-react";
 
 export default function PopularProducts() {
   return (
-    <section className="py-16">
+    <section className="py-16 font-sans">
       <div className="container mx-auto px-4 sm:px-6 max-w-7xl">
         <h2 className="text-2xl font-bold text-primary mb-6 text-center">
           Popular Products
