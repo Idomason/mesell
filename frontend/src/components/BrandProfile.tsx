@@ -25,7 +25,7 @@ export default function BrandProfile() {
       <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-8">
         {/* Hero Section */}
         <div className="bg-white rounded-xl shadow-sm overflow-hidden">
-          <div className="relative h-64 md:h-80">
+          <div className="relative h-32 md:h-52">
             <Image
               className="w-full h-full object-cover"
               src={"/images/mesell-brand-banner.avif"}
