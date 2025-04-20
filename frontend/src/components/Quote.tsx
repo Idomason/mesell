@@ -86,7 +86,7 @@ export default function Quote() {
                     step >= 1 ? "text-primary" : "text-gray-500"
                   }`}
                 >
-                  Business Info
+                  <span className="hidden md:block">Business Info</span>
                 </span>
               </div>
               <div className="flex-1 h-0.5 mx-4 bg-gray-200">
@@ -112,7 +112,7 @@ export default function Quote() {
                     step >= 2 ? "text-primary" : "text-gray-500"
                   }`}
                 >
-                  Order Details
+                  <span className="hidden md:block">Order Details</span>
                 </span>
               </div>
               <div className="flex-1 h-0.5 mx-4 bg-gray-200">
@@ -138,7 +138,7 @@ export default function Quote() {
                     step >= 3 ? "text-primary" : "text-gray-500"
                   }`}
                 >
-                  Confirmation
+                  <span className="hidden md:block">Confirmation</span>
                 </span>
               </div>
             </div>
