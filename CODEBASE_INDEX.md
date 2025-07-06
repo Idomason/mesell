@@ -1,7 +1,7 @@
 # Mesell Codebase Index & Catalog
 
 ## Project Overview
-**Mesell** is a Nigerian pre-order ecommerce platform featuring escrow payments, seller verification, and localized experiences.
+**Mesell** is a Nigerian and African pre-order ecommerce platform featuring escrow payments, seller verification, and localized experiences.
 
 ### Tech Stack
 - **Frontend**: Next.js 15 (App Router) + TypeScript + Tailwind CSS + RTK Query

@@ -1,6 +1,6 @@
 # Mesell - Nigerian Pre-Order Ecommerce Platform
 
-A secure and trusted pre-order ecommerce platform built for the Nigerian market, featuring escrow payments, seller verification, and localized experiences.
+A secure and trusted pre-order ecommerce platform built for the Nigerian and African market, featuring escrow payments, seller verification, and localized experiences.
 
 ## Tech Stack
 
