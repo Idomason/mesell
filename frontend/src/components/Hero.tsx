@@ -32,12 +32,12 @@ export default function Hero() {
           <div className="flex flex-col space-y-8">
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
-                <span className="text-primary relative">
+                <span className="text-primary relative inline-flex animate-text-gradient direction-reverse bg-gradient-to-r from-[#ff85b9] via-[#ff004f] to-[#ffd6e8] bg-[200%_auto] bg-clip-text text-transparent">
                   Pre-order
                   <span className="absolute -bottom-1 left-0 w-full h-1 bg-primary/20 rounded-full"></span>
                 </span>{" "}
                 with{" "}
-                <span className="text-primary/25 relative inline-block mt-1.5">
+                <span className=" relative inline-block mt-1.5 animate-background-shine delay-1000 bg-[linear-gradient(110deg,#939393,45%,#1e293b,55%,#939393)] bg-[length:250%_100%] bg-clip-text text-transparent">
                   Confidence
                   <span className="absolute -bottom-1 left-0 w-full h-1 bg-primary/10 rounded-full"></span>
                 </span>

@@ -147,10 +147,26 @@ module.exports = {
           "0%, 100%": { transform: "translateY(0)" },
           "50%": { transform: "translateY(-30px)" },
         },
+        "text-gradient": {
+          "to": {
+            "backgroundPosition": "200% center"
+          }
+        },
+        "background-shine": {
+          "from": {
+            "backgroundPosition": "0 0"
+          },
+          "to": {
+            "backgroundPosition": "-200% 0"
+          }
+        }
+          
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
         "accordion-up": "accordion-up 0.2s ease-out",
+        "text-gradient": "text-gradient 5s linear infinite",
+        "background-shine": "background-shine 3s linear infinite",
         marquee: "marquee 40s linear infinite",
         "gradient-shift": "gradient-shift 15s ease infinite",
         "pulse-slow": "pulse 4s cubic-bezier(0.4, 0, 0.6, 1) infinite",

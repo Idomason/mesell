@@ -2,10 +2,9 @@
 
 import Link from "next/link";
 import Image from "next/image";
+import { BsTwitterX, BsWhatsapp } from "react-icons/bs";
+import { FiFacebook } from "react-icons/fi";
 import {
-  Facebook,
-  Instagram,
-  Twitter,
   Mail,
   Phone,
   MapPin,
@@ -20,6 +19,7 @@ import {
   ChevronUp,
 } from "lucide-react";
 import { useState, useEffect } from "react";
+import { IoLogoInstagram } from "react-icons/io5";
 
 export default function Footer() {
   const currentYear = new Date().getFullYear();
@@ -64,12 +64,12 @@ export default function Footer() {
                 width={120}
                 height={40}
                 priority
-                className="h-7 w-auto"
+                className="md:h-6 w-auto h-5"
               />
             </div>
             <p className="text-sm">
               A secure and trusted pre-order e-commerce platform built for the
-              Nigerian market, offering quality locally made products from top
+              Nigerian and African market, offering quality locally made products from top
               brands.
             </p>
             <div className="flex space-x-4 pt-2">
@@ -80,31 +80,16 @@ export default function Footer() {
                 className="h-9 w-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
                 aria-label="Instagram"
               >
-                <Instagram size={18} />
+                <IoLogoInstagram size={18} />
               </a>
               <a
-                href="https://threads.net"
+                href="https://whatsapp.com"
                 target="_blank"
                 rel="noopener noreferrer"
                 className="h-9 w-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
                 aria-label="Threads"
               >
-                <svg
-                  width="18"
-                  height="18"
-                  viewBox="0 0 24 24"
-                  fill="none"
-                  xmlns="http://www.w3.org/2000/svg"
-                >
-                  <path
-                    d="M12.186 24C18.929 24 24 18.929 24 12.186C24 5.443 18.929 0.372 12.186 0.372C5.443 0.372 0.372 5.443 0.372 12.186C0.372 18.929 5.443 24 12.186 24ZM12.186 2.791C17.715 2.791 22.209 7.285 22.209 12.814C22.209 18.343 17.715 22.837 12.186 22.837C6.657 22.837 2.163 18.343 2.163 12.814C2.163 7.285 6.657 2.791 12.186 2.791Z"
-                    fill="currentColor"
-                  />
-                  <path
-                    d="M12.186 7.442C14.651 7.442 16.651 9.442 16.651 11.907C16.651 14.372 14.651 16.372 12.186 16.372C9.721 16.372 7.721 14.372 7.721 11.907C7.721 9.442 9.721 7.442 12.186 7.442ZM12.186 9.302C10.907 9.302 9.861 10.348 9.861 11.627C9.861 12.906 10.907 13.952 12.186 13.952C13.465 13.952 14.511 12.906 14.511 11.627C14.511 10.348 13.465 9.302 12.186 9.302Z"
-                    fill="currentColor"
-                  />
-                </svg>
+                <BsWhatsapp size={18} />
               </a>
               <a
                 href="https://twitter.com"
@@ -113,7 +98,7 @@ export default function Footer() {
                 className="h-9 w-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
                 aria-label="X (Twitter)"
               >
-                <Twitter size={18} />
+                <BsTwitterX size={18} />
               </a>
               <a
                 href="https://facebook.com"
@@ -122,7 +107,7 @@ export default function Footer() {
                 className="h-9 w-9 rounded-full bg-gray-800 flex items-center justify-center hover:bg-primary hover:scale-110 transition-all duration-300"
                 aria-label="Facebook"
               >
-                <Facebook size={18} />
+                <FiFacebook size={18}/>
               </a>
             </div>
           </div>
