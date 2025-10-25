@@ -12,7 +12,7 @@ const plusJakarta = Plus_Jakarta_Sans({
 });
 
 export const metadata = {
-  title: "Mesell - Nigerian Pre-Order Ecommerce Platform | Africa at Large",
+  title: "Mesell - African Pre-Order Ecommerce Platform | Africa at Large",
   description:
     "A secure and trusted pre-order ecommerce platform built for the Nigerian market and Africa at large.",
 };
