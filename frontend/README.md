@@ -1,4 +1,4 @@
-This is a [Next.js](https://nextjs.org) project bootstrapped with [`create-next-app`](https://nextjs.org/docs/app/api-reference/cli/create-next-app).
+This is [MESELL](https://mesell.vercel.app) a pre-order e-commerce platform built for the Nigerian and African market focusing on showcasing and promoting African made products (culture and antiquities) to potential buyers in the hope of boosting local entrepreneurs.
 
 ## Getting Started
 
