@@ -1,30 +1,19 @@
 import jwt from "jsonwebtoken";
 import { promisify } from "util";
+
+import { User } from "@/models/User.js";
+import { AppError } from "./errorHandler.js";
+import { catchAsync } from "@/utils/catchAsync.js";
 import { Request, Response, NextFunction } from "express";
 
-import { AppError } from "./errorHandler.js";
-import { IUser, User } from "../models/User.js";
-import { catchAsync } from "@/utils/catchAsync.js";
-
-interface JwtPayload {
-  id: string;
-}
-
-declare global {
-  namespace Express {
-    interface Request {
-      user?: IUser;
-    }
-  }
-}
-
-export const protect = catchAsync(async function (
+exports.protect = catchAsync(async function (
   req: Request,
   res: Response,
   next: NextFunction
 ) {
-  // 1) Check if token exists
   let token;
+
+  //   Getting the token and check if it's there
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
@@ -33,34 +22,39 @@ export const protect = catchAsync(async function (
   }
 
   if (!token) {
-    throw new AppError(
-      "You are not logged in! Please log in to get access.",
-      401
+    return next(
+      new AppError(
+        "You are not logged in yet, please login to gain access.",
+        401
+      )
     );
   }
 
-  // 2) Verify token
+  //   Verify token
   const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
 
-  // 3) Check if user still exists
+  //   Check user still exists
   const user = await User.findById(decoded.id);
-
   if (!user) {
-    throw new AppError(
-      "The user belonging to this token no longer exists.",
-      401
+    return next(
+      new AppError("The user belonging to this token no longer exist", 401)
     );
   }
 
-  // 4) Grant access to protected route
-  req.user = user;
+  //   Check if user changed password after the token was issued
+  if (user.changedPasswordAfter(decoded.iat)) {
+    return next(
+      new AppError("User recently changed password, login to gain access", 401)
+    );
+  }
 
+  // Grant access to protected route
+  req.user = user;
   next();
 });
 
-// Restrict access permission
-export const restrictTo = function (...roles: string[]) {
-  return (req: Request, res: Response, next: NextFunction) => {
+exports.redirectTo = function (...roles: string[]) {
+  return function (req: Request, res: Response, next: NextFunction) {
     if (!req.user) {
       return next(
         new AppError("You must be logged in to perform this action", 401)

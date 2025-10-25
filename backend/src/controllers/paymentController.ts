@@ -1,8 +1,8 @@
 import { Request, Response, NextFunction } from "express";
-import { AppError } from "../middleware/errorHandler";
-import { PaystackService } from "../services/paystackService";
-import { Order } from "../models/Order";
-import { Payment } from "../models/Payment";
+import { AppError } from "../middleware/errorHandler.js";
+import { PaystackService } from "../services/paystackService.js";
+import { Order } from "../models/Order.js";
+import { Payment } from "../models/Payment.js";
 
 const paystackService = PaystackService.getInstance();
 
@@ -91,8 +91,8 @@ export const releasePayment = async (
   next: NextFunction
 ) => {
   try {
-    const { orderId } = req.params;
-    const { userId } = req.user; // Assuming user info is attached by auth middleware
+    const orderId = req.params?.id;
+    const userId = req.user?.id; // Assuming user info is attached by auth middleware
 
     const order = await Order.findById(orderId);
 
@@ -143,9 +143,9 @@ export const refundPayment = async (
   next: NextFunction
 ) => {
   try {
-    const { orderId } = req.params;
+    const orderId = req.params?.id;
     const { reason } = req.body;
-    const { userId } = req.user; // Assuming user info is attached by auth middleware
+    const userId = req.user?.id; // Assuming user info is attached by auth middleware
 
     const order = await Order.findById(orderId);
 

@@ -7,7 +7,7 @@ import { IoLogoFacebook } from "react-icons/io5";
 import { AiOutlineInstagram } from "react-icons/ai";
 import { RiTwitterXFill } from "react-icons/ri";
 import { IoIosNotifications } from "react-icons/io";
-import CountryFlag from 'react-country-flag';
+import CountryFlag from "react-country-flag";
 import {
   ShoppingCart,
   Search,
@@ -65,31 +65,41 @@ export default function Header() {
       <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
         <ul className="flex items-center justify-between">
           {/* Socials */}
-          <li className='flex items-center justify-center divide-x'>
-            <div className='flex items-center justify-center gap-2.5 mr-4'>
-                <Link href="/brand" className="text-sm font-medium text-accent hover:text-primary transition-colors">
-                  <IoLogoFacebook className='size-5' />
-                </Link>
+          <li className="flex items-center justify-center divide-x">
+            <div className="flex items-center justify-center gap-2.5 mr-4">
+              <Link
+                href="/brand"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <IoLogoFacebook className="size-5" />
+              </Link>
 
-                <Link href="/categories" className="text-sm font-medium text-accent hover:text-primary transition-colors">
-                  <AiOutlineInstagram className='size-5' />
-                </Link>
+              <Link
+                href="/categories"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <AiOutlineInstagram className="size-5" />
+              </Link>
 
-                <Link href="/orders" className="text-sm font-medium text-accent hover:text-primary transition-colors">
-                  <RiTwitterXFill className='size-5' />
-                </Link>
-            
+              <Link
+                href="/orders"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <RiTwitterXFill className="size-5" />
+              </Link>
             </div>
-              {/* Country */}
-            <div className='flex items-center justify-center gap-2.5 mr-4'>
+            {/* Country */}
+            <div className="flex items-center justify-center gap-2.5 mr-4">
               <span className="flex items-center gap-2">
-                <span className="text-sm font-medium text-accent ml-4">Nigeria</span>
+                <span className="text-sm font-medium text-accent ml-4">
+                  Nigeria
+                </span>
                 <CountryFlag
                   countryCode="NG"
                   svg
                   style={{
-                    width: '20px',
-                    height: '15px',
+                    width: "20px",
+                    height: "15px",
                   }}
                   title="Nigeria"
                 />
@@ -97,43 +107,42 @@ export default function Header() {
               <span className="text-sm font-medium text-accent hover:text-primary transition-colors">
                 <ChevronDown size={14} />
               </span>
-              
             </div>
           </li>
 
           {/* Auth & Cart */}
-          <li className='flex items-center justify-center gap-2.5'>
-              <Link
-                href="/cart"
-                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-              >
-                <ShoppingCart size={22} />
-                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                  0
-                </div>
-              </Link>
-
-              <Link
-                href="/cart"
-                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-              >
-                <IoIosNotifications size={22} />
-                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                  0
-                </div>
-              </Link>
+          <li className="flex items-center justify-center gap-2.5">
+            <Link
+              href="/cart"
+              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+            >
+              <ShoppingCart size={22} />
+              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                0
+              </div>
+            </Link>
 
             <Link
-                href="/login"
-                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-              >
-                <span className="hidden sm:inline">Login</span>
+              href="/cart"
+              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+            >
+              <IoIosNotifications size={22} />
+              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                0
+              </div>
+            </Link>
+
+            <Link
+              href="/login"
+              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+            >
+              <span className="hidden sm:inline">Login</span>
             </Link>
             <Link
-                href="/signup"
-                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-              >
-                <span className="hidden sm:inline">Sign Up</span>
+              href="/signup"
+              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+            >
+              <span className="hidden sm:inline">Sign Up</span>
             </Link>
           </li>
         </ul>
@@ -153,11 +162,14 @@ export default function Header() {
             </Link>
 
             {/* Search Bar */}
-            <form onSubmit={handleSearch} className="relative w-64 hidden md:block">
+            <form
+              onSubmit={handleSearch}
+              className="relative w-80 hidden md:block"
+            >
               <input
                 type="text"
                 placeholder="Search products..."
-                className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                className="w-full rounded-md border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
                 value={searchQuery}
                 onChange={(e) => setSearchQuery(e.target.value)}
               />
@@ -171,7 +183,6 @@ export default function Header() {
 
             {/* Desktop Navigation */}
             <div className="hidden md:flex items-center space-x-8">
-
               {/* Navigation Links */}
               <nav className="flex items-center space-x-6">
                 <Link
@@ -195,8 +206,6 @@ export default function Header() {
                   Orders
                 </Link>
               </nav>
-
-        
             </div>
 
             {/* Mobile Menu Button */}

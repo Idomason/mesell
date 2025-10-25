@@ -4,8 +4,8 @@ import {
   verifyPayment,
   releasePayment,
   refundPayment,
-} from "../controllers/paymentController";
-import { protect } from "../middleware/auth";
+} from "../controllers/paymentController.js";
+import { protect } from "../middleware/auth.js";
 
 const router = express.Router();
 
