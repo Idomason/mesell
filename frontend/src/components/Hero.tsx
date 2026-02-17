@@ -88,7 +88,7 @@ export default function Hero() {
             </div>
 
             {/* CTA Buttons */}
-            <div className="flex flex-col sm:flex-row gap-4">
+            {/* <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/products"
                 className="bg-primary rounded-lg cursor-pointer text-lg text-white font-semibold px-8 py-3 flex items-center justify-center group relative overflow-hidden"
@@ -120,6 +120,39 @@ export default function Hero() {
               >
                 How It Works
               </Link>
+            </div> */}
+            <div className="flex flex-col sm:flex-row gap-4">
+              <a
+                className="btn-primary cursor-pointer text-lg px-8 py-4 flex items-center justify-center group relative overflow-hidden"
+                aria-label="Start shopping"
+                href="/products"
+              >
+                <span className="relative z-10 flex items-center">
+                  Start Shopping
+                  <svg
+                    className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
+                    fill="none"
+                    stroke="currentColor"
+                    viewBox="0 0 24 24"
+                    aria-hidden="true"
+                  >
+                    <path
+                      stroke-linecap="round"
+                      stroke-linejoin="round"
+                      stroke-width="2"
+                      d="M13 7l5 5m0 0l-5 5m5-5H6"
+                    ></path>
+                  </svg>
+                </span>
+                <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+              </a>
+              <a
+                className="btn-secondary border border-primary/25 cursor-pointer text-lg px-8 py-4 flex items-center justify-center hover:bg-primary/5 transition-colors"
+                aria-label="Learn how it works"
+                href="/how-it-works"
+              >
+                How It Works
+              </a>
             </div>
 
             {/* Trust Badges */}
