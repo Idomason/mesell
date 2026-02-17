@@ -7,7 +7,7 @@ import ProductDescription from "@/components/product/ProductDescription";
 import ProductImageDisplay from "@/components/product/ProductImageDisplay";
 
 interface IProduct {
-  id: number;
+  id: string;
   name: string;
   description: string;
   price: number;
@@ -18,7 +18,7 @@ interface IProduct {
 export default async function page({
   params,
 }: {
-  params: { productId: number };
+  params: { productId: string };
 }) {
   const { productId } = await params;
   const product = products.find((product) => product.id === +productId);
