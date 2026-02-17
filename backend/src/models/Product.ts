@@ -8,11 +8,15 @@ export interface IProduct extends Document {
   preOrderPrice: number;
   category: string;
   images: string[];
+  slug: { type: String; unique: true };
   specifications: Record<string, string>;
   estimatedDeliveryDate: Date;
   minimumOrders: number;
   currentOrders: number;
+  stock: { type: Number; default: 0 };
+  currency: { type: String; default: "USD" };
   status: "active" | "inactive" | "sold_out";
+  variants: [{ name: String; sku: String; price: Number; stock: Number }];
   rating: number;
   reviews: Array<{
     user: mongoose.Types.ObjectId;

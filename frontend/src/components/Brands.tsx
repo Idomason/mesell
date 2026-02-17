@@ -1,5 +1,3 @@
-"use client";
-
 import { brands } from "@/data/brands";
 import Image from "next/image";
 
@@ -29,7 +27,7 @@ export default function Brands() {
                 <div key={brand.id} className="flex-shrink-0 mx-6 group">
                   <div className="relative h-20 w-40 bg-white rounded-lg shadow-sm p-3 flex items-center justify-center transition-all duration-300 group-hover:shadow-md">
                     <Image
-                      src={brand.image}
+                      src={brand.logo}
                       alt={brand.name}
                       width={120}
                       height={60}

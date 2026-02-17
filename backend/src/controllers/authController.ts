@@ -1,11 +1,10 @@
 import crypto from "crypto";
-import { Request, Response, NextFunction } from "express";
-
 import { User } from "@/models/User.js";
-import { signToken } from "@/utils/signToken.js";
-import { AppError } from "@/middleware/errorHandler.js";
-import { catchAsync } from "@/utils/catchAsync.js";
 import { sendEmail } from "@/utils/email.js";
+import { signToken } from "@/utils/signToken.js";
+import { catchAsync } from "@/utils/catchAsync.js";
+import { AppError } from "@/middleware/errorHandler.js";
+import { Request, Response, NextFunction } from "express";
 
 // Sign up a new user
 export const signup = catchAsync(async function (
@@ -97,7 +96,11 @@ export const forgotPassword = catchAsync(async function (
   try {
     await sendEmail({
       email: user.email,
+<<<<<<< HEAD
       subject: "Your Password Reset Token (valid for 10mins",
+=======
+      subject: "Your Password Reset Token (valid for 10 mins)",
+>>>>>>> mesell-v2
       message,
     });
 

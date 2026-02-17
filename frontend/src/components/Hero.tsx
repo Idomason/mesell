@@ -91,7 +91,7 @@ export default function Hero() {
             <div className="flex flex-col sm:flex-row gap-4">
               <Link
                 href="/products"
-                className="btn-primary cursor-pointer text-lg px-8 py-4 flex items-center justify-center group relative overflow-hidden"
+                className="bg-primary rounded-lg cursor-pointer text-lg text-white font-semibold px-8 py-3 flex items-center justify-center group relative overflow-hidden"
                 aria-label="Start shopping"
               >
                 <span className="relative z-10 flex items-center">
@@ -115,7 +115,7 @@ export default function Hero() {
               </Link>
               <Link
                 href="/how-it-works"
-                className="btn-secondary border border-primary/25 cursor-pointer text-lg px-8 py-4 flex items-center justify-center hover:bg-primary/5 transition-colors"
+                className="bg-secondary border rounded-lg border-primary/25 cursor-pointer text-lg px-8 py-3 flex items-center justify-center hover:bg-primary/5 transition-colors"
                 aria-label="Learn how it works"
               >
                 How It Works
@@ -123,7 +123,7 @@ export default function Hero() {
             </div>
 
             {/* Trust Badges */}
-            <div className="flex flex-wrap items-center gap-6 pt-4">
+            <div className="flex flex-wrap items-center gap-6 pt-3">
               <div className="flex items-center space-x-2 group">
                 <svg
                   className="w-5 h-5 text-accent group-hover:scale-110 transition-transform"
