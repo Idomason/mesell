@@ -6,11 +6,7 @@ import ProductOverview from "@/components/product/ProductOverview";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductImageDisplay from "@/components/product/ProductImageDisplay";
 
-type ParamsProp = {
-  params: { productId: string };
-};
-
-export default async function page({ params }: ParamsProp) {
+export default async function page({ params }: any) {
   const { productId } = await params;
   const product = products.find((product) => product.id === +productId);
 
