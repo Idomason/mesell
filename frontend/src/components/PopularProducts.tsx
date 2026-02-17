@@ -10,7 +10,7 @@ export default function PopularProducts() {
     <section className="py-16 font-sans bg-black/75">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-2xl font-bold text-primary mb-6 text-center">
-          Popular Products
+          Popular Productss
         </h2>
         <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-7 gap-x-7">
           {products.map((product) => (
