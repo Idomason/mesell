@@ -1,10 +1,24 @@
 import Item from "./Item";
 
+type CartItem = {
+  id: number;
+  image: string;
+  heading: string;
+  color: string;
+  size: string;
+  price: number;
+};
+
 type SetTotalProp = {
   onSetTotal: (t: number) => void;
 };
 
-export default function CartItems({ cartData, onSetTotal }: SetTotalProp) {
+type CartItemsProp = {
+  cartData: CartItem[];
+  onSetTotal: SetTotalProp;
+};
+
+export default function CartItems({ cartData, onSetTotal }: CartItemsProp) {
   return (
     <div className="w-full bg-white rounded-md">
       <div>
