@@ -15,11 +15,7 @@ interface IProduct {
   category: string;
 }
 
-export default async function page({
-  params,
-}: {
-  params: { productId: string };
-}) {
+export default async function page({ params }: any) {
   const { productId } = await params;
   const product = products.find((product) => product.id === +productId);
 
