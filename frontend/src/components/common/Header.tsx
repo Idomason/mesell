@@ -16,6 +16,7 @@ import {
   Menu,
   X,
   ChevronDown,
+  Heart,
 } from "lucide-react";
 
 export default function Header() {
@@ -62,92 +63,104 @@ export default function Header() {
 
   return (
     <>
-      <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
-        <ul className="flex items-center justify-between">
-          {/* Socials */}
-          <li className="flex items-center justify-center divide-x">
-            <div className="flex items-center justify-center gap-2.5 mr-4">
-              <Link
-                href="/brand"
-                className="text-sm font-medium text-accent hover:text-primary transition-colors"
-              >
-                <IoLogoFacebook className="size-5" />
-              </Link>
+      <header className="fixed w-full flex flex-col items-center justify-between border-b bg-background top-0 left-0 right-0 z-50">
+        {/* First Nav */}
+        <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
+          <ul className="flex items-center justify-between">
+            {/* Socials */}
+            <li className="flex items-center justify-center divide-x">
+              <div className="flex items-center justify-center gap-2.5 mr-4">
+                <Link
+                  href="#"
+                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
+                >
+                  <IoLogoFacebook className="size-5" />
+                </Link>
 
-              <Link
-                href="/categories"
-                className="text-sm font-medium text-accent hover:text-primary transition-colors"
-              >
-                <AiOutlineInstagram className="size-5" />
-              </Link>
+                <Link
+                  href="#"
+                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
+                >
+                  <AiOutlineInstagram className="size-5" />
+                </Link>
 
-              <Link
-                href="/orders"
-                className="text-sm font-medium text-accent hover:text-primary transition-colors"
-              >
-                <RiTwitterXFill className="size-5" />
-              </Link>
-            </div>
-            {/* Country */}
-            <div className="flex items-center justify-center gap-2.5 mr-4">
-              <span className="flex items-center gap-2">
-                <span className="text-sm font-medium text-accent ml-4">
-                  Nigeria
+                <Link
+                  href="#"
+                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
+                >
+                  <RiTwitterXFill className="size-5" />
+                </Link>
+              </div>
+              {/* Country */}
+              <div className="flex items-center justify-center gap-2.5 mr-4">
+                <span className="flex items-center gap-2">
+                  <span className="text-sm font-medium text-accent ml-4">
+                    Nigeria
+                  </span>
+                  <CountryFlag
+                    countryCode="NG"
+                    svg
+                    style={{
+                      width: "20px",
+                      height: "15px",
+                    }}
+                    title="Nigeria"
+                  />
                 </span>
-                <CountryFlag
-                  countryCode="NG"
-                  svg
-                  style={{
-                    width: "20px",
-                    height: "15px",
-                  }}
-                  title="Nigeria"
-                />
-              </span>
-              <span className="text-sm font-medium text-accent hover:text-primary transition-colors">
-                <ChevronDown size={14} />
-              </span>
-            </div>
-          </li>
-
-          {/* Auth & Cart */}
-          <li className="flex items-center justify-center gap-2.5">
-            <Link
-              href="/cart"
-              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-            >
-              <ShoppingCart size={22} />
-              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                0
+                <span className="text-sm font-medium text-accent hover:text-primary transition-colors">
+                  <ChevronDown size={14} />
+                </span>
               </div>
-            </Link>
+            </li>
 
-            <Link
-              href="/cart"
-              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-            >
-              <IoIosNotifications size={22} />
-              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                0
-              </div>
-            </Link>
+            {/* Auth & Cart */}
+            <li className="flex items-center justify-center gap-2.5">
+              <Link
+                href="/cart"
+                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+              >
+                <ShoppingCart className="hover:stroke-primary" size={22} />
+                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                  0
+                </div>
+              </Link>
 
-            <Link
-              href="/login"
-              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-            >
-              <span className="hidden sm:inline">Login</span>
-            </Link>
-            <Link
-              href="/signup"
-              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-            >
-              <span className="hidden sm:inline">Sign Up</span>
-            </Link>
-          </li>
-        </ul>
-      </nav>
-      <header className="w-full border-b bg-background sticky top-0 z-50">
+              <Link
+                href="/cart"
+                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+              >
+                <Heart className="hover:stroke-primary" size={22} />
+                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                  0
+                </div>
+              </Link>
+
+              <Link
+                href="/cart"
+                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+              >
+                <IoIosNotifications className="hover:fill-primary" size={22} />
+                <div className="absolute -top-2 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                  0
+                </div>
+              </Link>
+
+              <Link
+                href="/login"
+                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+              >
+                <span className="hidden sm:inline">Login</span>
+              </Link>
+              <Link
+                href="/signup"
+                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+              >
+                <span className="hidden sm:inline">Sign Up</span>
+              </Link>
+            </li>
+          </ul>
+        </nav>
+        {/* Second Nav */}
         <div className="container mx-auto px-4 sm:px-6 py-2.5">
           <div className="flex items-center justify-between">
             {/* Logo */}
@@ -186,11 +199,10 @@ export default function Header() {
               {/* Navigation Links */}
               <nav className="flex items-center space-x-6">
                 <Link
-                  href="/brand"
+                  href="/brands"
                   className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
                 >
-                  {/* Products */}
-                  Brand
+                  Brands
                 </Link>
                 <Link
                   href="/categories"
@@ -280,11 +292,11 @@ export default function Header() {
               <nav className="flex-1 overflow-y-auto">
                 <div className="px-4 py-2 space-y-1">
                   <Link
-                    href="/brand"
+                    href="/brands"
                     className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
                     onClick={() => setIsMenuOpen(false)}
                   >
-                    Brand
+                    Brands
                   </Link>
                   <Link
                     href="/categories"

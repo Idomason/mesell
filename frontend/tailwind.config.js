@@ -148,19 +148,18 @@ module.exports = {
           "50%": { transform: "translateY(-30px)" },
         },
         "text-gradient": {
-          "to": {
-            "backgroundPosition": "200% center"
-          }
+          to: {
+            backgroundPosition: "200% center",
+          },
         },
         "background-shine": {
-          "from": {
-            "backgroundPosition": "0 0"
+          from: {
+            backgroundPosition: "0 0",
           },
-          "to": {
-            "backgroundPosition": "-200% 0"
-          }
-        }
-          
+          to: {
+            backgroundPosition: "-200% 0",
+          },
+        },
       },
       animation: {
         "accordion-down": "accordion-down 0.2s ease-out",
@@ -182,5 +181,5 @@ module.exports = {
       },
     },
   },
-  plugins: [require("tailwindcss-animate")],
+  plugins: [require("tailwindcss-animate", "@tailwindcss/line-clamp")],
 };

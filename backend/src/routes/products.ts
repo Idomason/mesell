@@ -8,4 +8,10 @@ router.get("/", async (req, res) => {
   res.status(200).json(products);
 });
 
+/*
+  GET /api/products (pagination, filters)
+
+  GET /api/products/:slug
+*/
+
 export default router;

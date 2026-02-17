@@ -18,8 +18,9 @@ import { Button } from "@/components/ui/button";
 import { customers } from "@/data/customer";
 import Link from "next/link";
 import { Input } from "./ui/input";
+import { Brand } from "@/Types/Brands";
 
-export default function BrandProfile() {
+export default function BrandProfile({ brand }: Brand) {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
       <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-8">
@@ -41,7 +42,7 @@ export default function BrandProfile() {
               <div className="h-32 w-32 md:h-40 md:w-40 border-4 border-white shadow-lg overflow-hidden rounded-full">
                 <Image
                   className="w-full h-full object-cover"
-                  src={"/images/customers/mesell-customer-4.png"}
+                  src={brand.image}
                   width={160}
                   height={160}
                   alt="Brand Owner Profile Image"
@@ -54,8 +55,8 @@ export default function BrandProfile() {
             <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-4">
               <div>
                 <div className="flex items-center gap-3">
-                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900">
-                    ISHA STEPS
+                  <h1 className="text-2xl md:text-3xl font-bold text-gray-900 uppercase">
+                    {brand.company}
                   </h1>
                   <span className="inline-flex items-center gap-1 bg-accent/10 text-accent-600 tracking-wider px-2 py-1 rounded-full text-xs font-medium">
                     <Verified
