@@ -13,7 +13,7 @@ import ProductCardSkeleton from "../skeletons/ProductCardSkeleton";
 
 export const dummyProducts = [
   {
-    _id: "prod_001",
+    id: 1,
     name: "Premium Ankara Two-Piece",
     description:
       "High-quality handcrafted Ankara outfit made with breathable cotton fabric.",
@@ -26,14 +26,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1544441893-675973e31985",
     ],
     seller: {
-      id: "seller_001",
+      id: 1,
       name: "Idoma Fashion House",
       verified: true,
       isLive: true,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_002",
+    id: 2,
     name: "Smart Fitness Watch",
     description:
       "Track your health, heart rate, sleep, and workouts in real time.",
@@ -46,14 +47,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1546868871-7041f2a55e12",
     ],
     seller: {
-      id: "seller_002",
+      id: 2,
       name: "TechNova Gadgets",
       verified: false,
       isLive: false,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_003",
+    id: 3,
     name: "Organic Skincare Set",
     description: "Natural glow kit made from 100% organic ingredients.",
     price: 32000,
@@ -65,14 +67,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1596462502278-27bfdc403348",
     ],
     seller: {
-      id: "seller_003",
+      id: 3,
       name: "Glow Naturals",
       verified: true,
       isLive: false,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_004",
+    id: 4,
     name: "Leather Office Backpack",
     description:
       "Durable leather backpack designed for work, travel, and everyday use.",
@@ -85,14 +88,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1507679799987-c73779587ccf",
     ],
     seller: {
-      id: "seller_004",
+      id: 4,
       name: "Urban Carry",
       verified: true,
       isLive: false,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_005",
+    id: 5,
     name: "Wireless Noise Cancelling Headphones",
     description: "Immersive sound experience with active noise cancellation.",
     price: 120000,
@@ -104,14 +108,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1484704849700-f032a568e944",
     ],
     seller: {
-      id: "seller_005",
+      id: 5,
       name: "AudioLab",
       verified: true,
       isLive: true,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_006",
+    id: 6,
     name: "Minimalist Desk Lamp",
     description: "Modern LED desk lamp with adjustable brightness and angle.",
     price: 27000,
@@ -123,14 +128,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1493666438817-866a91353ca9",
     ],
     seller: {
-      id: "seller_006",
+      id: 6,
       name: "HomeSpace",
       verified: false,
       isLive: false,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_007",
+    id: 7,
     name: "Handmade Wooden Coffee Table",
     description: "Solid wood coffee table crafted for durability and elegance.",
     price: 98000,
@@ -142,14 +148,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1533090481720-856c6e3c1fdc",
     ],
     seller: {
-      id: "seller_007",
+      id: 7,
       name: "CraftWood",
       verified: true,
       isLive: true,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_008",
+    id: 8,
     name: "Sports Running Sneakers",
     description:
       "Lightweight running sneakers designed for comfort and performance.",
@@ -162,14 +169,15 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1519741497674-611481863552",
     ],
     seller: {
-      id: "seller_008",
+      id: 8,
       name: "ActiveWear",
       verified: true,
       isLive: false,
     },
+    category: "clothing",
   },
   {
-    _id: "prod_009",
+    id: 9,
     name: "Premium Ankara Two-Piece",
     description:
       "High-quality handcrafted Ankara outfit made with breathable cotton fabric.",
@@ -182,11 +190,12 @@ export const dummyProducts = [
       "https://images.unsplash.com/photo-1544441893-675973e31985",
     ],
     seller: {
-      id: "seller_009",
+      id: 9,
       name: "Idoma Fashion House",
       verified: true,
       isLive: true,
     },
+    category: "clothing",
   },
 ];
 
@@ -227,7 +236,7 @@ export default function FeaturedProducts() {
         </h2>
         <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4 max-w-6xl mx-auto">
           {dummyProducts.map((product) => (
-            <ProductCard key={product._id} product={product} />
+            <ProductCard key={product.id} product={product} />
           ))}
         </div>
         <div className="px-4 py-6 flex items-center justify-center">
