@@ -4,8 +4,13 @@ import ProductImages from "./ProductImages";
 import ProductOverview from "./ProductOverview";
 import ProductDescription from "./ProductDescription";
 import ProductImageDisplay from "./ProductImageDisplay";
+import { Product } from "@/Types/Products";
 
-export default function ProductDetails() {
+interface IProductProp {
+  product: Product;
+}
+
+export default function ProductDetails({ product }: IProductProp) {
   return (
     <section className=" bg-gray-200 font-sans">
       <div className="max-w-6xl mx-auto bg-white">
@@ -30,10 +35,10 @@ export default function ProductDetails() {
         </nav>
         <div className="grid md:grid-cols-[1fr_400px]">
           <div className="flex flex-col-reverse md:flex-row">
-            <ProductImages />
-            <ProductImageDisplay />
+            <ProductImages images={product?.images ?? []} />
+            <ProductImageDisplay image={product?.images?.[0] || ""} />
           </div>
-          <ProductDescription />
+          <ProductDescription product={product} />
         </div>
       </div>
       <ProductOverview />
