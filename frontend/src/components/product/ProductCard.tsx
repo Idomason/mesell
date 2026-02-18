@@ -23,7 +23,7 @@ export default function ProductCard({ product }: ProductCardProps) {
   return (
     <div className="relative group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link
-        href={`/products/${product._id}`}
+        href={`/products/${product.id}`}
         className="block relative aspect-square overflow-hidden"
       >
         <Image
@@ -75,7 +75,7 @@ export default function ProductCard({ product }: ProductCardProps) {
           )}
         </div>
 
-        <Link href={`/products/${product._id}`}>
+        <Link href={`/products/${product.id}`}>
           <h3 className="font-karla font-semibold text-lg mb-1 hover:text-primary">
             {product.name}
           </h3>
