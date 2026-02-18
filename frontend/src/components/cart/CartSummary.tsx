@@ -1,7 +1,9 @@
 import Link from "next/dist/client/link";
 import { TbTruckDelivery } from "react-icons/tb";
 
-export default function CartSummary({ items }) {
+type ItemsProp = { totalItems: number };
+
+export default function CartSummary({ totalItems }: ItemsProp) {
   return (
     <div className="bg-primary-50 rounded-md p-4 flex flex-col justify-between font-sans max-h-[35.4rem]">
       <div className="border-b border-gray-200 pb-4">
@@ -20,7 +22,7 @@ export default function CartSummary({ items }) {
         </div>
         <div className="space-y-2 text-xs text-gray-500 font-medium">
           <div className="flex justify-between">
-            <span>{items} Items</span>
+            <span>{totalItems} Items</span>
             <span className="font-semibold text-gray-700">₦20,890</span>
           </div>
           <div className="flex justify-between">

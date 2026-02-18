@@ -122,7 +122,7 @@ export default function page() {
             <div className="w-full border border-gray-200 rounded-md">
               <CartItems cartData={cart} onSetTotal={handleTotalCalc} />
             </div>
-            <CartSummary items={numItems} />
+            <CartSummary totalItems={numItems} />
           </div>
         ) : (
           <p className="text-center text-gray-600 mb-8">
