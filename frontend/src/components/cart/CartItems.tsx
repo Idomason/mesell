@@ -9,9 +9,7 @@ type CartItem = {
   price: number;
 };
 
-type SetTotalProp = {
-  onSetTotal: (t: number) => void;
-};
+type SetTotalProp = (t: number) => void;
 
 type CartItemsProp = {
   cartData: CartItem[];
@@ -24,7 +22,7 @@ export default function CartItems({ cartData, onSetTotal }: CartItemsProp) {
       <div>
         <ul role="list" className="divide-y divide-gray-200 px-2">
           {cartData.map((item) => (
-            <Item key={item.id} item={item} onSetTotal={onSetTotal} />
+            <Item key={item.id} item={item} />
           ))}
         </ul>
         <div className="px-2 py-5 text-center border-t">
