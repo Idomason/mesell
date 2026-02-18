@@ -1,9 +1,9 @@
 import { StarIcon } from "lucide-react";
 
 type RatingProps = {
-  rating: number;
-  totalReviews: number;
-  breakdown: Record<number, number>;
+  rating?: number;
+  totalReviews?: number;
+  breakdown?: Record<number, number>;
 };
 
 export default function RatingOverview({

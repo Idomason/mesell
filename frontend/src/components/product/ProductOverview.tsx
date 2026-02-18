@@ -31,7 +31,7 @@ export default function ProductOverview() {
                 >
                   {item}
                 </button>
-              )
+              ),
             )}
           </div>
           <hr className="h-0.5 bg-black/25" />
