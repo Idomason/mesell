@@ -20,7 +20,11 @@ import Link from "next/link";
 import { Input } from "./ui/input";
 import { Brand } from "@/Types/Brands";
 
-export default function BrandProfile({ brand }: Brand) {
+interface BrandProp {
+  brand: Brand;
+}
+
+export default function BrandProfile({ brand }: BrandProp) {
   return (
     <div className="bg-gray-50 min-h-screen font-sans">
       <div className="max-w-7xl mx-auto px-4 py-8 flex flex-col gap-8">

@@ -1,34 +1,44 @@
 "use client";
 
 import { Dot } from "lucide-react";
-import { useState } from "react";
 import { TbShoppingBagPlus } from "react-icons/tb";
 import { HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi2";
 import StarRating from "../common/ratings/StarRating";
 import Quantity from "./QuantitySelector";
 
+type Seller = {
+  id: number;
+  name: string;
+  verified: boolean;
+  isLive: boolean;
+};
+
 type ProductDescriptionProps = {
   product: {
+    id: number;
     name: string;
-    price: number;
-    image: string;
-    category: string;
     description: string;
+    price: number;
+    totalSold: number;
+    isLive: boolean;
+    images: string[];
+    seller: Seller;
+    category: string;
   };
 };
 
 export default function ProductDescription({
   product,
 }: ProductDescriptionProps) {
-  const [quantity, setQuantity] = useState(1);
+  // const [quantity, setQuantity] = useState(1);
 
-  function handleQuantityNext() {
-    setQuantity((quantity) => quantity + 1);
-  }
+  // function handleQuantityNext() {
+  //   setQuantity((quantity) => quantity + 1);
+  // }
 
-  function handleQuantityPrevious() {
-    if (quantity > 1) setQuantity((quantity) => quantity - 1);
-  }
+  // function handleQuantityPrevious() {
+  //   if (quantity > 1) setQuantity((quantity) => quantity - 1);
+  // }
 
   return (
     <div className="px-2 md:px-4 py-4">
@@ -92,11 +102,7 @@ export default function ProductDescription({
         {/* Quantity */}
         <div>
           <h4 className="mb-2">Quantity</h4>
-          <Quantity
-            quantity={quantity}
-            onSetNext={handleQuantityNext}
-            onSetPrevious={handleQuantityPrevious}
-          />
+          <Quantity onAddItem={() => {}} />
         </div>
         <div className="py-4">
           <h5 className="mb-2 text-sm font-medium">Price</h5>

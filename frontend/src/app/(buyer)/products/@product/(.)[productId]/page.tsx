@@ -10,6 +10,10 @@ export default async function page({ params }: any) {
   const { productId } = await params;
   const product = products.find((product) => product.id === +productId);
 
+  if (!product) {
+    return <div>No product found</div>;
+  }
+
   return (
     <section className=" bg-gray-200 font-sans">
       <div className="max-w-6xl mx-auto bg-white">
@@ -34,9 +38,10 @@ export default async function page({ params }: any) {
         </nav>
         <div className="grid md:grid-cols-[1fr_400px]">
           <div className="flex flex-col-reverse md:flex-row">
-            <ProductImages images={product?.image ?? []} />
-            <ProductImageDisplay image={product?.image ?? ""} />
+            <ProductImages images={product?.images ?? []} />
+            <ProductImageDisplay image={product?.images?.[0] ?? ""} />
           </div>
+          {/* <ProductDescription product={product} /> */}
           <ProductDescription product={product} />
         </div>
       </div>

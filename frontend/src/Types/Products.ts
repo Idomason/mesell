@@ -1,7 +1,7 @@
 import { Seller } from "./Sellers";
 
 export interface Product {
-  _id: string;
+  id: number;
   name: string;
   description: string;
   price: number;
@@ -9,4 +9,5 @@ export interface Product {
   isLive: boolean;
   images: string[];
   seller: Seller;
+  category: string;
 }

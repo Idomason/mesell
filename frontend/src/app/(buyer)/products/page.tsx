@@ -32,7 +32,7 @@ function ProductCard({ product }: { product: Product }) {
       <div className="relative">
         <div className="overflow-hidden">
           <Image
-            src={product.image}
+            src={product?.images[0]}
             alt={product.name}
             className="w-full h-48 object-cover transform transition-transform duration-300 ease-in-out hover:scale-125"
             width={200}
