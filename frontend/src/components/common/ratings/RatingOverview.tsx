@@ -1,5 +1,11 @@
 import { StarIcon } from "lucide-react";
 
+type RatingProps = {
+  rating: number;
+  totalReviews: number;
+  breakdown: Record<number, number>;
+};
+
 export default function RatingOverview({
   rating = 4.7,
   totalReviews = 458,
@@ -8,7 +14,7 @@ export default function RatingOverview({
     4: 0.65,
     3: 0.3,
   },
-}) {
+}: RatingProps) {
   // Generate star fill levels for the main rating display
   const getStarFill = (index: number) => {
     const diff = rating - index;
