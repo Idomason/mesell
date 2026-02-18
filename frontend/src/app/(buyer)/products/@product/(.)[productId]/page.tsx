@@ -6,15 +6,6 @@ import ProductOverview from "@/components/product/ProductOverview";
 import ProductDescription from "@/components/product/ProductDescription";
 import ProductImageDisplay from "@/components/product/ProductImageDisplay";
 
-interface IProduct {
-  id: string;
-  name: string;
-  description: string;
-  price: number;
-  image: string;
-  category: string;
-}
-
 export default async function page({ params }: any) {
   const { productId } = await params;
   const product = products.find((product) => product.id === +productId);
@@ -43,10 +34,10 @@ export default async function page({ params }: any) {
         </nav>
         <div className="grid md:grid-cols-[1fr_400px]">
           <div className="flex flex-col-reverse md:flex-row">
-            <ProductImages images={product?.image || []} />
-            <ProductImageDisplay image={product?.image || ""} />
+            <ProductImages images={product?.image ?? []} />
+            <ProductImageDisplay image={product?.image ?? ""} />
           </div>
-          <ProductDescription product={product || {}} />
+          <ProductDescription product={product} />
         </div>
       </div>
       <ProductOverview />

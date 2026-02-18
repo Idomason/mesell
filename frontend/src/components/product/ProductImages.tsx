@@ -1,6 +1,10 @@
 import Image from "next/image";
 
-export default function ProductImages({ images }: { images: string[] }) {
+type ImageProp = {
+  images: string[];
+};
+
+export default function ProductImages({ images }: ImageProp) {
   return (
     <div className="flex md:flex-col gap-2 px-2 py-4">
       <div className=" w-fit cursor-pointer rounded  transition-all hover:scale-105 duration-300 ease-in-out ">
