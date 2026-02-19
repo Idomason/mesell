@@ -30,16 +30,6 @@ type ProductDescriptionProps = {
 export default function ProductDescription({
   product,
 }: ProductDescriptionProps) {
-  // const [quantity, setQuantity] = useState(1);
-
-  // function handleQuantityNext() {
-  //   setQuantity((quantity) => quantity + 1);
-  // }
-
-  // function handleQuantityPrevious() {
-  //   if (quantity > 1) setQuantity((quantity) => quantity - 1);
-  // }
-
   return (
     <div className="px-2 md:px-4 py-4">
       <div>
@@ -57,7 +47,7 @@ export default function ProductDescription({
             <span>154 orders</span>
           </div>
         </div>
-        <div className="flex items-center gap-10 text-[12px] font-semibold pb-4 border-b-2 border-gray-400/60">
+        <div className="flex items-center gap-10 text-sm font-semibold pb-4 border-b-2 border-gray-400/60">
           <div className="flex flex-col space-y-2 text-gray-700">
             <span>Made in:</span>
             <span>Native:</span>
@@ -110,14 +100,14 @@ export default function ProductDescription({
         </div>
         <div>
           <div className="flex items-center gap-2">
-            <button className="px-6 py-1.5 md:py-2.5 flex items-center rounded-md space-x-2 text-[13px] md:text-sm  shadow text-white bg-primary-500 border border-gray-300 hover:bg-primary-700">
+            <button className="px-6 py-2.5 flex items-center rounded-md space-x-2 text-[13px] md:text-sm  shadow text-white bg-primary-500 border border-gray-300 hover:bg-primary-700">
               <TbShoppingBagPlus className="hidden size-5 sm:block" />
               <span className="font-semibold">Add to cart</span>
             </button>
-            <button className="px-6 py-1.5 md:py-2.5 inline-block w-[150px] rounded-md items-center space-x-2 text-sm font-semibold text-primary-500 bg-primary-100 border border-gray-300 hover:text-primary-700 shadow">
+            <button className="px-6 py-2.5 inline-block w-[150px] rounded-md items-center space-x-2 text-sm font-semibold text-primary-500 bg-primary-100 border border-gray-300 hover:text-primary-700 shadow">
               Buy now
             </button>
-            <button className="inline-block rounded-md shadow p-2 md:p-2.5 bg-gray-100 hover:bg-accent-500 transition-all duration-300 ease-in-out border border-gray-300">
+            <button className="inline-block rounded-md shadow p-2.5 bg-gray-100 hover:bg-accent-500 transition-all duration-300 ease-in-out border border-gray-300">
               <HiOutlineHeart className="md:size-5" />
             </button>
           </div>
