@@ -107,7 +107,7 @@ export default function ProductDescription({
             <button className="px-6 py-2.5 inline-block w-[150px] rounded-md items-center space-x-2 text-sm font-semibold text-primary-500 bg-primary-100 border border-gray-300 hover:text-primary-700 shadow">
               Buy now
             </button>
-            <button className="inline-block rounded-md shadow p-2.5 bg-gray-100 hover:bg-accent-500 transition-all duration-300 ease-in-out border border-gray-300">
+            <button className="inline-block rounded-md shadow p-3 bg-gray-100 hover:bg-accent-500 transition-all duration-300 ease-in-out border border-gray-300">
               <HiOutlineHeart className="md:size-5" />
             </button>
           </div>
