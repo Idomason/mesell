@@ -108,7 +108,7 @@ export default function ProductDescription({
               Buy now
             </button>
             <button className="inline-block rounded-md shadow p-3 bg-gray-100 hover:bg-accent-500 transition-all duration-300 ease-in-out border border-gray-300">
-              <HiOutlineHeart />
+              <HiOutlineHeart size={24} />
             </button>
           </div>
         </div>
