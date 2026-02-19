@@ -35,7 +35,7 @@ export default function ProductOverview() {
           <hr className="h-0.5 bg-black/25" />
           <div className="px-2 md:px-8 py-10 bg-white">
             {showDetail === "description" && (
-              <p className="text-gray-700">
+              <p className="px-1.5 text-gray-700">
                 Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
                 velit! Illo minus iusto nihil fugiat, error aperiam quis
                 aspernatur voluptas quasi sed tempore reprehenderit enim ex quae
