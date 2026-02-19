@@ -35,7 +35,7 @@ export default function CartSummary({ totalItems }: ItemsProp) {
           </div>
           <div className="flex justify-between">
             <span>Discount</span>
-            <span className="text-green-600 font-semibold">- ₦80</span>
+            <span className="text-accent font-semibold">- ₦80</span>
           </div>
         </div>
       </div>
@@ -63,13 +63,13 @@ export default function CartSummary({ totalItems }: ItemsProp) {
       <div className="mt-4 text-xs text-gray-500 text-center">
         <p>
           By proceeding to checkout, you agree to our <br />
-          <a href="#" className="text-primary hover:underline">
+          <Link href="#" className="text-primary hover:underline">
             Terms of Service
-          </a>
+          </Link>
           and
-          <a href="#" className="text-primary hover:underline">
+          <Link href="#" className="text-primary hover:underline">
             Privacy Policy
-          </a>
+          </Link>
           .
         </p>
       </div>
