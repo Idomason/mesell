@@ -25,7 +25,7 @@ export default function ProductOverview() {
                   onClick={() => handleShowDetail(item)}
                   className={`py-1 -mb-0.5 px-2 md:px-5 capitalize font-medium hover:text-primary-500 transition-all duration-300 ease-in-out ${
                     showDetail === item
-                      ? "border-b-2 border-primary text-primary bg-gradient-to-t from-primary-50 to-transparent"
+                      ? "border-b-2 border-primary text-primary bg-gradient-to-t from-primary-100 to-transparent"
                       : ""
                   }`}
                 >
