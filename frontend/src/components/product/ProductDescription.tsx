@@ -80,7 +80,7 @@ export default function ProductDescription({
           <div className="flex items-center gap-4">
             {["S", "M", "L", "XL"].map((size) => (
               <button
-                className="h-6 w-6 md:h-7 md:w-7 flex items-center justify-center bg-[#d7d7d7] border border-gray-50 rounded-sm hover:bg-white transition-all duration-300 ease-in-out"
+                className="h-7 w-7 flex items-center justify-center bg-[#d7d7d7] border border-gray-50 rounded-sm hover:bg-white transition-all duration-300 ease-in-out"
                 key={size}
               >
                 {size}
