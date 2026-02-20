@@ -17,12 +17,12 @@ export default function ProductOverview() {
       <div className="grid grid-cols-1 md:grid-cols-[1fr_400px] justify-between bg-white">
         <div className="py-3">
           <hr className="h-0.5 bg-black/25" />
-          <div className="flex items-center overflow-x-scroll md:overflow-x-hidden">
+          <div className="flex items-center">
             {["description", "reviews", "history", "guide"].map((item) => (
               <button
                 key={item}
                 onClick={() => handleShowDetail(item)}
-                className={`py-1.5 -mb-0.5 px-5 capitalize font-medium hover:text-primary-500 transition-all duration-300 ease-in-out ${
+                className={`py-1 -mb-0.5 px-2 md:px-5 capitalize font-medium hover:text-primary-500 transition-all duration-300 ease-in-out ${
                   showDetail === item
                     ? "border-b-2 border-primary-500 text-primary-500"
                     : ""

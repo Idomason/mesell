@@ -27,7 +27,10 @@ function ProductCard({ product }: { product: Product }) {
   const formattedPrice = product.price.toLocaleString("en-US");
 
   return (
-    <div className="bg-white rounded-lg w-full shadow-md overflow-hidden cursor-pointer">
+    <Link
+      href={`/products/${product.id}`}
+      className="bg-white rounded-lg w-full shadow-md overflow-hidden cursor-pointer"
+    >
       {/* Product top content */}
       <div className="relative">
         <div className="overflow-hidden">
@@ -46,7 +49,8 @@ function ProductCard({ product }: { product: Product }) {
         </div>
 
         {/* Seller profile */}
-        <Link href="/sellers/ene-adanu">
+        {/* href="/sellers/ene-adanu" */}
+        <button>
           <div className="h-10 w-10 rounded-full border-2 border-primary-500 overflow-hidden absolute left-0 top-0 right-full m-4 cursor-pointer">
             <Image
               className="w-full h-full object-cover"
@@ -57,7 +61,7 @@ function ProductCard({ product }: { product: Product }) {
             />
           </div>
           <Verified className="size-5 inset-1 text-success-foreground absolute left-11 top-9 fill-accent rounded-full" />
-        </Link>
+        </button>
       </div>
 
       {/* Product bottom content */}
@@ -68,11 +72,9 @@ function ProductCard({ product }: { product: Product }) {
         </p>
         <div className="flex items-center justify-between">
           <span className="text-primary font-bold">₦{formattedPrice}</span>
-          <Link href={`/products/${product.id}`} className="btn-primary">
-            View Product
-          </Link>
+          <button className="btn-primary">View Product</button>
         </div>
       </div>
-    </div>
+    </Link>
   );
 }
