@@ -18,19 +18,21 @@ export default function ProductOverview() {
         <div className="py-3">
           <hr className="h-0.5 bg-black/25" />
           <div className="flex items-center">
-            {["description", "reviews", "history", "guide"].map((item) => (
-              <button
-                key={item}
-                onClick={() => handleShowDetail(item)}
-                className={`py-1 -mb-0.5 px-2 md:px-5 capitalize font-medium hover:text-primary-500 transition-all duration-300 ease-in-out ${
-                  showDetail === item
-                    ? "border-b-2 border-primary-500 text-primary-500"
-                    : ""
-                }`}
-              >
-                {item}
-              </button>
-            ))}
+            {["description", "reviews", "history", "usage guide"].map(
+              (item) => (
+                <button
+                  key={item}
+                  onClick={() => handleShowDetail(item)}
+                  className={`py-1 -mb-0.5 px-2 md:px-5 capitalize font-medium hover:text-primary-500 transition-all duration-300 ease-in-out ${
+                    showDetail === item
+                      ? "border-b-2 border-primary-500 text-primary-500"
+                      : ""
+                  }`}
+                >
+                  {item}
+                </button>
+              ),
+            )}
           </div>
           <hr className="h-0.5 bg-black/25" />
           <div className="px-2 md:px-8 py-10 bg-white">
