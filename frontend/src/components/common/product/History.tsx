@@ -1,7 +1,7 @@
 export default function History() {
   return (
-    <div>
-      <h2 className="font-bold ">
+    <div className="leading-relaxed text-sm text-gray-600">
+      <h2 className="font-bold text-gray-700">
         A Legacy Forged in the Middle Belt: The Origins of Our Handcrafted
         Footwear
       </h2>

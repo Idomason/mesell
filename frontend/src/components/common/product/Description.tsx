@@ -2,8 +2,8 @@ import React from "react";
 
 export default function Description() {
   return (
-    <div className="text-base">
-      <p className="px-1.5 text-gray-700">
+    <div className="text-sm leading-relaxed text-gray-600">
+      <p className="px-1.5">
         Crafted with meticulous care by skilled artisans, these handcrafted
         footwear pieces are more than just shoes—they’re wearable works of art.
         Each pair is individually shaped, stitched, and finished by hand,

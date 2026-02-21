@@ -1,7 +1,7 @@
 export default function UsageGuide() {
   return (
-    <div>
-      <h2 className="font-bold mb-4">
+    <div className="leading-relaxed text-gray-600 text-sm">
+      <h2 className="font-bold mb-2 text-gray-700">
         User Usage & Care Guide for Handcrafted Middle Belt Footwear
       </h2>
       <div className="py-2 border-b border-gray-200">
