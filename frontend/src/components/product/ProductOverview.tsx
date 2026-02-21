@@ -4,6 +4,9 @@ import { useState } from "react";
 import Reviews from "../common/review/Reviews";
 import RatingOverview from "../common/ratings/RatingOverview";
 import BrandDetails from "../common/brand-details/BrandDetails";
+import Description from "../common/product/Description";
+import History from "../common/product/History";
+import UsageGuide from "../common/product/UsageGuide";
 
 export default function ProductOverview() {
   const [showDetail, setShowDetail] = useState("description");
@@ -36,30 +39,13 @@ export default function ProductOverview() {
           </div>
           <hr className="h-0.5 bg-black/25" />
           <div className="px-2 md:px-8 py-10 bg-white">
-            {showDetail === "description" && (
-              <p className="px-1.5 text-gray-700">
-                Lorem ipsum dolor sit amet, consectetur adipisicing elit. Fugit,
-                velit! Illo minus iusto nihil fugiat, error aperiam quis
-                aspernatur voluptas quasi sed tempore reprehenderit enim ex quae
-                hic perferendis harum ad rem, non debitis vero! Cumque sunt
-                adipisci error deserunt. Lorem ipsum dolor sit amet, consectetur
-                adipisicing elit. Fugit, velit! Illo minus iusto nihil fugiat,
-                error aperiam quis aspernatur voluptas quasi sed tempore
-                reprehenderit enim ex quae hic perferendis harum ad rem, non
-                debitis vero! Cumque sunt adipisci error deserunt. Lorem ipsum
-                dolor sit amet, consectetur adipisicing elit. Fugit, velit! Illo
-                minus iusto nihil fugiat, error aperiam quis aspernatur voluptas
-                quasi sed tempore reprehenderit enim ex quae hic perferendis
-                harum ad rem, non debitis vero! Cumque sunt adipisci error
-                deserunt. Lorem ipsum dolor sit amet, consectetur adipisicing
-                elit. Fugit, velit! Illo minus iusto nihil fugiat, error aperiam
-                quis aspernatur voluptas quasi sed tempore reprehenderit enim ex
-                quae hic perferendis harum ad rem, non debitis vero! Cumque sunt
-                adipisci error deserunt.
-              </p>
-            )}
+            {showDetail === "description" && <Description />}
 
             {showDetail === "reviews" && <Reviews />}
+
+            {showDetail === "history" && <History />}
+
+            {showDetail === "usage guide" && <UsageGuide />}
           </div>
         </div>
 
