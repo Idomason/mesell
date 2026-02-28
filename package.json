@@ -1,0 +1,19 @@
+{
+  "name": "mesell",
+  "version": "1.0.0",
+  "description": "A secure and trusted pre-order ecommerce platform built for the Nigerian and African market, featuring escrow payments, seller verification, and localized experiences.",
+  "main": "index.js",
+  "scripts": {
+    "setup-server": "pnpm --prefix backend install",
+    "setup-client": "pnpm --prefix frontend install",
+    "setup": "pnpm run setup-server && pnpm run setup-client",
+    "client": "pnpm --prefix frontend run dev",
+    "server": "pnpm --prefix backend run dev",
+    "watch": "pnpm run server & pnpm run client",
+    "deploy": "pnpm --prefix frontend build && pnpm --prefix backend build && pnpm --prefix backend start",
+    "test": "pnpm --prefix backend run test && pnpm --prefix frontend run test"
+  },
+  "keywords": [],
+  "author": "Idoma Ngbede",
+  "license": "ISC"
+}

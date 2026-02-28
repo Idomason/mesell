@@ -10,7 +10,7 @@ import { Request, Response, NextFunction } from "express";
 export const signup = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   const { firstName, lastName, email, password, passwordConfirm } = req.body;
 
@@ -45,7 +45,7 @@ export const signup = catchAsync(async function (
 export const login = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   const { email, password } = req.body;
 
@@ -73,7 +73,7 @@ export const login = catchAsync(async function (
 export const forgotPassword = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   // 1.) Get user based on the POSTed email
   const user = await User.findOne({ email: req.body.email });
@@ -88,7 +88,7 @@ export const forgotPassword = catchAsync(async function (
 
   // 3.) Send it to user's email
   const resetURL = `${req.protocol}://${req.get(
-    "host"
+    "host",
   )}/api/v1/users/reset-password/${resetToken}`;
 
   const message = `Forgot your password? Kindly send a password reset request with your new password and confirm password to: ${resetURL} \nIf you didn't forget your password, kindly ignore this email. Thanks!`;
@@ -96,11 +96,7 @@ export const forgotPassword = catchAsync(async function (
   try {
     await sendEmail({
       email: user.email,
-<<<<<<< HEAD
-      subject: "Your Password Reset Token (valid for 10mins",
-=======
       subject: "Your Password Reset Token (valid for 10 mins)",
->>>>>>> mesell-v2
       message,
     });
 
@@ -114,7 +110,7 @@ export const forgotPassword = catchAsync(async function (
     await user.save({ validateBeforeSave: false });
 
     return next(
-      new AppError("Somthing went wrong, please try again later", 500)
+      new AppError("Somthing went wrong, please try again later", 500),
     );
   }
 });
@@ -123,7 +119,7 @@ export const forgotPassword = catchAsync(async function (
 export const resetPassword = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   // Get the user based on the token
   const hashedToken = crypto

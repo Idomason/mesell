@@ -1,7 +1,9 @@
+import path from "node:path";
+
 import cors from "cors";
-import dotenv from "dotenv";
 import morgan from "morgan";
 import express from "express";
+import * as dotenv from "dotenv";
 
 import authRoutes from "@/routes/auth.js";
 import orderRoutes from "@/routes/orders.js";
@@ -27,9 +29,9 @@ app.use((req, res, next) => {
 if (process.env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-
-app.use(cors());
+app.use(cors({ origin: "http://localhost:3000" }));
 app.use(express.json());
+app.use(express.static(path.join(__dirname, "..", "public")));
 
 // Routes
 app.use("/api/v1/auth", authRoutes);
@@ -39,7 +41,7 @@ app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/users", userRoutes);
 
 app.get("/", (req, res) => {
-  res.send("<h1>Welcome Mesell Api service</h1>");
+  res.send(path.join(__dirname, "..", "public", "index.html"));
 });
 
 // Error handling

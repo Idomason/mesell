@@ -18,6 +18,21 @@ import {
   ChevronDown,
   Heart,
 } from "lucide-react";
+import { Input } from "../ui/input";
+import { motion } from "motion/react";
+
+const container = {
+  hidden: { opacity: 0 },
+  visible: {
+    opacity: 1,
+    transition: { staggerChildren: 0.15, delayChildren: 0.2 },
+  },
+};
+
+const item = {
+  hidden: { opacity: 0, y: 20 },
+  visible: { opacity: 1, y: 0 },
+};
 
 export default function Header() {
   const [mounted, setMounted] = useState(false);
@@ -62,235 +77,242 @@ export default function Header() {
   }
 
   return (
-    <>
-      <header className="fixed w-full flex flex-col items-center justify-between border-b bg-background top-0 left-0 right-0 z-50">
-        {/* First Nav */}
-        <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
-          <ul className="flex items-center justify-between">
-            {/* Socials */}
-            <li className="flex items-center justify-center divide-x">
-              <div className="flex items-center justify-center gap-2.5 mr-4">
-                <Link
-                  href="#"
-                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
-                >
-                  <IoLogoFacebook className="size-5" />
-                </Link>
+    <header className="fixed w-full flex flex-col items-center justify-between border-b border-white/30 bg-wite/20 backdrop-blur-md top-0 left-0 right-0 z-50">
+      {/* First Nav */}
+      <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
+        <ul className="flex items-center justify-between">
+          {/* Socials */}
+          <li className="flex items-center justify-center divide-x">
+            <div className="flex items-center justify-center gap-2.5 mr-4">
+              <Link
+                href="#"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <IoLogoFacebook className="size-5" />
+              </Link>
 
-                <Link
-                  href="#"
-                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
-                >
-                  <AiOutlineInstagram className="size-5" />
-                </Link>
+              <Link
+                href="#"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <AiOutlineInstagram className="size-5" />
+              </Link>
 
-                <Link
-                  href="#"
-                  className="text-sm font-medium text-accent hover:text-primary transition-colors"
-                >
-                  <RiTwitterXFill className="size-5" />
-                </Link>
-              </div>
-              {/* Country */}
-              <div className="flex items-center justify-center gap-2.5 mr-4">
-                <span className="flex items-center gap-2">
-                  <span className="text-sm font-medium text-accent ml-4">
-                    Nigeria
-                  </span>
-                  <CountryFlag
-                    countryCode="NG"
-                    svg
-                    style={{
-                      width: "20px",
-                      height: "15px",
-                    }}
-                    title="Nigeria"
-                  />
+              <Link
+                href="#"
+                className="text-sm font-medium text-accent hover:text-primary transition-colors"
+              >
+                <RiTwitterXFill className="size-5" />
+              </Link>
+            </div>
+            {/* Country */}
+            <div className="flex items-center justify-center gap-2.5 mr-4">
+              <span className="flex items-center gap-2">
+                <span className="text-sm font-medium text-accent ml-4">
+                  Nigeria
                 </span>
-                <span className="text-sm font-medium text-accent hover:text-primary transition-colors">
-                  <ChevronDown size={14} />
-                </span>
+                <CountryFlag
+                  countryCode="NG"
+                  svg
+                  style={{
+                    width: "20px",
+                    height: "15px",
+                  }}
+                  title="Nigeria"
+                />
+              </span>
+              <span className="text-sm font-medium text-accent hover:text-primary transition-colors">
+                <ChevronDown size={14} />
+              </span>
+            </div>
+          </li>
+
+          {/* Auth & Cart */}
+          <li className="flex items-center justify-center gap-2.5">
+            <Link
+              href="/cart"
+              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+            >
+              <ShoppingCart className="hover:stroke-primary" size={22} />
+              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                0
               </div>
-            </li>
-
-            {/* Auth & Cart */}
-            <li className="flex items-center justify-center gap-2.5">
-              <Link
-                href="/cart"
-                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-              >
-                <ShoppingCart className="hover:stroke-primary" size={22} />
-                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                  0
-                </div>
-              </Link>
-
-              <Link
-                href="/cart"
-                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-              >
-                <Heart className="hover:stroke-primary" size={22} />
-                <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                  0
-                </div>
-              </Link>
-
-              <Link
-                href="/cart"
-                className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
-              >
-                <IoIosNotifications className="hover:fill-primary" size={22} />
-                <div className="absolute -top-2 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                  0
-                </div>
-              </Link>
-
-              <Link
-                href="/login"
-                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-              >
-                <span className="hidden sm:inline">Login</span>
-              </Link>
-              <Link
-                href="/signup"
-                className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
-              >
-                <span className="hidden sm:inline">Sign Up</span>
-              </Link>
-            </li>
-          </ul>
-        </nav>
-        {/* Second Nav */}
-        <div className="container mx-auto px-4 sm:px-6 py-2.5">
-          <div className="flex items-center justify-between">
-            {/* Logo */}
-            <Link href="/" className="flex items-center">
-              <Image
-                src="/images/logo-opacity.png"
-                alt="Logo"
-                width={100}
-                height={40}
-                className="md:h-6 w-auto h-5"
-              />
             </Link>
 
-            {/* Search Bar */}
-            <form
-              onSubmit={handleSearch}
-              className="relative w-80 hidden md:block"
+            <Link
+              href="/cart"
+              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
             >
-              <input
-                type="text"
-                placeholder="Search products..."
-                className="w-full rounded-md border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                value={searchQuery}
-                onChange={(e) => setSearchQuery(e.target.value)}
-              />
-              <button
-                type="submit"
-                className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
-              >
-                <Search size={16} />
-              </button>
-            </form>
+              <Heart className="hover:stroke-primary" size={22} />
+              <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                0
+              </div>
+            </Link>
 
-            {/* Desktop Navigation */}
-            <div className="hidden md:flex items-center space-x-8">
-              {/* Navigation Links */}
-              <nav className="flex items-center space-x-6">
-                <Link
-                  href="/brands"
-                  className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                >
-                  Brands
-                </Link>
-                <Link
-                  href="/categories"
-                  className="text-sm font-medium text-gray-700 hover:text-primary transition-colors flex items-center"
-                >
-                  Categories
-                  <ChevronDown size={14} className="ml-1" />
-                </Link>
-                <Link
-                  href="/orders"
-                  className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
-                >
-                  Orders
-                </Link>
-              </nav>
-            </div>
+            <Link
+              href="/cart"
+              className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
+            >
+              <IoIosNotifications className="hover:fill-primary" size={22} />
+              <div className="absolute -top-2 -right-1 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
+                0
+              </div>
+            </Link>
 
-            {/* Mobile Menu Button */}
+            <Link
+              href="/login"
+              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+            >
+              <span className="hidden sm:inline">Login</span>
+            </Link>
+            <Link
+              href="/signup"
+              className="hidden md:flex items-center text-sm font-medium text-gray-200 hover:text-primary transition-colors"
+            >
+              <span className="hidden sm:inline">Sign Up</span>
+            </Link>
+          </li>
+        </ul>
+      </nav>
+
+      {/* Second Nav */}
+      <div className="container mx-auto px-4 sm:px-6 py-2.5">
+        <div className="flex items-center justify-between">
+          {/* Logo */}
+          <Link href="/" className="flex items-center">
+            <Image
+              src="/images/logo-opacity.png"
+              alt="Logo"
+              width={100}
+              height={40}
+              className="md:h-6 w-auto h-5"
+            />
+          </Link>
+
+          {/* Search Bar */}
+          <form
+            onSubmit={handleSearch}
+            className="relative w-80 hidden md:block"
+          >
+            <Input
+              type="text"
+              placeholder="Search products..."
+              className="w-full rounded-md border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+            />
             <button
-              className="md:hidden text-gray-700 hover:text-primary transition-colors"
-              onClick={() => setIsMenuOpen(!isMenuOpen)}
-              aria-label="Toggle menu"
+              type="submit"
+              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
             >
-              {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+              <Search size={16} />
             </button>
+          </form>
+
+          {/* Desktop Navigation */}
+          <div className="hidden md:flex items-center space-x-8">
+            {/* Navigation Links */}
+            <nav className="flex items-center space-x-6">
+              <Link
+                href="/brands"
+                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+              >
+                Brands
+              </Link>
+              <Link
+                href="/categories"
+                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors flex items-center"
+              >
+                Categories
+                <ChevronDown size={14} className="ml-1" />
+              </Link>
+              <Link
+                href="/orders"
+                className="text-sm font-medium text-gray-700 hover:text-primary transition-colors"
+              >
+                Orders
+              </Link>
+            </nav>
           </div>
 
-          {/* Mobile Menu Overlay */}
-          <div
-            className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden ${
-              isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
-            }`}
-            onClick={() => setIsMenuOpen(false)}
-          />
-
-          {/* Mobile Menu */}
-          <div
-            className={`fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl transform transition-transform duration-300 ease-in-out md:hidden ${
-              isMenuOpen ? "translate-x-0" : "translate-x-full"
-            }`}
+          {/* Mobile Menu Button */}
+          <button
+            className="md:hidden text-gray-700 hover:text-primary transition-colors"
+            onClick={() => setIsMenuOpen(!isMenuOpen)}
+            aria-label="Toggle menu"
           >
-            <div className="flex flex-col h-full">
-              {/* Mobile Menu Header */}
-              <div className="flex items-center justify-between p-4 border-b">
-                <Link
-                  href="/"
-                  className="flex items-center"
-                  onClick={() => setIsMenuOpen(false)}
-                >
-                  <Image
-                    src="/images/logo-opacity.png"
-                    alt="Logo"
-                    width={120}
-                    height={40}
-                    className="h-7 w-auto"
-                  />
-                </Link>
+            {isMenuOpen ? <X size={24} /> : <Menu size={24} />}
+          </button>
+        </div>
+
+        {/* Mobile Menu Overlay */}
+        <div
+          className={`fixed inset-0 bg-black/60 backdrop-blur-sm transition-opacity duration-300 md:hidden h-screen ${
+            isMenuOpen ? "opacity-100" : "opacity-0 pointer-events-none"
+          }`}
+          onClick={() => setIsMenuOpen(false)}
+        />
+
+        {/* Mobile Menu */}
+        <motion.div
+          initial={{ x: "100%" }}
+          animate={{ x: isMenuOpen ? "0%" : "100%" }}
+          transition={{ duration: 0.3 }}
+          className="fixed inset-y-0 right-0 w-full max-w-sm bg-white shadow-xl md:hidden h-screen"
+        >
+          <div className="flex flex-col h-full">
+            {/* Mobile Menu Header */}
+            <div className="flex items-center justify-between p-4 border-b">
+              <Link
+                href="/"
+                className="flex items-center"
+                onClick={() => setIsMenuOpen(false)}
+              >
+                <Image
+                  src="/images/logo-opacity.png"
+                  alt="Logo"
+                  width={120}
+                  height={40}
+                  className="h-5 w-auto"
+                />
+              </Link>
+              <button
+                className="text-gray-700 hover:text-primary transition-colors"
+                onClick={() => setIsMenuOpen(false)}
+                aria-label="Close menu"
+              >
+                <X size={24} />
+              </button>
+            </div>
+
+            {/* Mobile Search */}
+            <div className="p-4 border-b">
+              <form onSubmit={handleSearch} className="relative">
+                <input
+                  type="text"
+                  placeholder="Search products..."
+                  className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+                  value={searchQuery}
+                  onChange={(e) => setSearchQuery(e.target.value)}
+                />
                 <button
-                  className="text-gray-700 hover:text-primary transition-colors"
-                  onClick={() => setIsMenuOpen(false)}
-                  aria-label="Close menu"
+                  type="submit"
+                  className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
                 >
-                  <X size={24} />
+                  <Search size={16} />
                 </button>
-              </div>
+              </form>
+            </div>
 
-              {/* Mobile Search */}
-              <div className="p-4 border-b">
-                <form onSubmit={handleSearch} className="relative">
-                  <input
-                    type="text"
-                    placeholder="Search products..."
-                    className="w-full rounded-full border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
-                    value={searchQuery}
-                    onChange={(e) => setSearchQuery(e.target.value)}
-                  />
-                  <button
-                    type="submit"
-                    className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
-                  >
-                    <Search size={16} />
-                  </button>
-                </form>
-              </div>
-
-              {/* Mobile Navigation */}
-              <nav className="flex-1 overflow-y-auto">
-                <div className="px-4 py-2 space-y-1">
+            {/* Mobile Navigation */}
+            <nav className="flex-1 overflow-y-auto">
+              <motion.div
+                variants={container}
+                initial="hidden"
+                animate={isMenuOpen ? "visible" : "hidden"}
+                className="px-4 py-2 flex flex-col space-y-1"
+              >
+                <motion.button variants={item}>
                   <Link
                     href="/brands"
                     className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -298,6 +320,9 @@ export default function Header() {
                   >
                     Brands
                   </Link>
+                </motion.button>
+
+                <motion.button variants={item}>
                   <Link
                     href="/categories"
                     className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -305,6 +330,8 @@ export default function Header() {
                   >
                     Categories
                   </Link>
+                </motion.button>
+                <motion.button variants={item}>
                   <Link
                     href="/orders"
                     className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -312,11 +339,18 @@ export default function Header() {
                   >
                     Orders
                   </Link>
-                </div>
+                </motion.button>
+              </motion.div>
 
-                {/* Mobile Auth & Cart */}
-                <div className="px-4 py-4 border-t">
-                  <div className="space-y-2">
+              {/* Mobile Auth & Cart */}
+              <div className="px-4 py-4 border-t">
+                <motion.div
+                  variants={container}
+                  initial="hidden"
+                  animate={isMenuOpen ? "visible" : "hidden"}
+                  className="flex flex-col space-y-2"
+                >
+                  <motion.button variants={item}>
                     <Link
                       href="/login"
                       className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -325,6 +359,8 @@ export default function Header() {
                       <LogIn size={20} className="mr-3" />
                       Login
                     </Link>
+                  </motion.button>
+                  <motion.button variants={item}>
                     <Link
                       href="/signup"
                       className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -333,6 +369,8 @@ export default function Header() {
                       <User size={20} className="mr-3" />
                       Sign Up
                     </Link>
+                  </motion.button>
+                  <motion.button variants={item}>
                     <Link
                       href="/cart"
                       className="flex items-center px-4 py-3 text-base font-medium text-gray-700 hover:bg-gray-50 hover:text-primary rounded-lg transition-colors"
@@ -346,13 +384,13 @@ export default function Header() {
                       </div>
                       Cart
                     </Link>
-                  </div>
-                </div>
-              </nav>
-            </div>
+                  </motion.button>
+                </motion.div>
+              </div>
+            </nav>
           </div>
-        </div>
-      </header>
-    </>
+        </motion.div>
+      </div>
+    </header>
   );
 }

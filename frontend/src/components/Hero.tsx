@@ -1,6 +1,10 @@
+"use client";
+
 import Image from "next/image";
-import Link from "next/link";
+import { motion } from "motion/react";
 import { customers } from "@/data/customer";
+import Link from "next/link";
+import AnimatedButton from "./common/AnimatedButton";
 
 export default function Hero() {
   return (
@@ -29,7 +33,12 @@ export default function Hero() {
       <div className="container relative mx-auto px-4 sm:px-6 h-full max-w-7xl">
         <div className="grid lg:grid-cols-2 gap-12 items-center min-h-[85vh] py-12">
           {/* Left Content */}
-          <div className="flex flex-col space-y-8">
+          <motion.div
+            initial={{ opacity: 0, y: -40 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="flex flex-col space-y-8"
+          >
             <div className="space-y-4">
               <h1 className="text-4xl md:text-5xl lg:text-6xl font-bold tracking-tight">
                 <span className="text-primary relative inline-flex animate-text-gradient direction-reverse bg-gradient-to-r from-[#ff85b9] via-[#ff004f] to-[#ffd6e8] bg-[200%_auto] bg-clip-text text-transparent">
@@ -89,37 +98,41 @@ export default function Hero() {
 
             {/* CTA Buttons */}
             <div className="flex flex-col sm:flex-row gap-4">
-              <a
-                className="btn-primary cursor-pointer text-lg px-8 py-4 flex items-center justify-center group relative overflow-hidden"
-                aria-label="Start shopping"
-                href="/products"
-              >
-                <span className="relative z-10 flex items-center">
-                  Start Shopping
-                  <svg
-                    className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
-                    fill="none"
-                    stroke="currentColor"
-                    viewBox="0 0 24 24"
-                    aria-hidden="true"
-                  >
-                    <path
-                      strokeLinecap="round"
-                      strokeLinejoin="round"
-                      strokeWidth="2"
-                      d="M13 7l5 5m0 0l-5 5m5-5H6"
-                    ></path>
-                  </svg>
-                </span>
-                <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
-              </a>
-              <a
-                className="btn-secondary border border-primary/25 cursor-pointer text-lg px-8 py-4 flex items-center justify-center hover:bg-primary/5 transition-colors"
-                aria-label="Learn how it works"
-                href="/how-it-works"
-              >
-                How It Works
-              </a>
+              <AnimatedButton>
+                <Link
+                  className="btn-primary cursor-pointer text-lg px-8 py-4 flex items-center justify-center group relative overflow-hidden"
+                  aria-label="Start shopping"
+                  href="/products"
+                >
+                  <span className="relative z-10 flex items-center">
+                    Start Shopping
+                    <svg
+                      className="w-5 h-5 ml-2 transform group-hover:translate-x-1 transition-transform"
+                      fill="none"
+                      stroke="currentColor"
+                      viewBox="0 0 24 24"
+                      aria-hidden="true"
+                    >
+                      <path
+                        strokeLinecap="round"
+                        strokeLinejoin="round"
+                        strokeWidth="2"
+                        d="M13 7l5 5m0 0l-5 5m5-5H6"
+                      ></path>
+                    </svg>
+                  </span>
+                  <span className="absolute inset-0 bg-gradient-to-r from-primary/0 via-primary/20 to-primary/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></span>
+                </Link>
+              </AnimatedButton>
+              <AnimatedButton>
+                <Link
+                  className="btn-secondary border border-primary/25 cursor-pointer text-lg px-8 py-4 flex items-center justify-center hover:bg-primary/5 transition-colors"
+                  aria-label="Learn how it works"
+                  href="/how-it-works"
+                >
+                  How It Works
+                </Link>
+              </AnimatedButton>
             </div>
 
             {/* Trust Badges */}
@@ -182,10 +195,15 @@ export default function Hero() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
 
           {/* Right Content - Hero Image */}
-          <div className="relative hidden lg:block">
+          <motion.div
+            initial={{ opacity: 0, x: 40 }}
+            animate={{ opacity: 1, x: 0 }}
+            transition={{ duration: 0.8, ease: "easeOut" }}
+            className="relative hidden lg:block"
+          >
             <div className="relative">
               <div className="absolute -inset-4 bg-gradient-to-r from-primary/20 to-secondary/20 rounded-2xl blur-2xl animate-pulse-slow"></div>
               <div className="relative">
@@ -201,14 +219,14 @@ export default function Hero() {
             </div>
 
             {/* Floating Elements */}
-            <div className="absolute -top-4 -right-4 bg-background p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+            <div className="absolute -top-4 -right-4 bg-white/20 border border-white/30 backdrop-blur-md p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
               <div className="flex items-center space-x-2">
                 <div className="w-3 h-3 bg-green-500 rounded-full animate-pulse"></div>
                 <span className="text-sm font-medium">2,500+ Active Users</span>
               </div>
             </div>
 
-            <div className="absolute -bottom-4 -left-4 bg-background p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
+            <div className="absolute -bottom-4 -left-4 bg-white/20 border border-white/30 backdrop-blur-md p-4 rounded-xl shadow-lg transform hover:scale-105 transition-transform">
               <div className="flex items-center space-x-2">
                 <svg
                   className="w-5 h-5 text-yellow-400"
@@ -223,7 +241,7 @@ export default function Hero() {
                 </span>
               </div>
             </div>
-          </div>
+          </motion.div>
         </div>
       </div>
     </section>

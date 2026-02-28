@@ -23,13 +23,8 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning>
-      <body
-        className={`${plusJakarta.variable} min-h-screen w-full bg-background font-sans antialiased`}
-        style={{
-          fontFamily: `var(--font-plus-jakarta), system-ui, -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, 'Helvetica Neue', Arial, sans-serif`,
-        }}
-      >
+    <html lang="en" suppressHydrationWarning className={plusJakarta.variable}>
+      <body className="min-h-screen w-full bg-background font-sans antialiased">
         <div className="flex min-h-screen w-full flex-col">
           <Header />
           <main className="flex-1 w-full pt-20 md:pt-24">{children}</main>

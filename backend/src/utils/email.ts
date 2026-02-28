@@ -1,4 +1,5 @@
-import nodemailer from "nodemailer.js";
+import nodemailer from "nodemailer";
+import type { TransportOptions } from "nodemailer";
 
 interface emailResetOptions {
   email: string;
@@ -15,7 +16,7 @@ export const sendEmail = async function (options: emailResetOptions) {
       user: process.env.EMAIL_USERNAME,
       password: process.env.EMAIL_PASSWORD,
     },
-  });
+  } as TransportOptions);
 
   // Define email options
   const mailOptions = {
