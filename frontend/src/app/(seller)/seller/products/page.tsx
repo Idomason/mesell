@@ -3,13 +3,13 @@
 import { useList } from "@refinedev/core";
 
 export default function VendorProducts() {
-  const { data } = useList({
+  const { result } = useList({
     resource: "products",
   });
 
   return (
     <div>
-      {data?.data.map((p) => (
+      {result?.data.map((p) => (
         <div key={p.id}>{p.name}</div>
       ))}
     </div>
