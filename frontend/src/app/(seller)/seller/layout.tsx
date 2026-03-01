@@ -1,5 +1,7 @@
 "use client";
 
+export const dynamic = "force-dynamic";
+
 import { Refine, useMenu } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router/app";
 import { QueryClient, QueryClientProvider } from "@tanstack/react-query";

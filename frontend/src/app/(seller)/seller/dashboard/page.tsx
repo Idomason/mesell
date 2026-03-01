@@ -1,4 +1,4 @@
-import React from "react";
+"use client";
 
 export default function dashboard() {
   return <div>dashboard</div>;
