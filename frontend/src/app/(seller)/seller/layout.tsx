@@ -1,6 +1,5 @@
-"use client";
-
 export const dynamic = "force-dynamic";
+("use client");
 
 import { Refine, useMenu } from "@refinedev/core";
 import routerProvider from "@refinedev/nextjs-router/app";
