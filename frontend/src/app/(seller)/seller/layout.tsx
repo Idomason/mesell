@@ -20,7 +20,7 @@ export default function SellerLayout({
       <RefineKbarProvider>
         <Refine
           routerProvider={routerProvider}
-          dataProvider={dataProvider}
+          dataProvider={{ default: dataProvider }}
           resources={[
             {
               name: "dashboard",
