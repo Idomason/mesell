@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const Page = () => {
+export const page = () => {
   const {
     control,
     handleSubmit,
