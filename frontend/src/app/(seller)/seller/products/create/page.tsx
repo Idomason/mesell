@@ -1,17 +1,10 @@
 "use client";
 
-import { useForm } from "@refinedev/react-hook-form";
-import {
-  Form,
-  FormField,
-  FormItem,
-  FormLabel,
-  FormControl,
-} from "@/components/ui/form";
-import { Input } from "@/components/ui/input";
+import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
+import { useForm } from "@refinedev/react-hook-form";
 
-export const CreateProduct = () => {
+export const Page = () => {
   const {
     control,
     handleSubmit,
