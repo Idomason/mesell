@@ -4,7 +4,7 @@ import { Form } from "@/components/ui/form";
 import { Button } from "@/components/ui/button";
 import { useForm } from "@refinedev/react-hook-form";
 
-export const page = () => {
+export default function CreateProduct() {
   const {
     control,
     handleSubmit,
@@ -31,4 +31,4 @@ export const page = () => {
       </form>
     </Form>
   );
-};
+}
