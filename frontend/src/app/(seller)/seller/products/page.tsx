@@ -1,6 +1,5 @@
 "use client";
 
-import { useTable } from "@refinedev/core";
 import {
   Table,
   TableBody,
@@ -9,14 +8,13 @@ import {
   TableHeader,
   TableRow,
 } from "@/components/ui/table";
+import { useTable } from "@refinedev/core";
 
 export default function ProductList() {
-  const { queryResult } = useTable({
-    resource: "products",
-  });
+  const { tableQuery } = useTable({ resource: "products" });
 
-  const products = queryResult?.data?.data ?? [];
-  const isLoading = queryResult?.isLoading;
+  const products = tableQuery?.data?.data ?? [];
+  const isLoading = tableQuery?.isLoading;
 
   return (
     <div className="space-y-4">
