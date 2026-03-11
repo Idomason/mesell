@@ -79,8 +79,8 @@ export default function Header() {
   return (
     <header className="fixed w-full flex flex-col items-center justify-between border-b border-white/30 bg-wite/20 backdrop-blur-md top-0 left-0 right-0 z-50">
       {/* First Nav */}
-      <nav className="container mx-auto px-4 sm:px-6 py-2 bg-black">
-        <ul className="flex items-center justify-between">
+      <nav className="container px-4 sm:px-6 py-2 bg-black">
+        <ul className="flex items-center justify-between mx-auto">
           {/* Socials */}
           <li className="flex items-center justify-center divide-x">
             <div className="flex items-center justify-center gap-2.5 mr-4">
@@ -177,7 +177,7 @@ export default function Header() {
 
       {/* Second Nav */}
       <div className="container mx-auto px-4 sm:px-6 py-2.5">
-        <div className="grid grid-cols-[100px_auto_250px] gap-4">
+        <div className="grid grid-cols-2 md:grid-cols-[100px_auto_250px] items-center justify-between lg:justify-normal gap-4">
           {/* Logo */}
           <Link href="/" className="flex items-center">
             <Image
@@ -193,7 +193,7 @@ export default function Header() {
           <form
             onSubmit={handleSearch}
             // className="relative w-80 hidden md:block"
-            className="relative w-full max-w-[600px] mx-auto hidden md:block rounded-full outline-primary border border-gray-300 bg-gray-50 py-2 px-8 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:w-96"
+            className="relative w-full md:w-96 lg:min-w-[600px] mx-auto hidden md:block rounded-full outline-primary border border-gray-300 bg-gray-50 py-2 px-8 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:w-96"
           >
             <input
               type="text"
@@ -239,7 +239,7 @@ export default function Header() {
 
           {/* Mobile Menu Button */}
           <button
-            className="md:hidden text-gray-700 hover:text-primary transition-colors"
+            className="md:hidden text-gray-700 hover:text-primary transition-colors justify-self-end"
             onClick={() => setIsMenuOpen(!isMenuOpen)}
             aria-label="Toggle menu"
           >
