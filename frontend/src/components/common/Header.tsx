@@ -195,18 +195,19 @@ export default function Header() {
             // className="relative w-80 hidden md:block"
             className="relative w-full md:w-96 lg:min-w-[600px] mx-auto hidden md:block rounded-full outline-primary border border-gray-300 bg-gray-50 py-2 px-8 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:w-96"
           >
-            <Input
+            <input
               type="text"
               placeholder="Search products..."
-              className="w-full rounded-md border border-gray-300 bg-gray-50 py-2 pl-10 pr-4 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary"
+              // className="w-full rounded-full outline-primary border border-gray-300 bg-gray-50 py-2 pl-8 text-sm focus:border-primary focus:outline-none focus:ring-1 focus:ring-primary focus:w-96"
+              className="w-full bg-gray-50 outline-none border-none"
               value={searchQuery}
               onChange={(e) => setSearchQuery(e.target.value)}
             />
             <button
               type="submit"
-              className="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 hover:text-primary"
+              className="absolute right-0 shadow-md top-1/2 -translate-y-1/2 text-white hover:text-white/75 p-2 rounded-full bg-primary "
             >
-              <Search size={16} />
+              <Search size={19} className="stroke-2" />
             </button>
           </form>
 
