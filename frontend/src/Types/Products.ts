@@ -1,13 +1,17 @@
 import { Seller } from "./Sellers";
 
 export interface Product {
-  id: number;
+  id: string;
+  images: string[];
+  heading: string;
+  color?: string;
+  size: string;
+  price: number;
+  quantity: number;
   name: string;
   description: string;
-  price: number;
   totalSold: number;
   isLive: boolean;
-  images: string[];
   seller: Seller;
   category: string;
 }

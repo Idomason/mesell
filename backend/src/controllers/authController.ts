@@ -1,5 +1,5 @@
 import crypto from "crypto";
-import { User } from "@/models/User.js";
+import { User } from "@/models/UserModel.js";
 import { sendEmail } from "@/utils/email.js";
 import { signToken } from "@/utils/signToken.js";
 import { catchAsync } from "@/utils/catchAsync.js";
@@ -20,13 +20,15 @@ export const signup = catchAsync(async function (
   }
 
   // Create and save the new user to DB
-  const user = new User({
-    firstName,
-    lastName,
-    email,
-    password,
-    passwordConfirm,
-  });
+  // const user = new User({
+  //   firstName,
+  //   lastName,
+  //   email,
+  //   password,
+  //   passwordConfirm,
+  // });
+
+  const user = new User(req.body);
 
   await user.save();
 

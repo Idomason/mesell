@@ -1,5 +1,6 @@
 import "./globals.css";
 import { Plus_Jakarta_Sans } from "next/font/google";
+import Provider from "@/components/tankstack/providers";
 
 const plusJakarta = Plus_Jakarta_Sans({
   subsets: ["latin"],
@@ -24,11 +25,13 @@ export default function RootLayout({
   children: React.ReactNode;
 }) {
   return (
-    <html lang="en" suppressHydrationWarning className={plusJakarta.variable}>
+    <html lang="en" className={plusJakarta.variable}>
       <body className="min-h-screen w-full bg-background font-sans antialiased">
-        <div className="min-h-screen w-full">
-          <main className="flex-1 w-full">{children}</main>
-        </div>
+        <Provider>
+          <div className="min-h-screen w-full">
+            <main className="flex-1 w-full">{children}</main>
+          </div>
+        </Provider>
       </body>
     </html>
   );

@@ -4,7 +4,34 @@ import { useState } from "react";
 import Address from "./address/Address";
 import Payment from "./payment/Payment";
 
-export default function Checkout() {
+export type AddressProps = {
+  address: {
+    fullName: string;
+    email: string;
+    phoneNumber: string;
+    addressLine1: string;
+    addressLine2: string;
+    city: string;
+    state: string;
+    postalCode: string;
+    country: string;
+  };
+  setAddress: React.Dispatch<
+    React.SetStateAction<{
+      fullName: string;
+      email: string;
+      phoneNumber: string;
+      addressLine1: string;
+      addressLine2: string;
+      city: string;
+      state: string;
+      postalCode: string;
+      country: string;
+    }>
+  >;
+};
+
+export default function Checkout({ address, setAddress }: AddressProps) {
   const [option, setOption] = useState("address");
 
   return (
@@ -41,7 +68,9 @@ export default function Checkout() {
           Review
         </button>
       </div>
-      {option === "address" && <Address />}
+      {option === "address" && (
+        <Address address={address} setAddress={setAddress} />
+      )}
       {option === "payment" && <Payment />}
       {option === "review" && (
         <div className="p-4">
@@ -50,6 +79,7 @@ export default function Checkout() {
             Please review your order details before proceeding to payment.
           </p>
           {/* Display order summary and details here */}
+          {/* TODO: Display order summary and details */}
         </div>
       )}
     </div>

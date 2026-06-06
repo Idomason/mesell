@@ -20,6 +20,7 @@ import {
 } from "lucide-react";
 import { Input } from "../ui/input";
 import { motion } from "motion/react";
+import { useProductStore } from "@/store/productStore";
 
 const container = {
   hidden: { opacity: 0 },
@@ -38,6 +39,8 @@ export default function Header() {
   const [mounted, setMounted] = useState(false);
   const [isMenuOpen, setIsMenuOpen] = useState(false);
   const [searchQuery, setSearchQuery] = useState("");
+  const getCartStats = useProductStore((state) => state.getCartStats);
+  const cartStats = getCartStats();
 
   useEffect(() => {
     setMounted(true);
@@ -135,12 +138,12 @@ export default function Header() {
             >
               <ShoppingCart className="hover:stroke-primary" size={22} />
               <div className="absolute -top-2 -right-2 flex h-4 w-4 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                0
+                {cartStats.totalItems}
               </div>
             </Link>
 
             <Link
-              href="/cart"
+              href="/whislist"
               className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
             >
               <Heart className="hover:stroke-primary" size={22} />
@@ -150,7 +153,7 @@ export default function Header() {
             </Link>
 
             <Link
-              href="/cart"
+              href="/notification"
               className="relative flex items-center text-gray-200 hover:text-primary transition-colors"
             >
               <IoIosNotifications className="hover:fill-primary" size={22} />
@@ -381,7 +384,7 @@ export default function Header() {
                       <div className="relative">
                         <ShoppingCart size={20} className="mr-3" />
                         <span className="absolute -top-2 -right-2 flex h-5 w-5 items-center justify-center rounded-full bg-primary text-xs font-medium text-white">
-                          0
+                          {cartStats.totalItems}
                         </span>
                       </div>
                       Cart

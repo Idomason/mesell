@@ -3,13 +3,14 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IOrder extends Document {
   buyer: mongoose.Types.ObjectId;
   seller: mongoose.Types.ObjectId;
-  product: mongoose.Types.ObjectId;
+  // product: mongoose.Types.ObjectId;
+  product: number;
   quantity: number;
   totalAmount: number;
   paymentStatus: "pending" | "paid" | "refunded" | "released";
-  paymentMethod: "card" | "ussd" | "pos";
-  paymentReference: string;
-  escrowId: string;
+  paymentMethod?: "card" | "ussd" | "pos";
+  paymentReference?: string;
+  escrowId?: string;
   deliveryStatus:
     | "pending"
     | "processing"
@@ -56,7 +57,8 @@ const orderSchema = new Schema<IOrder>(
       required: [true, "Order must belong to a seller"],
     },
     product: {
-      type: Schema.Types.ObjectId,
+      // type: Schema.Types.ObjectId,
+      type: Number,
       ref: "Product",
       required: [true, "Order must contain a product"],
     },
@@ -78,15 +80,12 @@ const orderSchema = new Schema<IOrder>(
     paymentMethod: {
       type: String,
       enum: ["card", "ussd", "pos"],
-      required: [true, "Please provide payment method"],
     },
     paymentReference: {
       type: String,
-      required: [true, "Please provide payment reference"],
     },
     escrowId: {
       type: String,
-      required: [true, "Please provide escrow ID"],
     },
     deliveryStatus: {
       type: String,
@@ -150,7 +149,7 @@ const orderSchema = new Schema<IOrder>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Index for buyer orders

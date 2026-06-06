@@ -8,7 +8,7 @@ export interface IProduct extends Document {
   preOrderPrice: number;
   category: string;
   images: string[];
-  slug: { type: String; unique: true };
+  slug: { type: String; unique: Boolean };
   specifications: Record<string, string>;
   estimatedDeliveryDate: Date;
   minimumOrders: number;
@@ -18,6 +18,7 @@ export interface IProduct extends Document {
   status: "active" | "inactive" | "sold_out";
   variants: [{ name: String; sku: String; price: Number; stock: Number }];
   rating: number;
+  brand: { type: String; required: Boolean };
   reviews: Array<{
     user: mongoose.Types.ObjectId;
     rating: number;
@@ -60,8 +61,21 @@ const productSchema = new Schema<IProduct>(
     category: {
       type: String,
       required: [true, "Please provide product category"],
-      enum: ["electronics", "fashion", "home", "beauty", "food", "other"],
+      enum: [
+        "children",
+        "shoes",
+        "dress",
+        "clothes",
+        "home",
+        "men",
+        "women",
+        "kitchen",
+        "Room Decor",
+        "Wood Work",
+      ],
     },
+    brand: { type: String, required: true, trim: true },
+    stock: { type: Number, required: [true, "Stock is required"], min: 0 },
     images: [
       {
         type: String,
@@ -135,7 +149,7 @@ const productSchema = new Schema<IProduct>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Index for text search

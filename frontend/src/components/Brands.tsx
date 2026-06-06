@@ -31,7 +31,7 @@ export default function Brands() {
                       alt={brand.name}
                       width={120}
                       height={60}
-                      className="object-contain h-full w-full"
+                      className="object-contain"
                     />
                   </div>
                 </div>
@@ -51,7 +51,7 @@ export default function Brands() {
                       alt={brand.name}
                       width={120}
                       height={60}
-                      className="object-contain h-full w-full"
+                      className="object-contain"
                     />
                   </div>
                 </div>

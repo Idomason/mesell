@@ -1,7 +1,7 @@
 import jwt from "jsonwebtoken";
 import { promisify } from "util";
 
-import { User } from "@/models/User.js";
+import { User } from "@/models/UserModel.js";
 import { AppError } from "./errorHandler.js";
 import { catchAsync } from "@/utils/catchAsync.js";
 import { Request, Response, NextFunction } from "express";
@@ -9,7 +9,7 @@ import { Request, Response, NextFunction } from "express";
 exports.protect = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   let token;
 
@@ -25,8 +25,8 @@ exports.protect = catchAsync(async function (
     return next(
       new AppError(
         "You are not logged in yet, please login to gain access.",
-        401
-      )
+        401,
+      ),
     );
   }
 
@@ -37,14 +37,14 @@ exports.protect = catchAsync(async function (
   const user = await User.findById(decoded.id);
   if (!user) {
     return next(
-      new AppError("The user belonging to this token no longer exist", 401)
+      new AppError("The user belonging to this token no longer exist", 401),
     );
   }
 
   //   Check if user changed password after the token was issued
   if (user.changedPasswordAfter(decoded.iat)) {
     return next(
-      new AppError("User recently changed password, login to gain access", 401)
+      new AppError("User recently changed password, login to gain access", 401),
     );
   }
 
@@ -57,13 +57,13 @@ exports.redirectTo = function (...roles: string[]) {
   return function (req: Request, res: Response, next: NextFunction) {
     if (!req.user) {
       return next(
-        new AppError("You must be logged in to perform this action", 401)
+        new AppError("You must be logged in to perform this action", 401),
       );
     }
 
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You do not have permission to perform this action", 403)
+        new AppError("You do not have permission to perform this action", 403),
       );
     }
 

@@ -77,7 +77,7 @@ const paymentSchema = new Schema<IPayment>(
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Index for order payments

@@ -3,17 +3,19 @@ import path from "node:path";
 import cors from "cors";
 import morgan from "morgan";
 import express from "express";
-import * as dotenv from "dotenv";
 
 import authRoutes from "@/routes/auth.js";
 import orderRoutes from "@/routes/orders.js";
 import userRoutes from "@/routes/userRoutes.js";
-import productRoutes from "@/routes/products.js";
+import productRoutes from "@/routes/buyer/products.js";
 import paymentRoutes from "@/routes/payments.js";
+import checkoutRoutes from "@/routes/checkoutRoutes.js";
 import { globalErrorHandler } from "@/middleware/errorHandler.js";
 import { notFoundHandler } from "@/middleware/notFoundHandler.js";
+import { paystackWebhookHandler } from "./webhooks/paystackWebhooks";
+import { getEnv } from "./lib/env";
 
-dotenv.config({ path: ".env" });
+const env = getEnv();
 
 const app = express();
 
@@ -26,7 +28,7 @@ app.use((req, res, next) => {
 });
 
 // Middlewares
-if (process.env.NODE_ENV === "development") {
+if (env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
 app.use(cors({ origin: "http://localhost:3000" }));
@@ -39,6 +41,14 @@ app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/orders", orderRoutes);
 app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/users", userRoutes);
+app.use("/api/v1/checkout", checkoutRoutes);
+
+// Webhooks
+app.use(
+  "/api/v1/webhooks/paystack",
+  express.raw({ type: "application/json" }),
+  paystackWebhookHandler,
+);
 
 app.get("/", (req, res) => {
   res.send(path.join(__dirname, "..", "public", "index.html"));

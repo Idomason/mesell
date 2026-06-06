@@ -1,8 +1,12 @@
+import "dotenv/config";
 import http from "http";
-import dotenv from "dotenv";
 
 import app from "./app.js";
 import { connectDB } from "./config/db.js";
+import { getEnv } from "./lib/env.js";
+import serverJob from "./lib/cron.js";
+
+const env = getEnv();
 
 // Handle all uncaughtExceptions
 process.on("uncaughtException", function (err) {
@@ -11,15 +15,15 @@ process.on("uncaughtException", function (err) {
   process.exit(1);
 });
 
-// Load environment variables
-dotenv.config({ path: ".env" });
-
 const server = http.createServer(app);
 
-const PORT = process.env.PORT || 8000;
+const PORT = env.PORT || 8000;
 
 // Start server
 const myserver = server.listen(PORT, () => {
+  // Restarts Render server every 14mins.
+  if (env.NODE_ENV === "production") serverJob.start();
+
   // Initialize MongoDB connection
   connectDB();
   console.log(`Server is running on port:${PORT}`);

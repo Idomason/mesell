@@ -5,31 +5,9 @@ import { TbShoppingBagPlus } from "react-icons/tb";
 import { HiOutlineHeart, HiOutlineShoppingBag } from "react-icons/hi2";
 import StarRating from "../common/ratings/StarRating";
 import Quantity from "./QuantitySelector";
+import { Product } from "@/Types/Products";
 
-type Seller = {
-  id: number;
-  name: string;
-  verified: boolean;
-  isLive: boolean;
-};
-
-type ProductDescriptionProps = {
-  product: {
-    id: number;
-    name: string;
-    description: string;
-    price: number;
-    totalSold: number;
-    isLive: boolean;
-    images: string[];
-    seller: Seller;
-    category: string;
-  };
-};
-
-export default function ProductDescription({
-  product,
-}: ProductDescriptionProps) {
+export default function ProductDescription({ product }: { product: Product }) {
   return (
     <div className="px-2 md:px-4 py-4">
       <div>
@@ -92,11 +70,13 @@ export default function ProductDescription({
         {/* Quantity */}
         <div>
           <h4 className="mb-2">Quantity</h4>
-          <Quantity onAddItem={() => {}} />
+          <Quantity item={product} />
         </div>
         <div className="py-4">
           <h5 className="mb-2 text-sm font-medium">Price</h5>
-          <span className="font-semibold">₦499,000</span>
+          <span className="font-semibold">
+            ₦{(product?.quantity * product?.price).toLocaleString("en-US")}
+          </span>
         </div>
         <div>
           <div className="flex items-center gap-2">

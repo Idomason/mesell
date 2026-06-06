@@ -1,0 +1,182 @@
+[
+  {
+    "name": "Apple Smart Watch",
+    "description": "Lorem ipsum dolor sit amet consectetur adipisicing elit. Rerum doloribus incidunt et repudiandae quod possimus repellat blanditiis.",
+    "price": 10000,
+    "preOrderPrice": 9500,
+    "brand": "Apple",
+    "category": "men",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 25,
+    "specifications": { "strap": "silicone", "feature": "heart rate monitor" },
+    "estimatedDeliveryDate": "2026-07-15T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1523275335684-37898b6baf30?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1511707171634-5f897ff02aa9?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1518444025380-2c9f50b1b2b7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1510557880182-3b7d4e8b7c03?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Headphones",
+    "description": "High-quality wireless headphones with long battery life.",
+    "price": 20000,
+    "preOrderPrice": 19000,
+    "brand": "AudioBrand",
+    "category": "men",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 30,
+    "specifications": { "type": "wireless", "batteryLife": "24h" },
+    "estimatedDeliveryDate": "2026-07-20T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1505740420928-5e560c06d30e?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1518444025380-2c9f50b1b2b7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1526178617001-827a0a5b9b2b?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Nike Air Max",
+    "description": "Comfortable running shoes.",
+    "price": 3500,
+    "preOrderPrice": 3300,
+    "brand": "Nike",
+    "category": "shoes",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 40,
+    "specifications": { "material": "mesh", "feature": "breathable" },
+    "estimatedDeliveryDate": "2026-08-01T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1542291026-7eec264c27ff?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1528701800484-9f1a0e2bb9ef?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-6b1c9d3c2e6a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-4c2a5f3c6a1b?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Casual T-Shirt",
+    "description": "Soft cotton t-shirt available in multiple colors.",
+    "price": 4200,
+    "preOrderPrice": 4000,
+    "brand": "Generic",
+    "category": "clothes",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 35,
+    "specifications": { "material": "cotton", "feature": "soft" },
+    "estimatedDeliveryDate": "2026-08-15T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-6b1c9d3c2e6a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1530845645840-6a5f3c2d4e8a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1519681393784-d120267933ba?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Summer Linen Shirt",
+    "description": "Lightweight linen shirt.",
+    "price": 5000,
+    "preOrderPrice": 4800,
+    "brand": "Generic",
+    "category": "clothes",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 45,
+    "specifications": { "material": "linen", "feature": "breathable" },
+    "estimatedDeliveryDate": "2026-09-10T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-4c2a5f3c6a1b?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-9c5b4f3a2d8f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1491553895911-0055eca6402d?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Denim Jacket",
+    "description": "Durable denim jacket.",
+    "price": 5500,
+    "preOrderPrice": 5300,
+    "brand": "Generic",
+    "category": "clothes",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 25,
+    "specifications": { "material": "denim", "feature": "durable" },
+    "estimatedDeliveryDate": "2026-10-01T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1585386959984-a4155224a1ad?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-6b1c9d3c2e6a?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1519744792095-2f2205e87b6f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Waterproof Jacket",
+    "description": "All-weather waterproof jacket.",
+    "price": 6500,
+    "preOrderPrice": 6200,
+    "brand": "Generic",
+    "category": "women",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 40,
+    "specifications": { "material": "nylon", "feature": "water resistant" },
+    "estimatedDeliveryDate": "2026-09-20T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1572635196237-14b3f281503f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-9c5b4f3a2d8f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1503342217505-b0a15ec3261c?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-4c2a5f3c6a1b?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1511367461989-f85a21fda167?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Kids Cotton Set",
+    "description": "Comfortable kids set.",
+    "price": 7200,
+    "preOrderPrice": 7000,
+    "brand": "Generic",
+    "category": "children",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 30,
+    "specifications": { "material": "cotton", "feature": "lightweight" },
+    "estimatedDeliveryDate": "2026-10-15T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1512436991641-6745cdb1723f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1516117172878-fd2c41f4a759?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1514996937319-344454492b37?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1520975913976-6b1c9d3c2e6a?auto=format&fit=crop&w=1000&q=80"
+    ]
+  },
+  {
+    "name": "Handmade Vase",
+    "description": "Decorative ceramic vase.",
+    "price": 8000,
+    "preOrderPrice": 7800,
+    "brand": "Generic",
+    "category": "home",
+    "seller": "64a1b2c3d4e5f67890123456",
+    "stock": 20,
+    "specifications": { "material": "ceramic", "feature": "handmade" },
+    "estimatedDeliveryDate": "2026-11-01T00:00:00.000Z",
+    "minimumOrders": 1,
+    "images": [
+      "https://images.unsplash.com/photo-1584917865442-de89df76afd3?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1503341455253-b2e723bb3dbb?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1517433456452-f9633a875f6f?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1518444025380-2c9f50b1b2b7?auto=format&fit=crop&w=1000&q=80",
+      "https://images.unsplash.com/photo-1526178617001-827a0a5b9b2b?auto=format&fit=crop&w=1000&q=80"
+    ]
+  }
+]

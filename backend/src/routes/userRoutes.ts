@@ -8,6 +8,10 @@ userRouter.post("/sign-up", authController.signup);
 userRouter.post("/sign-in", authController.login);
 
 userRouter.post("/forgot-password", authController.forgotPassword);
-userRouter.post("/reset-password/:token", authController.resetPassword);
+userRouter.post(
+  "/reset-password/:token",
+  protect,
+  authController.resetPassword,
+);
 
 export default userRouter;

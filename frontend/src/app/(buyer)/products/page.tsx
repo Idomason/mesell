@@ -1,36 +1,66 @@
-import { customers } from "@/data/customer";
-import { products } from "@/data/products";
-import { Product } from "@/Types/Products";
-import { Verified } from "lucide-react";
-import Image from "next/image";
+"use client";
+
 import Link from "next/link";
+import Image from "next/image";
+import { Verified } from "lucide-react";
+import { customers } from "@/data/customer";
+import { Product } from "@/app/api/products";
+import { productApi } from "@/app/api/products";
+import { useQuery } from "@tanstack/react-query";
+import { useProductStore } from "@/store/productStore";
+
+const fetchProducts = async (): Promise<Product[]> => {
+  const response = await productApi.getProducts();
+  return response;
+};
 
 export default function PopularProducts() {
+  // const queryClient = useQueryClient();
+  const {
+    data: products,
+    isLoading,
+    error,
+  } = useQuery<Product[]>({
+    queryKey: ["products"],
+    queryFn: fetchProducts,
+  });
+
+  const addToCart = useProductStore((state) => state.addToCart);
+
   return (
     <section className="py-16 font-sans bg-gray-800">
       <div className="mx-auto max-w-7xl">
         <h2 className="text-2xl font-bold text-primary mb-6 text-center">
           All Available Products
         </h2>
-        <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-y-7 gap-x-7">
-          {products.map((product) => (
-            <ProductCard key={product.id} product={product} />
-          ))}
+        <div className="px-2 grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-y-7 gap-x-7 max-w-6xl mx-auto">
+          {products &&
+            products.length > 0 &&
+            products.map((product: any) => (
+              <ProductCard
+                key={product._id}
+                product={product}
+                addToCart={addToCart}
+              />
+            ))}
         </div>
       </div>
     </section>
   );
 }
 
-function ProductCard({ product }: { product: Product }) {
+function ProductCard({
+  product,
+  addToCart,
+}: {
+  product: Product;
+  addToCart: (item: Product) => void;
+}) {
   // Format price with commas for better readability
   const formattedPrice = product.price.toLocaleString("en-US");
 
   return (
-    <Link
-      href={`/products/${product.id}`}
-      className="bg-white rounded-lg w-full shadow-md overflow-hidden cursor-pointer"
-    >
+    <div className="bg-white rounded-lg w-full shadow-md overflow-hidden cursor-pointer">
       {/* Product top content */}
       <div className="relative">
         <div className="overflow-hidden">
@@ -72,9 +102,22 @@ function ProductCard({ product }: { product: Product }) {
         </p>
         <div className="flex items-center justify-between">
           <span className="text-primary font-bold">₦{formattedPrice}</span>
-          <button className="btn-primary">View Product</button>
+          <div className="flex items-center space-x-2">
+            <button
+              onClick={() => addToCart(product)}
+              className="btn-primary hover:bg-primary-600 transition-colors duration-300 ease-in"
+            >
+              Add To Cart
+            </button>
+            <Link
+              href={`/products/${product._id}`}
+              className="btn-secondary border border-white/24 hover:bg-primary-600 transition-colors duration-300 ease-in"
+            >
+              See Details
+            </Link>
+          </div>
         </div>
       </div>
-    </Link>
+    </div>
   );
 }

@@ -1,31 +1,22 @@
 "use client";
 
+import Image from "next/image";
 import { X } from "lucide-react";
-import { useState } from "react";
 import { HiOutlineHeart } from "react-icons/hi2";
 import Quantity from "../product/QuantitySelector";
+import { Product } from "@/Types/Products";
+import { useProductStore } from "@/store/productStore";
 
-type ItemProp = {
-  id: number;
-  image: string;
-  heading: string;
-  color: string;
-  size: string | number;
-  price: number;
-};
-
-export default function Item({ item }: { item: ItemProp }) {
-  const [actualPrice, setActualPrice] = useState(0);
-
-  function handleSelectedItems(num: number) {
-    setActualPrice(num * item.price);
-  }
+export default function Item({ item }: { item: Product }) {
+  const removeItem = useProductStore(state => state.removeItemFromCart);
 
   return (
     <li className="py-2 flex">
       <div className="h-28 w-28 flex-shrink-0 overflow-hidden rounded-md border border-gray-200">
-        <img
-          src={item.image}
+        <Image
+          src={item.images[0]}
+          width={100}
+          height={200}
           alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
           className="h-full w-full object-cover object-center"
         />
@@ -50,12 +41,12 @@ export default function Item({ item }: { item: ItemProp }) {
             <span className="font-semibold text-gray-900">₦{item.price}</span> /
             per item
           </p>
-          <Quantity onAddItem={handleSelectedItems} />
+          <Quantity item={item} />
         </div>
       </div>
       <div className="flex flex-col items-end justify-between text-sm">
         <p className="ml-4 text-sm font-semibold">
-          ₦{actualPrice || item.price}
+          ₦{(item.quantity * item.price).toLocaleString("en-US")}
         </p>
         <div className="flex items-center space-x-2">
           <button
@@ -69,6 +60,7 @@ export default function Item({ item }: { item: ItemProp }) {
             />
           </button>
           <button
+          onClick={() => removeItem(item.id)}
             title="Remove item"
             type="button"
             className="font-medium text-primary hover:text-primary/80 rounded-full p-.5 transition-all duration-300 ease-in-out"

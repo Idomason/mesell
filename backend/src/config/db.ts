@@ -3,7 +3,7 @@ import mongoose from "mongoose";
 // MongoDB connection
 const MONGODB_URI = process.env.MONGODB_URI?.replace(
   "<PASSWORD>",
-  process.env.MONGODB_PASSWORD!
+  process.env.MONGODB_PASSWORD!,
 );
 
 export const connectDB = async () => {

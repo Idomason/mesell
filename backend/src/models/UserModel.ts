@@ -2,6 +2,14 @@ import crypto from "crypto";
 import bcrypt from "bcryptjs";
 import mongoose, { Document, Schema } from "mongoose";
 
+export interface IAddress {
+  fullName: string;
+  address: string;
+  state: string;
+  postalCode: string;
+  isDefault: boolean;
+}
+
 export interface IUser extends Document {
   email: string;
   password: string;
@@ -18,16 +26,50 @@ export interface IUser extends Document {
   qualityCertification?: string;
   rating: number;
   totalSales: number;
+  points: number;
+  addresses: IAddress[];
   passwordChangedAt: Date;
   passwordResetToken: string | undefined;
   passwordResetExpires: Date | undefined;
   comparePassword(
     candidatePassword: string,
-    userPassword: string
+    userPassword: string,
   ): Promise<boolean>;
   changedPasswordAfter(JWTTimestamp: Date): Boolean;
   createPasswordResetToken(): String;
 }
+
+const addressSchema = new mongoose.Schema<IAddress>(
+  {
+    fullName: {
+      type: String,
+      required: [true, "Fullname is required"],
+      trim: true,
+    },
+    address: {
+      type: String,
+      required: [true, "Address is required"],
+      trim: true,
+    },
+    state: {
+      type: String,
+      required: [true, "State is required"],
+      trim: true,
+    },
+    postalCode: {
+      type: String,
+      required: [true, "Postal code is required"],
+      trim: true,
+    },
+    isDefault: {
+      type: Boolean,
+      default: false,
+    },
+  },
+  {
+    timestamps: false,
+  },
+);
 
 const userSchema = new Schema<IUser>(
   {
@@ -109,13 +151,18 @@ const userSchema = new Schema<IUser>(
       type: Number,
       default: 0,
     },
+    points: { type: Number, default: 0, min: 0 },
+    addresses: {
+      type: [addressSchema],
+      default: [],
+    },
     passwordChangedAt: Date,
     passwordResetToken: String,
     passwordResetExpires: Date,
   },
   {
     timestamps: true,
-  }
+  },
 );
 
 // Hash password before saving
@@ -129,17 +176,17 @@ userSchema.pre("save", async function (next) {
 });
 
 userSchema.pre("save", function (next) {
-  if (!this.isModified('password') || this.isNew) return next();
+  if (!this.isModified("password") || this.isNew) return next();
 
-  this.passwordChangedAt = Date.now();
+  this.passwordChangedAt = new Date();
 
-  next()
+  next();
 });
 
 // Compare and check password
 userSchema.methods.comparePassword = async function (
   candidatePassword: string,
-  userPassword: string
+  userPassword: string,
 ) {
   return await bcrypt.compare(candidatePassword, userPassword);
 };
@@ -147,9 +194,8 @@ userSchema.methods.comparePassword = async function (
 // Password changed
 userSchema.methods.changedPasswordAfter = function (JWTTimestamp: number) {
   if (this.passwordChangedAt) {
-    const changedTimestamp = parseInt(
+    const changedTimestamp = Math.floor(
       this.passwordChangedAt.getTime() / 1000,
-      10
     );
     console.log(changedTimestamp, JWTTimestamp);
 

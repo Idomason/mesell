@@ -9,6 +9,7 @@
     "setup": "pnpm run setup-server && pnpm run setup-client",
     "client": "pnpm --prefix frontend run dev",
     "server": "pnpm --prefix backend run dev",
+    "seed-data": "pnpm --prefix backend run seed",
     "watch": "pnpm run server & pnpm run client",
     "deploy": "pnpm --prefix frontend build && pnpm --prefix backend build && pnpm --prefix backend start",
     "test": "pnpm --prefix backend run test && pnpm --prefix frontend run test"

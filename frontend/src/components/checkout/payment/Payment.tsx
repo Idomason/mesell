@@ -65,19 +65,21 @@ export default function Payment() {
           <div className="bg-gray-200 max-w-fit rounded-full flex items-center justify-center">
             <button
               onClick={() => setPaymentOption("card")}
-              className={`${paymentOption === "card" ? "bg-primary text-white font-semibold" : "bg-white text-gray-700 shadow-inner"} px-8 md:px-12 py-1 rounded-full transition-colors duration-300 ease-in-out`}
+              className={`${
+                paymentOption === "card"
+                  ? "bg-primary text-white font-semibold"
+                  : "bg-white text-gray-700 shadow-inner"
+              } px-8 md:px-12 py-1 rounded-full transition-colors duration-300 ease-in-out`}
             >
               Card
             </button>
             <button
-              onClick={() => setPaymentOption("paystack")}
-              className={`${paymentOption === "paystack" ? "bg-primary text-white font-semibold" : "bg-white text-gray-700 shadow-inner"} px-4 md:px-8 py-1 rounded-full ml-2 transition-colors duration-300 ease-in-out`}
-            >
-              PayStack
-            </button>
-            <button
               onClick={() => setPaymentOption("transfer")}
-              className={`${paymentOption === "transfer" ? "bg-primary text-white font-semibold" : "bg-white text-gray-700 shadow-inner"} px-4 md:px-8 py-1 rounded-full ml-2 transition-colors duration-300 ease-in-out`}
+              className={`${
+                paymentOption === "transfer"
+                  ? "bg-primary text-white font-semibold"
+                  : "bg-white text-gray-700 shadow-inner"
+              } px-4 md:px-8 py-1 rounded-full ml-2 transition-colors duration-300 ease-in-out`}
             >
               Transfer
             </button>

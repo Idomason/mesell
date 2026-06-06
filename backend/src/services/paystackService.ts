@@ -1,166 +1,249 @@
 import axios from "axios";
-import { AppError } from "../middleware/errorHandler";
-import { IPayment } from "../models/Payment";
-import { IOrder } from "../models/Order";
+import { getEnv } from "@/lib/env";
+import { CreateSellerAcctSchema } from "@/lib/zodSchema";
 
-const PAYSTACK_SECRET_KEY = process.env.PAYSTACK_SECRET_KEY;
-const PAYSTACK_BASE_URL = "https://api.paystack.co";
+const env = getEnv();
 
-interface PaystackResponse {
-  status: boolean;
-  message: string;
-  data: any;
+interface ITransactionData {
+  email: any;
+  amount: number;
+  currency: string;
+  subaccount: any;
+  split_code: any;
+  metadata?: {
+    custom_fields: {
+      display_name: string;
+      variable_name: string;
+      value: string;
+    }[];
+  };
 }
 
-export class PaystackService {
-  private static instance: PaystackService;
-  private readonly headers: Record<string, string>;
+interface IRecipientData {
+  type: string;
+  name: string;
+  account_number: string;
+  bank_code: string;
+}
 
-  private constructor() {
-    this.headers = {
-      Authorization: `Bearer ${PAYSTACK_SECRET_KEY}`,
-      "Content-Type": "application/json",
+interface ITransferData {
+  source: string;
+  amount: number;
+  recipient: string;
+  reason?: string;
+}
+
+export const paystackClient = axios.create({
+  baseURL: env.PAYSTACK_BASE_URL,
+  headers: {
+    Authorization: `Bearer ${env.PAYSTACK_SECRET_KEY}`,
+    "Content-Type": "application/json",
+  },
+});
+
+// Get bank code
+export const getBankCode = async function (bankName: string) {
+  try {
+    const response = await paystackClient.get("/bank");
+    const bank = response.data.data.find(
+      (b: { name: string }) => b.name.toLowerCase() === bankName.toLowerCase(),
+    );
+    if (!bank) {
+      throw new Error("Bank not found");
+    }
+    return { success: true, data: bank.code };
+  } catch (error) {
+    console.error("Error fetching bank code:", error);
+    let message = "Failed to fetch bank code";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
+    }
+    throw new Error(message);
+  }
+};
+
+// Get list of subaccounts (sellers)
+export const allSellerAccounts = async function () {
+  try {
+    const response = await paystackClient.get("/subaccount");
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Error fetching subaccounts(sellers account):", error);
+    let message = "Failed to fetch subaccounts";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
+    }
+    throw new Error(message);
+  }
+};
+
+// Find subaccount by business name & account number
+export const findSellerByBusinessAndAccountNumber = async function (
+  accountNumber: string,
+  businessName: string,
+) {
+  try {
+    const response = await paystackClient.get("/subaccount?perPage=100&page=1");
+    const subaccounts = response.data.data;
+    const existingAccount = subaccounts.find(
+      (acct: { account_number: string; business_name: string }) =>
+        acct.account_number === accountNumber &&
+        acct.business_name === businessName,
+    );
+    return existingAccount || null;
+  } catch (error) {
+    console.error("Error fetching subaccounts:", error);
+    let message = "Failed to fetch subaccounts";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
+    }
+    throw new Error(message);
+  }
+};
+
+// Create subaccount
+export const createSellerAccount = async function (
+  subaccountData: CreateSellerAcctSchema,
+) {
+  try {
+    const response = await paystackClient.post("/subaccount", subaccountData);
+    return {
+      success: true,
+      data: response.data,
+      message: "Seller created successfully",
     };
-  }
-
-  public static getInstance(): PaystackService {
-    if (!PaystackService.instance) {
-      PaystackService.instance = new PaystackService();
+  } catch (error: unknown) {
+    console.error("Error creating subaccount:", error);
+    let message = "Failed to create subaccount";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
-    return PaystackService.instance;
+    throw new Error(message);
   }
+};
 
-  async initializeEscrowPayment(
-    order: IOrder
-  ): Promise<{ authorizationUrl: string; reference: string }> {
-    try {
-      const response = await axios.post<PaystackResponse>(
-        `${PAYSTACK_BASE_URL}/transaction/initialize`,
-        {
-          email: order.buyer.toString(), // Replace with actual buyer email
-          amount: order.totalAmount * 100, // Convert to kobo
-          reference: `ORDER-${order._id}-${Date.now()}`,
-          metadata: {
-            orderId: order._id,
-            productId: order.product.toString(),
-            quantity: order.quantity,
+// Initialize payment (The Lock)
+export const initializeEscrowPayment = async function (order: any) {
+  try {
+    const response = await paystackClient.post("/transaction/initialize", {
+      email: order.buyer.email,
+      amount: order.totalAmount * 100, // Paystack expects amount in kobo
+      currency: "NGN",
+      split: {
+        subaccount: order.subaccount_code, // Seller's Paystack subaccount ID
+        percentage: 0,
+        bearer: "main_account", // You (Platform) pay the transaction fees
+      }, // Split code for payment distribution
+      callback_url: `${env.FRONTEND_URL}/payment/success`, // URL to redirect after payment
+      metadata: {
+        custom_fields: [
+          {
+            display_name: order._id,
+            variable_name: "order_id",
+            value: order._id.toString(),
           },
-          callback_url: `${process.env.FRONTEND_URL}/payment/verify`,
-        },
-        { headers: this.headers }
-      );
+        ],
+      },
+    });
 
-      if (!response.data.status) {
-        throw new AppError(response.data.message, 400);
-      }
-
-      return {
-        authorizationUrl: response.data.data.authorization_url,
-        reference: response.data.data.reference,
-      };
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new AppError(
-          error.response?.data?.message || "Failed to initialize payment",
-          400
-        );
-      }
-      throw error;
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Error initializing escrow payment:", error);
+    let message = "Failed to initialize escrow payment";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
+    throw new Error(message);
   }
+};
 
-  async verifyPayment(reference: string): Promise<boolean> {
-    try {
-      const response = await axios.get<PaystackResponse>(
-        `${PAYSTACK_BASE_URL}/transaction/verify/${reference}`,
-        { headers: this.headers }
-      );
-
-      return response.data.status && response.data.data.status === "success";
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new AppError(
-          error.response?.data?.message || "Failed to verify payment",
-          400
-        );
-      }
-      throw error;
+// Initialize transaction (The Lock)
+export const initializeTransaction = async function (
+  transactionData: ITransactionData,
+) {
+  try {
+    const response = await paystackClient.post(
+      "/transaction/initialize",
+      transactionData,
+    );
+    const { authorizationUrl, reference } = response.data.data;
+    return { success: true, data: response.data, authorizationUrl, reference };
+  } catch (error) {
+    console.error("Error initializing transaction:", error);
+    let message = "Failed to initialize transaction";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
+    throw new Error(message);
   }
+};
 
-  async createEscrowTransaction(payment: IPayment): Promise<string> {
-    try {
-      const response = await axios.post<PaystackResponse>(
-        `${PAYSTACK_BASE_URL}/escrow/transaction`,
-        {
-          amount: payment.amount * 100, // Convert to kobo
-          currency: payment.currency,
-          description: `Escrow payment for order ${payment.order}`,
-          metadata: {
-            orderId: payment.order.toString(),
-            paymentId: payment._id.toString(),
-          },
-        },
-        { headers: this.headers }
-      );
-
-      if (!response.data.status) {
-        throw new AppError(response.data.message, 400);
-      }
-
-      return response.data.data.escrow_id;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new AppError(
-          error.response?.data?.message ||
-            "Failed to create escrow transaction",
-          400
-        );
-      }
-      throw error;
+// Create transfer recipient
+export const createTransferRecipient = async function (
+  recipientData: IRecipientData,
+) {
+  try {
+    const response = await paystackClient.post(
+      "/transferrecipient",
+      recipientData,
+    );
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Error creating transfer recipient:", error);
+    let message = "Failed to create transfer recipient";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
+    throw new Error(message);
   }
+};
 
-  async releaseEscrowPayment(escrowId: string): Promise<boolean> {
-    try {
-      const response = await axios.post<PaystackResponse>(
-        `${PAYSTACK_BASE_URL}/escrow/release/${escrowId}`,
-        {},
-        { headers: this.headers }
-      );
-
-      return response.data.status;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new AppError(
-          error.response?.data?.message || "Failed to release escrow payment",
-          400
-        );
-      }
-      throw error;
+// Create transfer
+export const createTransfer = async function (transferData: ITransferData) {
+  try {
+    const response = await paystackClient.post("/transfer", transferData);
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Error creating transfer:", error);
+    let message = "Failed to create transfer";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
+    throw new Error(message);
   }
+};
 
-  async refundEscrowPayment(
-    escrowId: string,
-    reason: string
-  ): Promise<boolean> {
-    try {
-      const response = await axios.post<PaystackResponse>(
-        `${PAYSTACK_BASE_URL}/escrow/refund/${escrowId}`,
-        { reason },
-        { headers: this.headers }
-      );
-
-      return response.data.status;
-    } catch (error) {
-      if (axios.isAxiosError(error)) {
-        throw new AppError(
-          error.response?.data?.message || "Failed to refund escrow payment",
-          400
-        );
-      }
-      throw error;
+// Verify transaction (webhook)
+export const verifyTransaction = async function (reference: string) {
+  try {
+    const response = await paystackClient.get(
+      `/transaction/verify/${reference}`,
+    );
+    return { success: true, data: response.data };
+  } catch (error) {
+    console.error("Error verifying transaction:", error);
+    let message = "Failed to verify transaction";
+    if (axios.isAxiosError(error)) {
+      message = error.response?.data?.message || error.message || message;
+    } else if (error instanceof Error) {
+      message = error.message || message;
     }
+    throw new Error(message);
   }
-}
+};

@@ -3,7 +3,7 @@ import { promisify } from "util";
 import { Request, Response, NextFunction } from "express";
 
 import { AppError } from "./errorHandler.js";
-import { IUser, User } from "../models/User.js";
+import { IUser, User } from "../models/UserModel.js";
 import { catchAsync } from "@/utils/catchAsync.js";
 
 interface JwtPayload {
@@ -21,7 +21,7 @@ declare global {
 export const protect = catchAsync(async function (
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) {
   // 1) Check if token exists
   let token;
@@ -35,7 +35,7 @@ export const protect = catchAsync(async function (
   if (!token) {
     throw new AppError(
       "You are not logged in! Please log in to get access.",
-      401
+      401,
     );
   }
 
@@ -48,7 +48,7 @@ export const protect = catchAsync(async function (
   if (!user) {
     throw new AppError(
       "The user belonging to this token no longer exists.",
-      401
+      401,
     );
   }
 
@@ -63,13 +63,13 @@ export const restrictTo = function (...roles: string[]) {
   return (req: Request, res: Response, next: NextFunction) => {
     if (!req.user) {
       return next(
-        new AppError("You must be logged in to perform this action", 401)
+        new AppError("You must be logged in to perform this action", 401),
       );
     }
 
     if (!roles.includes(req.user.role)) {
       return next(
-        new AppError("You do not have permission to perform this action", 403)
+        new AppError("You do not have permission to perform this action", 403),
       );
     }
 

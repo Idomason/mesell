@@ -1,9 +1,15 @@
-import Link from "next/dist/client/link";
+"use client";
+
+import Link from "next/link";
+import { IoWarning } from "react-icons/io5";
 import { TbTruckDelivery } from "react-icons/tb";
+import { useProductStore } from "@/store/productStore";
 
-type ItemsProp = { totalItems: number };
+export default function CartSummary() {
+  const getCartStats = useProductStore((state) => state.getCartStats);
+  const cart = useProductStore((state) => state.products);
+  const cartStats = getCartStats();
 
-export default function CartSummary({ totalItems }: ItemsProp) {
   return (
     <div className="bg-primary-50 rounded-md p-4 flex flex-col justify-between font-sans max-h-[35.4rem]">
       <div className="border-b border-gray-200 pb-4">
@@ -22,26 +28,34 @@ export default function CartSummary({ totalItems }: ItemsProp) {
         </div>
         <div className="space-y-2 text-xs text-gray-500 font-medium">
           <div className="flex justify-between">
-            <span>{totalItems} Items</span>
-            <span className="font-semibold text-gray-700">₦20,890</span>
+            <span>{cartStats.totalItems} Items</span>
+            <span className="font-semibold text-gray-700">
+              ₦{cartStats.totalPrice.toLocaleString("en-US")}
+            </span>
           </div>
           <div className="flex justify-between">
-            <span>Delivery Cost</span>
+            <span>Subtotal</span>
+            <span className="font-semibold text-gray-700">₦450</span>
+          </div>
+          <div className="flex justify-between">
+            <span>Shipping</span>
             <span className="font-semibold text-gray-700">₦150</span>
-          </div>
-          <div className="flex justify-between">
-            <span>Tax</span>
-            <span className="font-semibold text-gray-700">₦50</span>
           </div>
           <div className="flex justify-between">
             <span>Discount</span>
             <span className="text-green-600 font-semibold">- ₦80</span>
           </div>
+          <div className="flex justify-between">
+            <span>Tax</span>
+            <span className="font-semibold text-gray-700">
+              ₦50 ({cartStats.totalItems})
+            </span>
+          </div>
         </div>
       </div>
       <div className="flex justify-between font-semibold">
         <span>Total</span>
-        <span>₦22,040</span>
+        <span>₦{cartStats.totalPrice.toLocaleString("en-US")}</span>
       </div>
       <Link
         href="/checkout"
@@ -52,13 +66,20 @@ export default function CartSummary({ totalItems }: ItemsProp) {
 
       <div className="mt-4 text-xs text-gray-500 flex items-center gap-2 justify-around bg-gray-50 p-2 rounded-md">
         <TbTruckDelivery className="inline-block mr-1 size-10 stroke-1" />
-        <div>
-          <span className="block text-xs font-medium mb-0.5">Delivered by</span>
+        <div className="flex-1">
+          <span className="block text-xs font-medium mb-0.5">
+            Est. Delivery
+          </span>
           <span className="block text-xs font-semibold">
-            Morning, Friday, May 10, 2024
+            Friday, May 10, 2024 (14 day's production)
           </span>
         </div>
       </div>
+
+      <p className="py-4 text-xs text-gray-500 font-medium text-center">
+        <IoWarning size={15} className="fill-amber-500 inline-block" />
+        <span>Funds held in escrow. Released to sellers upon shipment.</span>
+      </p>
 
       <div className="mt-4 text-xs text-gray-500 text-center">
         <p>

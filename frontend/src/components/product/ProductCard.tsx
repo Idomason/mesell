@@ -1,52 +1,49 @@
-import React from "react";
 import Image from "next/image";
 import Link from "next/link";
 import VerificationBadge from "../trust/VerificationBadge";
-import { Play, Heart, Verified } from "lucide-react";
+import { Heart, Verified } from "lucide-react";
 import { Product } from "@/Types/Products";
 import { customers } from "@/data/customer";
 import { Button } from "../ui/button";
 
-interface ProductCardProps {
-  product: Product;
-}
-
-export default function ProductCard({ product }: ProductCardProps) {
-  const primaryImage = product.images?.[0] || "/placeholder.jpg";
-  const hoverImage = product.images?.[1];
+export default function ProductCard({ product }: { product: Product }) {
+  const primaryImage = product?.images?.[0] || "/placeholder.jpg";
+  const hoverImage = product?.images?.[1];
 
   const formattedPrice = new Intl.NumberFormat("en-NG", {
     style: "currency",
     currency: "NGN",
-  }).format(product.price);
+  }).format(product?.price);
 
   return (
     <div className="relative group bg-white rounded-lg shadow-md overflow-hidden hover:shadow-lg transition-shadow duration-300">
       <Link
-        href={`/products/${product.id}`}
+        href={`/products/${product?.id}`}
         className="block relative aspect-square overflow-hidden"
       >
         <Image
           src={primaryImage}
-          alt={product.name}
+          alt={`${product?.name} primary view`}
           fill
           sizes="(max-width: 768px) 100vw, 320px"
           className="object-cover group-hover:scale-115 transition-transform duration-300 ease-in-out"
+          priority
         />
 
         {hoverImage && (
           <Image
             src={hoverImage}
-            alt={`${product.name} alternate view`}
+            alt={`${product?.name} alternate view`}
             fill
             sizes="(max-width: 768px) 100vw, 320px"
             className="object-cover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
+            priority
           />
         )}
       </Link>
 
       {/* Seller profile */}
-      {product.seller && (
+      {product?.seller && (
         <Link href="/sellers/ene-adanu">
           <div className="h-10 w-10 rounded-full border-2 border-primary-500 overflow-hidden absolute left-0 top-0 right-full m-4 cursor-pointer">
             <Image
@@ -55,6 +52,7 @@ export default function ProductCard({ product }: ProductCardProps) {
               alt={customers[3].name}
               width={32}
               height={32}
+              priority
             />
           </div>
           <Verified className="size-5 inset-1 text-success-foreground absolute left-11 top-9 fill-accent rounded-full" />
@@ -70,19 +68,19 @@ export default function ProductCard({ product }: ProductCardProps) {
       <div className="p-4">
         <div className="flex items-center gap-2 mb-2">
           <VerificationBadge type="quality" size="sm" />
-          {product.seller.verified && (
+          {product?.seller?.verified && (
             <VerificationBadge type="bvn" size="sm" />
           )}
         </div>
 
-        <Link href={`/products/${product.id}`}>
+        <Link href={`/products/${product?.id}`}>
           <h3 className="font-karla font-semibold text-lg mb-1 hover:text-primary">
-            {product.name}
+            {product?.name}
           </h3>
         </Link>
 
         <p className="text-gray-600 text-sm mb-2 line-clamp-2">
-          {product.description}
+          {product?.description}
         </p>
 
         <div className="flex justify-between items-center">
@@ -91,14 +89,15 @@ export default function ProductCard({ product }: ProductCardProps) {
             <span className="text-sm text-gray-500 ml-2">pre-order</span>
           </div>
           <span className="text-sm text-gray-500">
-            {product.totalSold}+ sold
+            {/* {product?.totalSold}+ sold */}
+            {product?.stock}+ sold
           </span>
         </div>
 
         <div className="mt-3 flex gap-2">
-          <button className="flex-1 bg-primary text-white py-2 font-semibold rounded-lg hover:bg-primary-700 transition">
+          <Button className="flex-1 bg-primary text-white py-2 font-semibold rounded-lg hover:bg-primary-700 transition">
             Pre-Order Now
-          </button>
+          </Button>
         </div>
       </div>
     </div>

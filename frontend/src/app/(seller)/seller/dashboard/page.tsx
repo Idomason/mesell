@@ -1,6 +1,3 @@
-import DailyOrders from "@/components/seller/dashboard-charts/DailyOrders";
-import DailyRevenue from "@/components/seller/dashboard-charts/DailyRevenue";
-import NewCustomers from "@/components/seller/dashboard-charts/NewCustomers";
 import {
   Select,
   SelectContent,
@@ -9,12 +6,11 @@ import {
   SelectTrigger,
   SelectValue,
 } from "@/components/ui/select";
+import DashboardChartsClient from "@/components/seller/dashboard-charts/DashboardChartsClient";
 
-export const dynamic = "force-dynamic";
-
-export default function page() {
+export default function Page() {
   return (
-    <div className="w-fiull font-sans">
+    <div className="w-full font-sans">
       <div className="py-4 flex items-center justify-between">
         <h1 className="text-2xl text-primary font-semibold tracking-wide">
           Overview
@@ -34,11 +30,8 @@ export default function page() {
           </Select>
         </div>
       </div>
-      <div className="flex items-center gap-4">
-        <DailyRevenue />
-        <DailyOrders />
-        <NewCustomers />
-      </div>
+
+      <DashboardChartsClient />
     </div>
   );
 }

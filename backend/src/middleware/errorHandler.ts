@@ -1,7 +1,7 @@
 import { Request, Response, NextFunction } from "express";
 
 export class AppError extends Error {
-  statusCode: number;
+  public readonly statusCode: number;
   status: string;
   isOperational: boolean;
   code?: number;
@@ -50,10 +50,9 @@ const handleTokenExpiredError = function (err: any) {
 
 // Process development error
 const sendDevError = function (err: AppError, res: Response) {
-  console.log("HERE NOW!");
-  return res.status(err.statusCode).json({
+  return res.status(err.statusCode || 500).json({
     name: err.name,
-    status: err.status,
+    status: err.status || "error",
     message: err.message,
     err: err.stack,
     error: err,
@@ -87,7 +86,7 @@ export const globalErrorHandler = (
   err: AppError,
   req: Request,
   res: Response,
-  next: NextFunction
+  next: NextFunction,
 ) => {
   if (process.env.NODE_ENV === "development") {
     sendDevError(err, res);
