@@ -8,7 +8,9 @@ import ProductImageDisplay from "@/components/product/ProductImageDisplay";
 
 export default async function page({ params }: any) {
   const { productId } = await params;
-  const product = products.find((product) => product.id === +productId);
+  const product = products.find(
+    (product) => product.id.toString() === productId.toString(),
+  );
 
   if (!product) {
     return <div>No product found</div>;

@@ -30,7 +30,7 @@ export const createCheckout = catchAsync(
     let totalCheckoutAmount = 0;
 
     for (const item of orderItems) {
-      if (!item.seller?.id || !item.quantity || !item.totalPrice) {
+      if (!item.seller || !item.quantity || !item.totalPrice) {
         return next(
           new AppError(
             "All items must have seller, quantity, and totalPrice",
@@ -41,8 +41,8 @@ export const createCheckout = catchAsync(
 
       const order = await Order.create({
         buyer: buyerId,
-        seller: item.seller.id,
-        product: item.id, // Map frontend product id to product field
+        seller: item.seller,
+        product: item.product, // Map cart productId to order product field
         quantity: item.quantity,
         totalAmount: item.totalPrice,
         deliveryAddress: item.deliveryAddress,

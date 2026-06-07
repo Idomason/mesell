@@ -6,9 +6,11 @@ export interface IPayment extends Document {
   currency: string;
   paymentMethod: "card" | "ussd" | "pos";
   paymentReference: string;
-  escrowId: string;
+  authorizationUrl: string;
   status: "pending" | "success" | "failed" | "refunded" | "released";
   metadata: {
+    orderIds: string[];
+    itemCount: number;
     bank?: string;
     accountNumber?: string;
     accountName?: string;
@@ -50,9 +52,9 @@ const paymentSchema = new Schema<IPayment>(
       type: String,
       required: [true, "Please provide payment reference"],
     },
-    escrowId: {
+    authorizationUrl: {
       type: String,
-      required: [true, "Please provide escrow ID"],
+      required: [true, "Payment authorization url is required"],
     },
     status: {
       type: String,
@@ -60,6 +62,8 @@ const paymentSchema = new Schema<IPayment>(
       default: "pending",
     },
     metadata: {
+      orderIds: [String],
+      itemCount: Number,
       bank: String,
       accountNumber: String,
       accountName: String,

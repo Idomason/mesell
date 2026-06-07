@@ -37,7 +37,6 @@ export default function BrandProfile({ brand }: BrandProp) {
               width={1200}
               height={400}
               alt="Mesell Banner"
-              priority
             />
             <div className="absolute inset-0 bg-gradient-to-t from-black/60 to-transparent"></div>
 

@@ -24,7 +24,6 @@ export default function NotFound() {
                 alt="Page not found illustration"
                 fill
                 style={{ objectFit: "contain" }}
-                priority
               />
             </div>
           </div>

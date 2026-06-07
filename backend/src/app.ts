@@ -3,9 +3,11 @@ import path from "node:path";
 import cors from "cors";
 import morgan from "morgan";
 import express from "express";
+import cookieParser from "cookie-parser";
 
 import authRoutes from "@/routes/auth.js";
 import orderRoutes from "@/routes/orders.js";
+import cartRoutes from "@/routes/cart.js";
 import userRoutes from "@/routes/userRoutes.js";
 import productRoutes from "@/routes/buyer/products.js";
 import paymentRoutes from "@/routes/payments.js";
@@ -31,7 +33,8 @@ app.use((req, res, next) => {
 if (env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-app.use(cors({ origin: "http://localhost:3000" }));
+app.use(cors({origin: "http://localhost:3000", credentials: true,}));
+app.use(cookieParser());
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -39,6 +42,7 @@ app.use(express.static(path.join(__dirname, "..", "public")));
 app.use("/api/v1/auth", authRoutes);
 app.use("/api/v1/products", productRoutes);
 app.use("/api/v1/orders", orderRoutes);
+app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/checkout", checkoutRoutes);

@@ -63,7 +63,6 @@ export default function Footer() {
                 alt="Mesell Logo"
                 width={120}
                 height={40}
-                priority
                 className="md:h-6 w-auto h-5"
               />
             </div>

@@ -1,14 +1,9 @@
 import jwt from "jsonwebtoken";
-import { promisify } from "util";
 import { Request, Response, NextFunction } from "express";
 
 import { AppError } from "./errorHandler.js";
 import { IUser, User } from "../models/UserModel.js";
 import { catchAsync } from "@/utils/catchAsync.js";
-
-interface JwtPayload {
-  id: string;
-}
 
 declare global {
   namespace Express {
@@ -24,12 +19,16 @@ export const protect = catchAsync(async function (
   next: NextFunction,
 ) {
   // 1) Check if token exists
-  let token;
+  let token: string | undefined;
   if (
     req.headers.authorization &&
     req.headers.authorization.startsWith("Bearer")
   ) {
     token = req.headers.authorization.split(" ")[1];
+  }
+  // 2) Check Cookies (Browser with withCredentials: true)
+  else if (req.cookies && req.cookies.accessToken) {
+    token = req.cookies.accessToken; // Ensure name matches your cookie name
   }
 
   if (!token) {
@@ -39,11 +38,11 @@ export const protect = catchAsync(async function (
     );
   }
 
-  // 2) Verify token
-  const decoded = await promisify(jwt.verify)(token, process.env.JWT_SECRET);
+  // 3) Verify token
+  const decoded: any = jwt.verify(token, process.env.JWT_SECRET!);
 
-  // 3) Check if user still exists
-  const user = await User.findById(decoded.id);
+  // 4) Check if user still exists and attach user to request
+  const user = await User.findById(decoded._id);
 
   if (!user) {
     throw new AppError(
@@ -52,7 +51,7 @@ export const protect = catchAsync(async function (
     );
   }
 
-  // 4) Grant access to protected route
+  // 5) Grant access to protected route
   req.user = user;
 
   next();

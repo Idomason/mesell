@@ -15,9 +15,12 @@ export function SignupForm({
         <CardContent className="grid p-0 md:grid-cols-2">
           <div className="relative hidden bg-muted md:block">
             <Image
+              height={600}
+              width={600}
               src="/images/mesell-1.png"
               alt="Image"
               className="absolute inset-0 h-full w-full object-cover dark:brightness-[0.2] dark:grayscale"
+              priority
             />
           </div>
           <form className="p-6 md:p-8">

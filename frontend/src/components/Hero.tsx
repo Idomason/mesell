@@ -72,7 +72,7 @@ export default function Hero() {
                         alt={customer.name}
                         width={50}
                         height={50}
-                        className="rounded-full"
+                        className="rounded-full w-auto h-auto"
                       />
                     </div>
                   ))}

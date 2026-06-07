@@ -14,6 +14,7 @@
     "axios": "^1.6.7",
     "axios-retry": "^4.5.0",
     "bcryptjs": "^2.4.3",
+    "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
     "country-flag-icons": "^1.5.19",
     "cron": "^4.4.0",

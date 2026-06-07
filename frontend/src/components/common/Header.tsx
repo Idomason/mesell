@@ -82,8 +82,8 @@ export default function Header() {
   return (
     <header className="fixed w-full flex flex-col items-center justify-between border-b border-white/30 bg-wite/20 backdrop-blur-md top-0 left-0 right-0 z-50">
       {/* First Nav */}
-      <nav className="container px-4 sm:px-6 py-2 bg-black">
-        <ul className="flex items-center justify-between mx-auto">
+      <nav className="w-full px-4 py-2 bg-black">
+        <ul className="container sm:px-6 flex items-center justify-between mx-auto">
           {/* Socials */}
           <li className="flex items-center justify-center divide-x">
             <div className="flex items-center justify-center gap-2.5 mr-4">

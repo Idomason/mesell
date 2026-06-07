@@ -2,24 +2,16 @@ import { api } from "../../lib/api";
 import { boolean, z } from "zod";
 
 const CartItemSchema = z.object({
-  name: z.string().min(1, "Product name is required"),
-  color: z.string().array(),
-  size: z.number(),
-  description: z.string().min(1, "Product description is required"),
-  price: z.number(),
-  images: z.string().array(),
-  category: z.string(),
+  product: z.union([z.string(), z.number()]),
+  price: z.number().nonnegative(),
   quantity: z.number().int().positive("Quantity must be greater than zero"),
   seller: z.object({
-    id: z.number().min(1, "Seller ID is required"),
+    id: z.union([z.string(), z.number()]),
     name: z.string().min(1, "Seller name is required"),
     verified: z.boolean(),
-    isLive: boolean(),
+    isLive: z.boolean(),
   }),
-  totalPrice: z
-    .number()
-    .int()
-    .positive("Amount sold must be greater than zero"),
+  totalPrice: z.number().nonnegative(),
   deliveryAddress: z.object({
     street: z.string().min(1, "Delivery address is required"),
     city: z.string().min(1, "City is required"),

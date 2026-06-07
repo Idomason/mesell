@@ -8,6 +8,7 @@ import { Product } from "@/app/api/products";
 import { productApi } from "@/app/api/products";
 import { useQuery } from "@tanstack/react-query";
 import { useProductStore } from "@/store/productStore";
+import { toast } from "sonner";
 
 const fetchProducts = async (): Promise<Product[]> => {
   const response = await productApi.getProducts();
@@ -59,6 +60,11 @@ function ProductCard({
   // Format price with commas for better readability
   const formattedPrice = product.price.toLocaleString("en-US");
 
+  function addProductToCart(product) {
+    addToCart(product);
+    toast.success("Product added to cart");
+  }
+
   return (
     <div className="bg-white rounded-lg w-full shadow-md overflow-hidden cursor-pointer">
       {/* Product top content */}
@@ -70,6 +76,7 @@ function ProductCard({
             className="w-full h-48 object-cover transform transition-transform duration-300 ease-in-out hover:scale-125"
             width={200}
             height={200}
+            priority
           />
         </div>
 
@@ -104,7 +111,7 @@ function ProductCard({
           <span className="text-primary font-bold">₦{formattedPrice}</span>
           <div className="flex items-center space-x-2">
             <button
-              onClick={() => addToCart(product)}
+              onClick={() => addProductToCart(product)}
               className="btn-primary hover:bg-primary-600 transition-colors duration-300 ease-in"
             >
               Add To Cart

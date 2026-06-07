@@ -5,6 +5,7 @@ import Checkout from "@/components/checkout/Checkout";
 import OrderSummary from "@/components/checkout/OrderSummary";
 import { orderApi } from "@/app/api/orders";
 import { useProductStore } from "@/store/productStore";
+import { toast } from "sonner";
 
 const initialAddress = {
   fullName: "",
@@ -28,17 +29,11 @@ export default function page() {
   async function createCheckoutOrder() {
     try {
       const orderItems = cart.map((item) => ({
-        product: item.id,
-        name: item.name,
-        color: item.color ? [item.color] : [],
-        size: Number(item.size),
-        description: item.description,
-        price: item.price,
-        images: item.images,
-        category: item.category,
+        product: item._id,
         quantity: item.quantity,
+        price: item.price,
+        totalPrice: item.price * item.quantity,
         seller: item.seller,
-        totalPrice: cartStats.totalPrice,
         deliveryAddress: {
           street: `${address.addressLine1}, ${address.addressLine2}`.trim(),
           city: address.city,
@@ -49,8 +44,10 @@ export default function page() {
       }));
 
       const result = await orderApi.createOrder(orderItems);
-      if (result) console.log("Order created");
+      if (result) toast.success("Order created");
     } catch (error) {
+      toast.error(error?.response?.data.message);
+      console.log(error?.response?.data.message);
       throw new Error("Error occured, order creation failed try again");
     }
   }

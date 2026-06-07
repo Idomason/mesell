@@ -17,6 +17,7 @@ export interface IUser extends Document {
   firstName: string;
   lastName: string;
   phoneNumber: string;
+  subaccount?: string;
   role: "buyer" | "seller" | "admin";
   isVerified: boolean;
   bvn?: string;
@@ -112,6 +113,7 @@ const userSchema = new Schema<IUser>(
       required: [true, "Please provide your phone number"],
       trim: true,
     },
+    subaccount: { type: String },
     role: {
       type: String,
       enum: ["buyer", "seller", "admin"],

@@ -3,8 +3,7 @@ import mongoose, { Document, Schema } from "mongoose";
 export interface IOrder extends Document {
   buyer: mongoose.Types.ObjectId;
   seller: mongoose.Types.ObjectId;
-  // product: mongoose.Types.ObjectId;
-  product: number;
+  product: mongoose.Types.ObjectId;
   quantity: number;
   totalAmount: number;
   paymentStatus: "pending" | "paid" | "refunded" | "released";
@@ -57,8 +56,7 @@ const orderSchema = new Schema<IOrder>(
       required: [true, "Order must belong to a seller"],
     },
     product: {
-      // type: Schema.Types.ObjectId,
-      type: Number,
+      type: Schema.Types.ObjectId,
       ref: "Product",
       required: [true, "Order must contain a product"],
     },

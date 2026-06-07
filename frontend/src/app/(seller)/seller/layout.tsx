@@ -29,6 +29,7 @@ export default function SellerLayout({
               width={100}
               height={100}
               alt="Logo"
+              priority
             />
           </div>
 

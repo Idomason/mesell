@@ -7,6 +7,7 @@ export interface IProduct extends Document {
   price: number;
   preOrderPrice: number;
   category: string;
+  quantity: number;
   images: string[];
   slug: { type: String; unique: Boolean };
   specifications: Record<string, string>;
@@ -74,6 +75,7 @@ const productSchema = new Schema<IProduct>(
         "Wood Work",
       ],
     },
+    quantity: { type: Number, default: 1 },
     brand: { type: String, required: true, trim: true },
     stock: { type: Number, required: [true, "Stock is required"], min: 0 },
     images: [

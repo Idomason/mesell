@@ -1,6 +1,6 @@
 export const products = [
   {
-    id: 1,
+    id: "6486e1a36d1f1a5b2c0d0001",
     name: "Apple Smart Watch",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -29,7 +29,7 @@ export const products = [
     isLive: false,
   },
   {
-    id: 2,
+    id: "6486e1a36d1f1a5b2c0d0002",
     name: "Headphones",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -58,7 +58,7 @@ export const products = [
     isLive: false,
   },
   {
-    id: 3,
+    id: "6486e1a36d1f1a5b2c0d0003",
     name: "Nike Air Max",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -87,7 +87,7 @@ export const products = [
     isLive: false,
   },
   {
-    id: 4,
+    id: "6486e1a36d1f1a5b2c0d0004",
     name: "Product 4",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -116,7 +116,7 @@ export const products = [
     isLive: true,
   },
   {
-    id: 5,
+    id: "6486e1a36d1f1a5b2c0d0005",
     name: "Product 5",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -145,7 +145,7 @@ export const products = [
     isLive: false,
   },
   {
-    id: 6,
+    id: "6486e1a36d1f1a5b2c0d0006",
     name: "Product 6",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -174,7 +174,7 @@ export const products = [
     isLive: false,
   },
   {
-    id: 7,
+    id: "6486e1a36d1f1a5b2c0d0007",
     name: "Product 7",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -203,7 +203,7 @@ export const products = [
     isLive: true,
   },
   {
-    id: 8,
+    id: "6486e1a36d1f1a5b2c0d0008",
     name: "Product 8",
     heading: "Whisky Hot Wine",
     color: "Salmon",
@@ -232,7 +232,7 @@ export const products = [
     isLive: true,
   },
   {
-    id: 9,
+    id: "6486e1a36d1f1a5b2c0d0009",
     name: "Product 10",
     heading: "Whisky Hot Wine",
     color: "Salmon",

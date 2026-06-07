@@ -27,7 +27,6 @@ export default function ProductCard({ product }: { product: Product }) {
           fill
           sizes="(max-width: 768px) 100vw, 320px"
           className="object-cover group-hover:scale-115 transition-transform duration-300 ease-in-out"
-          priority
         />
 
         {hoverImage && (
@@ -37,7 +36,6 @@ export default function ProductCard({ product }: { product: Product }) {
             fill
             sizes="(max-width: 768px) 100vw, 320px"
             className="object-cover opacity-0 transition-opacity duration-300 ease-in-out group-hover:opacity-100"
-            priority
           />
         )}
       </Link>
@@ -52,7 +50,6 @@ export default function ProductCard({ product }: { product: Product }) {
               alt={customers[3].name}
               width={32}
               height={32}
-              priority
             />
           </div>
           <Verified className="size-5 inset-1 text-success-foreground absolute left-11 top-9 fill-accent rounded-full" />

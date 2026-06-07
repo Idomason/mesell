@@ -1,10 +1,19 @@
-/*
-    GET /api/cart (gets server-stored cart for user)
+import express from "express";
+import { Cart } from "../models/CartModel.js";
+import { protect } from "../middleware/auth.js";
+import {
+  createCartItem,
+  deleteCartItem,
+  getCartItems,
+  mergeCart,
+} from "@/controllers/cartController.js";
 
-    POST /api/cart (create/update cart)
+const router = express.Router();
 
-    POST /api/cart/merge (merge guest local cart into server cart after login)
+router.route("/").get(protect, getCartItems).post(protect, createCartItem);
 
-    DELETE /api/cart/item/:itemId
+router.post("/merge", protect, mergeCart);
 
-*/
+router.delete("/item/:itemId", protect, deleteCartItem);
+
+export default router;

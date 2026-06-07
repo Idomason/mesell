@@ -19,6 +19,7 @@ export default function Item({ item }: { item: Product }) {
           height={200}
           alt="Salmon orange fabric pouch with match zipper, gray zipper pull, and adjustable hip belt."
           className="h-full w-full object-cover object-center"
+          priority
         />
       </div>
 

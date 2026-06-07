@@ -32,12 +32,11 @@ export const signup = catchAsync(async function (
 
   await user.save();
 
-  const token = signToken(user._id);
+  const token = signToken(user._id, res);
 
   // Send a response to client
   res.status(201).json({
     status: "success",
-    token,
     data: { user },
     message: "User account created successfully",
   });
@@ -64,7 +63,7 @@ export const login = catchAsync(async function (
   }
 
   // If everything is ok, send token to the client
-  const token = signToken(user._id);
+  const token = signToken(user._id, res);
 
   res
     .status(200)
@@ -147,7 +146,7 @@ export const resetPassword = catchAsync(async function (
 
   // Update changePasswordAt property for the user
   // Log the user in, send JWT
-  const token = signToken(user._id);
+  const token = signToken(user._id, res);
   res
     .status(200)
     .json({ status: "success", message: "Password reset successful", token });
