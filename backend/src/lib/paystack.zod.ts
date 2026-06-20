@@ -8,7 +8,6 @@ export const InitPaymentSchema = z.object({
   orderId: z.string().min(1),
   productId: z.string().optional(),
   quantity: z.number().int().positive().optional(),
-  subaccount: z.string().min(1, "Subaccount is required"),
   metadata: z.record(z.unknown()).optional(),
 });
 
@@ -42,10 +41,20 @@ export const PaystackInitializeResponseSchema =
 
 export const PaystackVerifyResponseSchema = PaystackBaseResponseSchema.extend({
   data: z.object({
+    id: z.number().int(),
     status: z.enum(["success", "failed", "abandoned"]),
     reference: z.string(),
     amount: z.number().int(),
-    metadata: z.record(z.unknown()).optional(),
+    paid_at: z.string().datetime(),
+    channel: z.string(),
+    fees: z.number().int(),
+    authorization: z
+      .object({
+        last4: z.string().optional(),
+        brand: z.string().optional(),
+      })
+      .optional(),
+    metadata: z.any(),
   }),
 });
 

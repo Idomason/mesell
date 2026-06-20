@@ -1,7 +1,7 @@
 import { z } from "zod";
 
 export const createSellerAcctSchema = z.object({
-  business_name: z.string().min(1, "Business name is required"),
+  business_name: z.string().trim().min(1, "Business name is required"),
   settlement_bank: z.string().min(1, "Settlement bank is required"),
   account_number: z.string().min(1, "Account number is required"),
   currency: z.string().min(1, "Currency is required").default("NGN"),

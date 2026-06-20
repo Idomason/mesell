@@ -3,19 +3,25 @@
 import { Textarea } from "../ui/textarea";
 import { Button } from "../ui/button";
 import { useEffect, useState } from "react";
+import { Loader } from "lucide-react";
 
 export default function OrderSummary({
   onCreateOrder,
+  isLoading,
   cartStats,
 }: {
   onCreateOrder: () => void;
-  cartStats: any; // Replace 'any' with the correct type if available
+  isLoading: Boolean;
+  cartStats: {
+    totalItems: number;
+    totalPrice: number;
+  };
 }) {
   const [isMounted, setIsMounted] = useState(false);
 
-  const totalItems = isMounted ? cartStats?.totalItems ?? 0 : 0;
+  const totalItems = isMounted ? (cartStats?.totalItems ?? 0) : 0;
   const totalPrice = isMounted
-    ? cartStats?.totalPrice?.toLocaleString("en-US") ?? "0"
+    ? (cartStats?.totalPrice?.toLocaleString("en-US") ?? "0")
     : "0";
 
   useEffect(() => {
@@ -78,7 +84,7 @@ export default function OrderSummary({
         size={"lg"}
         className="w-full bg-white text-primary text-lg px-4 py-1 rounded mt-4 font-semibold hover:text-white hover:bg-black/75"
       >
-        Place Order
+        {isLoading ? <Loader className="animate-spin" /> : "Place Order"}
       </Button>
     </div>
   );

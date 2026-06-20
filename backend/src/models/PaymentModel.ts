@@ -1,22 +1,34 @@
 import mongoose, { Document, Schema } from "mongoose";
 
 export interface IPayment extends Document {
-  order: mongoose.Types.ObjectId;
+  orderId: mongoose.Types.ObjectId;
   amount: number;
   currency: string;
   paymentMethod: "card" | "ussd" | "pos";
   paymentReference: string;
   authorizationUrl: string;
-  status: "pending" | "success" | "failed" | "refunded" | "released";
+  status:
+    | "pending"
+    | "paid"
+    | "failed"
+    | "refunded"
+    | "released"
+    | "held_in_escrow";
   metadata: {
-    orderIds: string[];
+    orderId: string;
+    sellerIds: string[];
     itemCount: number;
+    sellerCount: number;
     bank?: string;
     accountNumber?: string;
     accountName?: string;
     bvn?: string;
     cardLast4?: string;
     cardBrand?: string;
+    transactionId: string;
+    channel: string;
+    fees: number;
+    paidAt: Date;
   };
   webhookData?: Record<string, any>;
   refundReason?: string;
@@ -28,7 +40,7 @@ export interface IPayment extends Document {
 
 const paymentSchema = new Schema<IPayment>(
   {
-    order: {
+    orderId: {
       type: Schema.Types.ObjectId,
       ref: "Order",
       required: [true, "Payment must be associated with an order"],
@@ -58,18 +70,24 @@ const paymentSchema = new Schema<IPayment>(
     },
     status: {
       type: String,
-      enum: ["pending", "success", "failed", "refunded", "released"],
+      enum: ["pending", "paid", "failed", "refunded", "released"],
       default: "pending",
     },
     metadata: {
-      orderIds: [String],
+      orderId: String,
       itemCount: Number,
+      sellerCount: Number,
+      sellerIds: [String],
       bank: String,
       accountNumber: String,
       accountName: String,
       bvn: String,
       cardLast4: String,
       cardBrand: String,
+      transactionId: String,
+      channel: String,
+      fees: Number,
+      paid: Date,
     },
     webhookData: {
       type: Map,
@@ -92,8 +110,5 @@ paymentSchema.index({ status: 1 });
 
 // Index for payment reference
 paymentSchema.index({ paymentReference: 1 }, { unique: true });
-
-// Index for escrow ID
-paymentSchema.index({ escrowId: 1 }, { unique: true });
 
 export const Payment = mongoose.model<IPayment>("Payment", paymentSchema);

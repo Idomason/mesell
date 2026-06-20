@@ -1,7 +1,7 @@
 import { Seller } from "./Sellers";
 
 export interface Product {
-  id: string | number;
+  _id: string | number;
   images: string[];
   heading: string;
   color?: string;

@@ -16,7 +16,7 @@ export const metadata = {
   description:
     "A secure and trusted pre-order ecommerce platform built for the Nigerian market and Africa at large.",
   icons: {
-    icon: "/favicon.co",
+    icon: "/favicon.ico",
   },
 };
 

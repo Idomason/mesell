@@ -4,6 +4,7 @@ import * as paystackService from "../services/paystackService.js";
 import { PaystackService } from "@/services/paystack-test.js";
 import { IOrder, Order } from "../models/OrderModel.js";
 import { Payment } from "../models/PaymentModel.js";
+import { User } from "../models/UserModel.js";
 import { catchAsync } from "@/utils/catchAsync.js";
 import {
   createSellerAcctSchema,
@@ -236,6 +237,26 @@ export const createSellerEscrowAccount = catchAsync(
       if (!createdSeller) {
         return next(new AppError("Seller account creation failed", 400));
       }
+
+      // Persist created subaccount to authenticated user and mark pending approval
+      try {
+        const subaccountCode =
+          createdSeller?.data?.data?.subaccount_code ||
+          createdSeller?.data?.data?.subaccount ||
+          createdSeller?.data?.subaccount ||
+          null;
+
+        if (req.user && req.user._id) {
+          await User.findByIdAndUpdate(req.user._id, {
+            subaccount: subaccountCode,
+            sellerPending: true,
+          });
+        }
+      } catch (e) {
+        // Don't fail the request if persisting to user fails, but log it
+        console.error("Failed to persist subaccount to user:", e);
+      }
+
       res.status(200).json({
         status: "success",
         data: createdSeller,

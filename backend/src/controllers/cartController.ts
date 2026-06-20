@@ -5,7 +5,7 @@ import { NextFunction, Request, Response } from "express";
 
 const calculateTotals = (items: any[], coupon: any) => {
   const subtotal = items.reduce(
-    (acc, item) => acc + (item.priceAtAdd ?? item.price ?? 0) * item.quantity,
+    (acc, item) => acc + (item.unitPrice ?? item.price ?? 0) * item.quantity,
     0,
   );
   const discount = coupon?.discountAmount ?? 0;
@@ -15,7 +15,7 @@ const calculateTotals = (items: any[], coupon: any) => {
 export const getCartItems = catchAsync(
   async (req: Request, res: Response, next: NextFunction) => {
     const userId = req.user?._id;
-    console.log("USER:", req.user);
+
     const cart = await Cart.findOne({ userId });
     if (!cart) {
       return next(new AppError("Item found in the cart", 404));
@@ -133,7 +133,21 @@ export const mergeCart = catchAsync(
       { new: true, upsert: true, setDefaultsOnInsert: true },
     );
 
-    res.status(200).json({ status: "success", data: updatedCart });
+    res.status(200).json({ status: "success", data: { updatedCart } });
+  },
+);
+
+export const updateCart = catchAsync(
+  async (req: Request, res: Response, next: NextFunction) => {
+    const userId = req.user?._id;
+
+    const cartItems = !Array.isArray(req.body) ? [req.body] : req.body;
+
+    const updatedCart = await Cart.findByIdAndUpdate(
+      { userId },
+      { cartItems },
+      { new: true, upsert: true, setDefaultsOnInsert: true },
+    );
   },
 );
 

@@ -1,18 +1,18 @@
 import express from "express";
 import {
   initializePayment,
-  verifyPayment,
   releasePayment,
   refundPayment,
   // initializeCheckoutPayment,
   createSellerEscrowAccount,
 } from "../controllers/paymentController.js";
 import { protect } from "../middleware/auth.js";
+import { verifyPayment } from "@/controllers/checkoutController.js";
 
 const router = express.Router();
 
-// Create seller account - Paystack subaacount
-router.post("/create", createSellerEscrowAccount);
+// Create seller account - Paystack subaacount (protected)
+router.post("/create", protect, createSellerEscrowAccount);
 
 // Buyer make payment at checkout
 // router.route("/pay").post(protect, initializeCheckoutPayment);
@@ -21,7 +21,7 @@ router.post("/create", createSellerEscrowAccount);
 // router.post("/initialize/", initializePayment);
 
 // Verify payment
-router.get("/verify/:reference", verifyPayment);
+router.get("/verify", verifyPayment);
 
 // Release payment (buyer confirms delivery)
 router.post("/release/:orderId", protect, releasePayment);

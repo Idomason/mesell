@@ -6,6 +6,11 @@ import OrderSummary from "@/components/checkout/OrderSummary";
 import { orderApi } from "@/app/api/orders";
 import { useProductStore } from "@/store/productStore";
 import { toast } from "sonner";
+import { useRouter } from "next/navigation";
+import { getFrontendEnv } from "@/lib/env";
+import { useMutation, useQueryClient } from "@tanstack/react-query";
+
+const env = getFrontendEnv();
 
 const initialAddress = {
   fullName: "",
@@ -24,33 +29,56 @@ export default function page() {
 
   const cart = useProductStore((state) => state.products);
   const getCartStats = useProductStore((state) => state.getCartStats);
+  const clearCart = useProductStore((state) => state.removeAllCartItems);
   const cartStats = getCartStats();
+
+  const router = useRouter();
+  const queryClient = useQueryClient();
 
   async function createCheckoutOrder() {
     try {
-      const orderItems = cart.map((item) => ({
-        product: item._id,
+      const deliveryAddress = {
+        street: `${address.addressLine1}, ${address.addressLine2}`.trim(),
+        city: address.city,
+        state: address.state,
+        country: address.country,
+        postalCode: address.postalCode,
+      };
+      const cartItems = cart.map((item) => ({
+        productId: item._id,
         quantity: item.quantity,
-        price: item.price,
-        totalPrice: item.price * item.quantity,
-        seller: item.seller,
-        deliveryAddress: {
-          street: `${address.addressLine1}, ${address.addressLine2}`.trim(),
-          city: address.city,
-          state: address.state,
-          country: address.country,
-          postalCode: address.postalCode,
-        },
       }));
 
-      const result = await orderApi.createOrder(orderItems);
-      if (result) toast.success("Order created");
+      const checkoutPayload = {
+        deliveryAddress,
+        cartItems,
+      };
+
+      const { data } = await orderApi.createOrder(checkoutPayload);
+      if (!data.authorizationUrl) {
+        throw new Error("No authorization URL revieved");
+      }
+
+      return data;
     } catch (error) {
-      toast.error(error?.response?.data.message);
-      console.log(error?.response?.data.message);
-      throw new Error("Error occured, order creation failed try again");
+      console.error(`Order creation failed: ${error?.response?.data?.message}`);
+      throw new Error(error?.response?.data?.message);
     }
   }
+
+  const mutation = useMutation({
+    mutationFn: createCheckoutOrder,
+    onSuccess: (data) => {
+      queryClient.invalidateQueries({ queryKey: ["order-checkout"] });
+      if (data.authorizationUrl) router.push(data.authorizationUrl);
+      // Clear cart items
+      clearCart();
+      toast.success("Order created successfully!");
+    },
+    onError: (err) =>
+      toast.error(err.message || "Order creation failed try again"),
+    onMutate: () => null,
+  });
 
   return (
     <div className="container mx-auto p-4 md:px-8 bg-gray-200 h-full">
@@ -64,7 +92,8 @@ export default function page() {
 
         {/* Order Summary */}
         <OrderSummary
-          onCreateOrder={createCheckoutOrder}
+          onCreateOrder={mutation.mutate}
+          isLoading={mutation.isPending}
           cartStats={cartStats}
         />
       </div>

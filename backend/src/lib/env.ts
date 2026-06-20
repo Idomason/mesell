@@ -12,6 +12,7 @@ export const envSchema = z.object({
   JWT_SECRET: z.string().min(1, "jwt secret is required"),
   PORT: z.coerce.number().default(5000),
   FRONTEND_URL: z.string().url().min(1, "Client side URL is required"),
+  BACKEND_URL: z.string().url().min(1, 'Server side URL is required'),
 
   EMAIL_USERNAME: z.string().min(1, "Email username is required"),
   EMAIL_PASSWORD: z.string().min(1, "Email password is required"),

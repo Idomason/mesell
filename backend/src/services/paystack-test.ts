@@ -1,5 +1,5 @@
 // services/paystack.service.ts
-import axios, { AxiosInstance, AxiosError } from "axios";
+import axios, { AxiosInstance } from "axios";
 import axiosRetry from "axios-retry";
 import { randomUUID } from "crypto";
 import { AppError } from "../middleware/errorHandler";
@@ -17,10 +17,10 @@ const env = getEnv();
 
 export class PaystackService {
   private readonly client: AxiosInstance;
-  private readonly frontendUrl: string;
+  private readonly backendUrl: string;
 
   private constructor(env: Env) {
-    this.frontendUrl = env.FRONTEND_URL;
+    this.backendUrl = env.BACKEND_URL;
     this.client = axios.create({
       baseURL: env.PAYSTACK_BASE_URL,
       timeout: env.PAYSTACK_TIMEOUT_MS,
@@ -39,9 +39,7 @@ export class PaystackService {
     });
   }
 
-  /**
-   * Factory: validates environment variables once at startup.
-   */
+  // Factory: validates environment variables once at startup.
   public static create(): PaystackService {
     return new PaystackService(env);
   }
@@ -57,15 +55,17 @@ export class PaystackService {
     const reference = this.generateReference("PAY", validated.orderId);
     const requestPayload = {
       email: validated.email,
-      amount: Math.round(validated.amount * 100),
+      amount: Math.round(validated.amount * 100), // Paystack expects amount in kobo
       reference,
-      subaccount: validated.subaccount,
-      callback_url: `${this.frontendUrl}/payment/verify`,
+      currency: "NGN",
+      callback_url: `${this.backendUrl}/api/v1/payments/verify`,
       metadata: {
         orderId: validated.orderId,
         productId: validated.productId,
         quantity: validated.quantity,
         ...validated.metadata,
+        expected_delivery_days: 14,
+        escrow_status: "held",
       },
       idempotency_key: randomUUID(),
     };
@@ -98,13 +98,13 @@ export class PaystackService {
     }
   }
 
-  /**
-   * Verify payment – response is validated with Zod.
-   */
+  // Verify payment – response is validated with Zod.
+
   async verifyPayment(reference: string): Promise<{
-    success: boolean;
+    status: boolean;
     amountInNaira: number;
     metadata: Record<string, unknown>;
+    authorization: Record<string, unknown>;
   }> {
     if (!reference) throw new AppError("Payment reference is required", 400);
 
@@ -124,13 +124,62 @@ export class PaystackService {
 
       const isSuccess = parsed.data.status === "success";
       return {
-        success: isSuccess,
+        status: isSuccess,
         amountInNaira: parsed.data.amount / 100,
-        metadata: parsed.data.metadata || {},
+        metadata: {
+          transactionId: parsed.data.id, // Paystack's internal ID
+          channel: parsed.data.channel,
+          cardLast4: parsed.data.authorization?.last4,
+          cardBrand: parsed.data.authorization?.brand,
+          fees: parsed.data.fees,
+          paid: parsed.data.paid_at,
+        },
+        authorization: {
+          cardLast4: parsed.data.authorization?.last4,
+          cardBrand: parsed.data.authorization?.brand,
+        },
       };
     } catch (error) {
       this.handleError(error, "verifyPayment");
     }
+  }
+
+  // Release Payment
+  async releasePayment(paymentDetails: {
+    source: string;
+    amount: number;
+    recipient: string;
+    reference: string;
+    currency: string;
+    reason: string;
+    sellerId: string;
+  }): Promise<{}> {
+    if (!paymentDetails.amount || !paymentDetails.currency) {
+      throw new AppError("Amount and currency is required", 400);
+    }
+
+    try {
+      logger.info(`Releasing funds to the seller: ${paymentDetails.sellerId}`);
+      const { data } = await this.client.post("/transfer", paymentDetails);
+
+      return data;
+    } catch (error) {
+      this.handleError(error, "releasePayment");
+    }
+  }
+
+  // Create Transferrecipient
+  async createTransferRecipient(sellerPaymentData) {
+    if (!sellerPaymentData.name || !sellerPaymentData.accountNumber) {
+      throw new AppError("Seller's payment detail is not complete", 400);
+    }
+
+    const { data } = await this.client.post(
+      "/transferrecipient",
+      sellerPaymentData,
+    );
+
+    return data.recipient_code;
   }
 
   // ---------- Webhook handler (keeps signature verification) ----------

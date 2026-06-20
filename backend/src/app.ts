@@ -33,8 +33,16 @@ app.use((req, res, next) => {
 if (env.NODE_ENV === "development") {
   app.use(morgan("dev"));
 }
-app.use(cors({origin: "http://localhost:3000", credentials: true,}));
-app.use(cookieParser());
+app.use(cors({ origin: "http://localhost:3000", credentials: true }));
+
+// Webhooks
+app.use(
+  "/api/v1/webhooks/paystack",
+  express.raw({ type: "application/json" }),
+  paystackWebhookHandler,
+);
+
+app.use(cookieParser("your-jwt-secret"));
 app.use(express.json());
 app.use(express.static(path.join(__dirname, "..", "public")));
 
@@ -46,13 +54,6 @@ app.use("/api/v1/cart", cartRoutes);
 app.use("/api/v1/payments", paymentRoutes);
 app.use("/api/v1/users", userRoutes);
 app.use("/api/v1/checkout", checkoutRoutes);
-
-// Webhooks
-app.use(
-  "/api/v1/webhooks/paystack",
-  express.raw({ type: "application/json" }),
-  paystackWebhookHandler,
-);
 
 app.get("/", (req, res) => {
   res.send(path.join(__dirname, "..", "public", "index.html"));

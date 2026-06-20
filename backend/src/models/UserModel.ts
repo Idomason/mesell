@@ -1,46 +1,18 @@
 import crypto from "crypto";
 import bcrypt from "bcryptjs";
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { HydratedDocument, Schema } from "mongoose";
+import { CreateUserInput, UserAddressInput } from "mesell-shared";
 
-export interface IAddress {
-  fullName: string;
-  address: string;
-  state: string;
-  postalCode: string;
-  isDefault: boolean;
+interface IUserMethod {
+  comparePassword(candidatePassword: string): Promise<boolean>;
+  changedPasswordAfter(JWTTimestamp: number): boolean;
+  createPasswordResetToken(): string;
 }
 
-export interface IUser extends Document {
-  email: string;
-  password: string;
-  passwordConfirm: String | undefined;
-  firstName: string;
-  lastName: string;
-  phoneNumber: string;
-  subaccount?: string;
-  role: "buyer" | "seller" | "admin";
-  isVerified: boolean;
-  bvn?: string;
-  idDocument?: string;
-  businessName?: string;
-  businessAddress?: string;
-  qualityCertification?: string;
-  rating: number;
-  totalSales: number;
-  points: number;
-  addresses: IAddress[];
-  passwordChangedAt: Date;
-  passwordResetToken: string | undefined;
-  passwordResetExpires: Date | undefined;
-  comparePassword(
-    candidatePassword: string,
-    userPassword: string,
-  ): Promise<boolean>;
-  changedPasswordAfter(JWTTimestamp: Date): Boolean;
-  createPasswordResetToken(): String;
-}
+type IUser = CreateUserInput & IUserMethod;
+type IUserDocument = HydratedDocument<IUser>;
 
-const addressSchema = new mongoose.Schema<IAddress>(
+const addressSchema = new Schema<UserAddressInput>(
   {
     fullName: {
       type: String,
@@ -92,7 +64,7 @@ const userSchema = new Schema<IUser>(
       required: [true, "Please confirm your password"],
       // This only works on CREATE or SAVE
       validate: {
-        validator: function (el) {
+        validator: function (this: IUserDocument, el: string) {
           return el === this.password;
         },
         message: "Password do not match",
@@ -113,45 +85,100 @@ const userSchema = new Schema<IUser>(
       required: [true, "Please provide your phone number"],
       trim: true,
     },
-    subaccount: { type: String },
+    sellerAcctInfo: {
+      subaccount: { type: String },
+      settlementBank: {
+        type: String,
+        required: [true, "Seller must have a settlement bank"],
+      },
+      percentageCharge: { type: Number, default: 0 },
+      paymentDetails: {
+        type: {
+          type: String,
+          required: [
+            true,
+            "Your bank Type. It could be one of: nuban, ghipss, mobile_money or basa",
+          ],
+        },
+        name: {
+          type: String,
+          required: [
+            true,
+            "The seller's name according to their account registration",
+          ],
+        },
+        accountNumber: {
+          type: String,
+          required: [true, "Seller's account number"],
+        },
+        bankCode: { type: String, required: [true, "Seller's bank code"] },
+        currency: { type: String, required: [true, "Seller's currency"] },
+      },
+      primaryContactEmail: {
+        type: String,
+        unique: true,
+        lowercase: true,
+        trim: true,
+        required: [true, "Please provide your active email"],
+      },
+      primaryContactName: {
+        type: String,
+        required: [true, "Please provide a legal name we can contact you with"],
+      },
+      primaryContactPhone: {
+        type: String,
+        required: [true, "Kindly provide your primary contact number"],
+      },
+      isVerified: {
+        type: Boolean,
+        default: false,
+      },
+      bvn: {
+        type: String,
+        select: false,
+      },
+      idDocument: {
+        type: String,
+        select: false,
+      },
+      businessName: {
+        type: String,
+        trim: true,
+      },
+      businessAddress: {
+        type: String,
+        trim: true,
+      },
+      qualityCertification: {
+        type: String,
+        trim: true,
+      },
+      rating: {
+        type: Number,
+        default: 0,
+        min: 0,
+        max: 5,
+      },
+      totalSales: {
+        type: Number,
+        default: 0,
+      },
+      metadata: {
+        custom_fields: [
+          {
+            display_name: { type: String },
+            variable_name: { type: String },
+            value: { type: String },
+          },
+        ],
+      },
+    },
+    // Indicates a pending seller onboarding / subaccount creation awaiting admin approval
+    sellerPending: { type: Boolean, default: false },
     role: {
       type: String,
       enum: ["buyer", "seller", "admin"],
       default: "buyer",
-    },
-    isVerified: {
-      type: Boolean,
-      default: false,
-    },
-    bvn: {
-      type: String,
-      select: false,
-    },
-    idDocument: {
-      type: String,
-      select: false,
-    },
-    businessName: {
-      type: String,
-      trim: true,
-    },
-    businessAddress: {
-      type: String,
-      trim: true,
-    },
-    qualityCertification: {
-      type: String,
-      trim: true,
-    },
-    rating: {
-      type: Number,
-      default: 0,
-      min: 0,
-      max: 5,
-    },
-    totalSales: {
-      type: Number,
-      default: 0,
     },
     points: { type: Number, default: 0, min: 0 },
     addresses: {
@@ -167,17 +194,23 @@ const userSchema = new Schema<IUser>(
   },
 );
 
+/* ==========================================
+                HOOKS & METHODS 
+   ========================================== 
+*/
+
 // Hash password before saving
-userSchema.pre("save", async function (next) {
+userSchema.pre<IUserDocument>("save", async function (next) {
   if (!this.isModified("password")) return next();
 
   this.password = await bcrypt.hash(this.password, 12);
-  this.passwordConfirm = undefined;
+  (this as any).passwordConfirm = undefined;
 
   next();
 });
 
-userSchema.pre("save", function (next) {
+// Check if password is not modified and the document is a new one
+userSchema.pre<IUserDocument>("save", function (next) {
   if (!this.isModified("password") || this.isNew) return next();
 
   this.passwordChangedAt = new Date();
@@ -187,14 +220,17 @@ userSchema.pre("save", function (next) {
 
 // Compare and check password
 userSchema.methods.comparePassword = async function (
+  this: IUserDocument,
   candidatePassword: string,
-  userPassword: string,
 ) {
-  return await bcrypt.compare(candidatePassword, userPassword);
+  return await bcrypt.compare(candidatePassword, this.password || "");
 };
 
 // Password changed
-userSchema.methods.changedPasswordAfter = function (JWTTimestamp: number) {
+userSchema.methods.changedPasswordAfter = function (
+  this: IUserDocument,
+  JWTTimestamp: number,
+): boolean {
   if (this.passwordChangedAt) {
     const changedTimestamp = Math.floor(
       this.passwordChangedAt.getTime() / 1000,
@@ -208,7 +244,9 @@ userSchema.methods.changedPasswordAfter = function (JWTTimestamp: number) {
 };
 
 // Create password reset token
-userSchema.methods.createPasswordResetToken = function () {
+userSchema.methods.createPasswordResetToken = function (
+  this: IUserDocument,
+): string {
   const resetToken = crypto.randomBytes(32).toString("hex");
 
   this.passwordResetToken = crypto
@@ -216,7 +254,7 @@ userSchema.methods.createPasswordResetToken = function () {
     .update(resetToken)
     .digest("hex");
 
-  this.passwordResetExpires = Date.now() + 10 * 60 * 1000;
+  this.passwordResetExpires = new Date(Date.now() + 10 * 60 * 1000);
 
   return resetToken;
 };

@@ -24,7 +24,7 @@ export default function page() {
 
   if (!isHydrated) {
     return (
-      <div className="font-sans py-12 bg-gray-200">
+      <div className="font-sans py-12 bg-gray-200 min-h-screen w-full">
         <div className="px-2 sm:px-4 mx-auto max-w-7xl">
           <div className="mb-8">
             <h1 className="text-4xl font-bold text-primary">Your Cart</h1>
@@ -38,14 +38,14 @@ export default function page() {
   }
 
   return (
-    <div className="font-sans py-12 bg-gray-200">
+    <div className="font-sans py-12 bg-gray-200 min-h-screen w-full">
       <div className="px-2 sm:px-4 mx-auto max-w-7xl">
         <div className="mb-8">
           <h1 className="text-4xl font-bold text-primary">Your Cart</h1>
-          <span className="text-sm text-gray-600 mb-8 font-semibold">
-            {cartStats.totalItems} Products in your cart - Total worth: $
-            {cartStats.totalPrice.toFixed(2)}
-          </span>
+          {cart && cart.length > 0 && (<span className="text-sm text-gray-600 mb-8 font-semibold">
+            {cartStats.totalItems} Products in your cart - Total worth: ₦
+            {cartStats.totalPrice.toLocaleString("en-US")}
+          </span>)}
         </div>
 
         {cart && cart.length > 0 ? (

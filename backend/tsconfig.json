@@ -8,12 +8,13 @@
     "strict": true,
     "skipLibCheck": true,
     "outDir": "./dist",
-    "rootDir": "./",
-    "baseUrl": ".",
+    "rootDir": "..",
     "paths": {
-      "@/*": ["src/*"]
+      "@/*": ["./src/*"],
+      "mesell-shared": ["../shared/src/index.ts"],
+      "mesell-shared/*": ["../shared/src/*"]
     }
   },
-  "include": ["src/**/*", "src/server.ts", "src/app.ts"],
+  "include": ["src/**/*", "src/server.ts", "src/app.ts", "../shared/src/**/*"],
   "exclude": ["node_modules", "dist"]
 }

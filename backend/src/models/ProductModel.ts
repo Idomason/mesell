@@ -1,7 +1,7 @@
-import mongoose, { Document, Schema } from "mongoose";
+import mongoose, { Schema } from "mongoose";
 
-export interface IProduct extends Document {
-  seller: mongoose.Types.ObjectId;
+export interface IProduct {
+  sellerId: mongoose.Types.ObjectId;
   name: string;
   description: string;
   price: number;
@@ -9,6 +9,8 @@ export interface IProduct extends Document {
   category: string;
   quantity: number;
   images: string[];
+  color: string;
+  size: string;
   slug: { type: String; unique: Boolean };
   specifications: Record<string, string>;
   estimatedDeliveryDate: Date;
@@ -35,7 +37,7 @@ export interface IProduct extends Document {
 
 const productSchema = new Schema<IProduct>(
   {
-    seller: {
+    sellerId: {
       type: Schema.Types.ObjectId,
       ref: "User",
       required: [true, "Product must belong to a seller"],
@@ -84,6 +86,8 @@ const productSchema = new Schema<IProduct>(
         required: [true, "Please provide at least one product image"],
       },
     ],
+    color: { type: String, trim: true },
+    size: { type: String, trim: true },
     specifications: {
       type: Map,
       of: String,
