@@ -2,6 +2,7 @@ import { create } from "zustand";
 import { Product } from "@/Types/Products";
 import { persist } from "zustand/middleware";
 import { cartApi } from "@/app/api/cart";
+import { toast } from "sonner";
 
 interface CartState {
   products: Product[];
@@ -15,7 +16,7 @@ interface CartState {
 }
 
 const normalizeItemForServer = (item: Product) => ({
-  productId: item.id,
+  productId: item._id,
   quantity: item.quantity,
   priceAtAdd: item.price,
   images: item.images,
@@ -72,6 +73,7 @@ export const useProductStore = create<CartState>()(
 
       // Remove from cart
       removeItemFromCart: async (_id: string | number) => {
+        console.log("_ID:", _id);
         set((state) => ({
           products: state.products.filter(
             (cartItem) => cartItem._id.toString() !== _id.toString(),
@@ -120,15 +122,12 @@ export const useProductStore = create<CartState>()(
           const { products } = get();
           const items = products.map(normalizeItemForServer);
           await cartApi.updateCart({ items });
-        } catch (error) {
-          console.error("Failed to sync cart with server", error);
-          if ((error as any)?.response) {
-            console.error(
-              "Sync cart response:",
-              (error as any).response.status,
-              (error as any).response.data,
-            );
-          }
+        } catch (error: any) {
+          console.error(
+            "Failed to sync cart with server",
+            error.response.data.message,
+          );
+          toast.error(error.response.data.message);
         }
       },
     }),
